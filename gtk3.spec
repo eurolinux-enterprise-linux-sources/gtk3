@@ -22,7 +22,7 @@
 
 Name: gtk3
 Version: 3.22.26
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: GTK+ graphical user interface library
 
 License: LGPLv2+
@@ -38,6 +38,9 @@ Patch19: 0001-gdk-Always-emit-motion-after-enter.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1483942
 Patch20: x11-Dont-call-XInput-API-for-core-events.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1502788
+Patch21: 0001-x11-Avoid-a-division-by-zero.patch
 
 BuildRequires: pkgconfig(atk) >= %{atk_version}
 BuildRequires: pkgconfig(atk-bridge-2.0)
@@ -177,6 +180,7 @@ the functionality of the installed %{name} package.
 %patch18 -p1
 %patch19 -p1
 %patch20 -p1
+%patch21 -p1
 
 cp %{SOURCE1} po/
 
@@ -368,6 +372,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/installed-tests
 
 %changelog
+* Mon Apr 09 2018 Debarshi Ray <rishi@fedoraproject.org> - 3.22.26-4
+- Avoid a division by zero with RandR 1.3
+- Resolves: #1502788
+
 * Tue Feb 13 2018 Ray Strode <rstrode@redhat.com> - 3.22.26-3
 - Fix emacs on Xming
   Resolves: #1483942
