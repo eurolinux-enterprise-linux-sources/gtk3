@@ -1,0 +1,175 @@
+From 775c174c07120760820d68e44402b9da547a0263 Mon Sep 17 00:00:00 2001
+From: Ray Strode <rstrode@redhat.com>
+Date: Wed, 23 Sep 2015 09:29:11 -0400
+Subject: [PATCH] GtkAppChooserButton: Hide compat desktop entries
+
+RHEL maintains some NoDisplay compat desktop entries to keep old user
+mime associations working in the 7.1 to 7.2 rebase.
+
+These NoDisplay desktop files aren't meant to show up in the UI but do
+in the details panel of control-center (since GtkAppChooserButton
+specifically wants to show NoDisplay desktop files, see bug 702681)
+
+This commit checks a downstream specific key, X-RHEL-AliasOf, that is
+used to mark desktop files that are compat entries.  An example of the
+use would be in totem.desktop:
+
+X-RHEL-AliasOf=org.gnome.Totem
+
+https://bugzilla.redhat.com/show_bug.cgi?id=1259292
+---
+ gtk/gtkappchooserbutton.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/gtk/gtkappchooserbutton.c b/gtk/gtkappchooserbutton.c
+index c0af584..78df7f1 100644
+--- a/gtk/gtkappchooserbutton.c
++++ b/gtk/gtkappchooserbutton.c
+@@ -33,60 +33,61 @@
+  *
+  * The list of applications shown in a #GtkAppChooserButton includes
+  * the recommended applications for the given content type. When
+  * #GtkAppChooserButton:show-default-item is set, the default application
+  * is also included. To let the user chooser other applications,
+  * you can set the #GtkAppChooserButton:show-dialog-item property,
+  * which allows to open a full #GtkAppChooserDialog.
+  *
+  * It is possible to add custom items to the list, using
+  * gtk_app_chooser_button_append_custom_item(). These items cause
+  * the #GtkAppChooserButton::custom-item-activated signal to be
+  * emitted when they are selected.
+  *
+  * To track changes in the selected application, use the
+  * #GtkComboBox::changed signal.
+  */
+ #include "config.h"
+ 
+ #include "gtkappchooserbutton.h"
+ 
+ #include "gtkappchooser.h"
+ #include "gtkappchooserdialog.h"
+ #include "gtkappchooserprivate.h"
+ #include "gtkcelllayout.h"
+ #include "gtkcellrendererpixbuf.h"
+ #include "gtkcellrenderertext.h"
+ #include "gtkcombobox.h"
+ #include "gtkdialog.h"
+ #include "gtkintl.h"
+ #include "gtkmarshalers.h"
++#include "gio/gdesktopappinfo.h"
+ 
+ enum {
+   PROP_SHOW_DIALOG_ITEM = 1,
+   PROP_SHOW_DEFAULT_ITEM,
+   PROP_HEADING,
+   NUM_PROPERTIES,
+ 
+   PROP_CONTENT_TYPE = NUM_PROPERTIES
+ };
+ 
+ enum {
+   SIGNAL_CUSTOM_ITEM_ACTIVATED,
+   NUM_SIGNALS
+ };
+ 
+ enum {
+   COLUMN_APP_INFO,
+   COLUMN_NAME,
+   COLUMN_LABEL,
+   COLUMN_ICON,
+   COLUMN_CUSTOM,
+   COLUMN_SEPARATOR,
+   NUM_COLUMNS,
+ };
+ 
+ #define CUSTOM_ITEM_OTHER_APP "gtk-internal-item-other-app"
+ 
+ static void app_chooser_iface_init  (GtkAppChooserIface *iface);
+ 
+ static void real_insert_custom_item (GtkAppChooserButton *self,
+@@ -312,78 +313,81 @@ insert_one_application (GtkAppChooserButton *self,
+ 
+   gtk_list_store_set (self->priv->store, iter,
+                       COLUMN_APP_INFO, app,
+                       COLUMN_LABEL, g_app_info_get_name (app),
+                       COLUMN_ICON, icon,
+                       COLUMN_CUSTOM, FALSE,
+                       -1);
+ 
+   g_object_unref (icon);
+ }
+ 
+ static void
+ gtk_app_chooser_button_populate (GtkAppChooserButton *self)
+ {
+   GList *recommended_apps = NULL, *l;
+   GAppInfo *app, *default_app = NULL;
+   GtkTreeIter iter, iter2;
+   gboolean cycled_recommended;
+ 
+ #ifndef G_OS_WIN32
+   if (self->priv->content_type)
+     recommended_apps = g_app_info_get_recommended_for_type (self->priv->content_type);
+ #endif
+   cycled_recommended = FALSE;
+ 
+   if (self->priv->show_default_item)
+     {
+       if (self->priv->content_type)
+         default_app = g_app_info_get_default_for_type (self->priv->content_type, FALSE);
+ 
+-      if (default_app != NULL)
++      if (default_app != NULL && (!G_IS_DESKTOP_APP_INFO (default_app) || !g_desktop_app_info_has_key (G_DESKTOP_APP_INFO (default_app), "X-RHEL-AliasOf")))
+         {
+           get_first_iter (self->priv->store, &iter);
+           cycled_recommended = TRUE;
+ 
+           insert_one_application (self, default_app, &iter);
+ 
+           g_object_unref (default_app);
+         }
+     }
+ 
+   for (l = recommended_apps; l != NULL; l = l->next)
+     {
+       app = l->data;
+ 
+       if (default_app != NULL && g_app_info_equal (app, default_app))
+         continue;
+ 
++      if (G_IS_DESKTOP_APP_INFO (app) && g_desktop_app_info_has_key (G_DESKTOP_APP_INFO (app), "X-RHEL-AliasOf"))
++        continue;
++
+       if (cycled_recommended)
+         {
+           gtk_list_store_insert_after (self->priv->store, &iter2, &iter);
+           iter = iter2;
+         }
+       else
+         {
+           get_first_iter (self->priv->store, &iter);
+           cycled_recommended = TRUE;
+         }
+ 
+       insert_one_application (self, app, &iter);
+     }
+ 
+   if (recommended_apps != NULL)
+     g_list_free_full (recommended_apps, g_object_unref);
+ 
+   if (!cycled_recommended)
+     gtk_app_chooser_button_ensure_dialog_item (self, NULL);
+   else
+     gtk_app_chooser_button_ensure_dialog_item (self, &iter);
+ 
+   gtk_combo_box_set_active (GTK_COMBO_BOX (self), 0);
+ }
+ 
+ static void
+ gtk_app_chooser_button_build_ui (GtkAppChooserButton *self)
+ {
+   GtkCellRenderer *cell;
+   GtkCellArea *area;
+-- 
+2.5.0
+
