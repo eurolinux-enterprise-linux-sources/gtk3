@@ -19,7 +19,7 @@
 
 Name: gtk3
 Version: 3.22.10
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
 
 License: LGPLv2+
@@ -30,6 +30,7 @@ source1: ja.po
 # Downstream fix to filter out X-RHEL-AliasOf
 # https://bugzilla.redhat.com/show_bug.cgi?id=1259292
 Patch18: app-chooser-fixes.patch
+Patch19: 0001-gdk-Always-emit-motion-after-enter.patch
 
 BuildRequires: pkgconfig(atk) >= %{atk_version}
 BuildRequires: pkgconfig(atk-bridge-2.0)
@@ -166,6 +167,7 @@ the functionality of the installed %{name} package.
 %prep
 %setup -q -n gtk+-%{version}
 %patch18 -p1
+%patch19 -p1
 
 cp %{SOURCE1} po/
 
@@ -356,6 +358,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/installed-tests
 
 %changelog
+* Fri Dec 15 2017 Carlos Garnacho <cgarnach@redhat.com> - 3.22.10-5
+- Fix touch emulated pointer motion event delivery with spice-gtk
+Resolves: #1524317
+
 * Tue May 30 2017 Matthias Clasen <mclasen@redhat.com> - 3.22.10-4
 - Update Japanese translations
 - Resolves: #1449636

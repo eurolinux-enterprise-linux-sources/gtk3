@@ -1,0 +1,37 @@
+From 12d965a62da72315d2cd201d30abeb79933f6eb2 Mon Sep 17 00:00:00 2001
+From: Carlos Garnacho <carlosg@gnome.org>
+Date: Mon, 20 Nov 2017 18:54:40 +0100
+Subject: [PATCH] gdk: Always emit motion after enter
+
+After a pointer emulating GDK_TOUCH_END event triggering a fake leave
+notify with GDK_CROSSING_TOUCH_END mode, pointer_under_window will be
+unset, which will make the next motion/touch_update event to trigger
+an enter notify event again.
+
+Up till there, that's fine, however the motion event is just consumed
+in favor of the just synthesized enter notify event. This is unexpected
+to clients like spice-gtk that will only update coordinates from motion
+events, sending both enter and motion will make them happy.
+---
+ gdk/gdkwindow.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/gdk/gdkwindow.c b/gdk/gdkwindow.c
+index 79804cdacd..3ac80e910a 100644
+--- a/gdk/gdkwindow.c
++++ b/gdk/gdkwindow.c
+@@ -9294,8 +9294,9 @@ proxy_pointer_event (GdkDisplay                 *display,
+ 				       serial, non_linear);
+       _gdk_display_set_window_under_pointer (display, device, pointer_window);
+     }
+-  else if (source_event->type == GDK_MOTION_NOTIFY ||
+-           source_event->type == GDK_TOUCH_UPDATE)
++
++  if (source_event->type == GDK_MOTION_NOTIFY ||
++      source_event->type == GDK_TOUCH_UPDATE)
+     {
+       GdkWindow *event_win;
+       guint evmask;
+-- 
+2.14.3
+
