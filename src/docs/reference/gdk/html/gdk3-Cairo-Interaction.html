@@ -8,7 +8,7 @@
 <link rel="up" href="reference.html" title="API Reference">
 <link rel="prev" href="gdk3-Pango-Interaction.html" title="Pango Interaction">
 <link rel="next" href="gdk3-X-Window-System-Interaction.html" title="X Window System Interaction">
-<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -65,7 +65,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<span class="returnvalue">gboolean</span>
 </td>
 <td class="function_name">
 <a class="link" href="gdk3-Cairo-Interaction.html#gdk-cairo-get-clip-rectangle" title="gdk_cairo_get_clip_rectangle ()">gdk_cairo_get_clip_rectangle</a> <span class="c_punctuation">()</span>
@@ -167,7 +167,7 @@ can be used with GDK. GTK+ does all of its drawing using cairo.</p>
 <p>GDK does not wrap the cairo API, instead it allows to create cairo
 contexts which can be used to draw on <a href="gdk3-Windows.html#GdkWindow-struct"><span class="type">GdkWindows</span></a>. Additional
 functions allow use <a href="gdk3-Points-Rectangles-and-Regions.html#GdkRectangle"><span class="type">GdkRectangles</span></a> with cairo and to use <a href="gdk3-Colors.html#GdkColor"><span class="type">GdkColors</span></a>,
-<a href="gdk3-RGBA-Colors.html#GdkRGBA"><span class="type">GdkRGBAs</span></a>, <a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbufs</span></a> and <a href="gdk3-Windows.html#GdkWindow-struct"><span class="type">GdkWindows</span></a> as sources for drawing
+<a href="gdk3-RGBA-Colors.html#GdkRGBA"><span class="type">GdkRGBAs</span></a>, <span class="type">GdkPixbufs</span> and <a href="gdk3-Windows.html#GdkWindow-struct"><span class="type">GdkWindows</span></a> as sources for drawing
 operations.</p>
 </div>
 <div class="refsect1">
@@ -273,16 +273,16 @@ use:</p>
 8
 9
 10</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">int</span> scale <span class="gtkdoc opt">=</span> <span class="function"><a href="gdk3-Windows.html#gdk-window-get-scale-factor">gdk_window_get_scale_factor</a></span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">);</span>
-<span class="gtkdoc kwb">int</span> width <span class="gtkdoc opt">=</span> <span class="function"><a href="gdk3-Windows.html#gdk-window-get-width">gdk_window_get_width</a></span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">) *</span> scale<span class="gtkdoc opt">;</span>
-<span class="gtkdoc kwb">int</span> height <span class="gtkdoc opt">=</span> <span class="function"><a href="gdk3-Windows.html#gdk-window-get-height">gdk_window_get_height</a></span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">) *</span> scale<span class="gtkdoc opt">;</span>
+        <td class="listing_code"><pre class="programlisting"><span class="type">int</span><span class="normal"> scale </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gdk3-Windows.html#gdk-window-get-scale-factor">gdk_window_get_scale_factor</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">window</span><span class="symbol">);</span>
+<span class="type">int</span><span class="normal"> width </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gdk3-Windows.html#gdk-window-get-width">gdk_window_get_width</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">window</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">*</span><span class="normal"> scale</span><span class="symbol">;</span>
+<span class="type">int</span><span class="normal"> height </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gdk3-Windows.html#gdk-window-get-height">gdk_window_get_height</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">window</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">*</span><span class="normal"> scale</span><span class="symbol">;</span>
 
-<span class="gtkdoc slc">// format is set elsewhere</span>
-cairo_surface_t <span class="gtkdoc opt">*</span>surface <span class="gtkdoc opt">=</span>
-  <span class="function"><a href="gdk3-Cairo-Interaction.html#gdk-window-create-similar-image-surface">gdk_window_create_similar_image_surface</a></span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">,</span>
-                                           format<span class="gtkdoc opt">,</span>
-                                           width<span class="gtkdoc opt">,</span> height<span class="gtkdoc opt">,</span>
-                                           scale<span class="gtkdoc opt">);</span></pre></td>
+<span class="comment">// format is set elsewhere</span>
+<span class="usertype">cairo_surface_t</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">surface </span><span class="symbol">=</span>
+<span class="normal">  </span><span class="function"><a href="gdk3-Cairo-Interaction.html#gdk-window-create-similar-image-surface">gdk_window_create_similar_image_surface</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">window</span><span class="symbol">,</span>
+<span class="normal">                                           format</span><span class="symbol">,</span>
+<span class="normal">                                           width</span><span class="symbol">,</span><span class="normal"> height</span><span class="symbol">,</span>
+<span class="normal">                                           scale</span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -306,13 +306,13 @@ surface's device scale is set to <em class="parameter"><code>scale</code></em>
 <tbody>
 <tr>
 <td class="parameter_name"><p>window</p></td>
-<td class="parameter_description"><p> window to make new surface similar to, or
-<a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if none. </p></td>
+<td class="parameter_description"><p>window to make new surface similar to, or
+<code class="literal">NULL</code> if none. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>format</p></td>
-<td class="parameter_description"><p> the format for the new surface. </p></td>
+<td class="parameter_description"><p>the format for the new surface. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> int]</span></td>
 </tr>
 <tr>
@@ -391,7 +391,7 @@ instead. GTK will automatically do this for you when drawing a widget.</p>
 <hr>
 <div class="refsect2">
 <a name="gdk-cairo-get-clip-rectangle"></a><h3>gdk_cairo_get_clip_rectangle ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<pre class="programlisting"><span class="returnvalue">gboolean</span>
 gdk_cairo_get_clip_rectangle (<em class="parameter"><code><span class="type">cairo_t</span> *cr</code></em>,
                               <em class="parameter"><code><a class="link" href="gdk3-Points-Rectangles-and-Regions.html#GdkRectangle" title="GdkRectangle"><span class="type">GdkRectangle</span></a> *rect</code></em>);</pre>
 <p>This is a convenience function around <code class="function">cairo_clip_extents()</code>.
@@ -413,7 +413,7 @@ a boolean indicating if a clip area exists.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>rect</p></td>
-<td class="parameter_description"><p> return location for the clip, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_description"><p>return location for the clip, or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -421,7 +421,7 @@ a boolean indicating if a clip area exists.</p>
 </div>
 <div class="refsect3">
 <a name="gdk-cairo-get-clip-rectangle.returns"></a><h4>Returns</h4>
-<p> <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if a clip rectangle exists, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if all of <em class="parameter"><code>cr</code></em>
+<p> <code class="literal">TRUE</code> if a clip rectangle exists, <code class="literal">FALSE</code> if all of <em class="parameter"><code>cr</code></em>
 is
 clipped and all drawing can be skipped</p>
 </div>
@@ -451,7 +451,7 @@ context <em class="parameter"><code>cr</code></em>
 </div>
 <div class="refsect3">
 <a name="gdk-cairo-get-drawing-context.returns"></a><h4>Returns</h4>
-<p> a <a class="link" href="GdkDrawingContext.html" title="GdkDrawingContext"><span class="type">GdkDrawingContext</span></a>, if any is set. </p>
+<p>a <a class="link" href="GdkDrawingContext.html" title="GdkDrawingContext"><span class="type">GdkDrawingContext</span></a>, if any is set. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-3-22.html#api-index-3.22">3.22</a></p>
@@ -529,9 +529,9 @@ gdk_cairo_set_source_rgba (<em class="parameter"><code><span class="type">cairo_
 <a name="gdk-cairo-set-source-pixbuf"></a><h3>gdk_cairo_set_source_pixbuf ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gdk_cairo_set_source_pixbuf (<em class="parameter"><code><span class="type">cairo_t</span> *cr</code></em>,
-                             <em class="parameter"><code>const <a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> *pixbuf</code></em>,
-                             <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> pixbuf_x</code></em>,
-                             <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> pixbuf_y</code></em>);</pre>
+                             <em class="parameter"><code>const <span class="type">GdkPixbuf</span> *pixbuf</code></em>,
+                             <em class="parameter"><code><span class="type">gdouble</span> pixbuf_x</code></em>,
+                             <em class="parameter"><code><span class="type">gdouble</span> pixbuf_y</code></em>);</pre>
 <p>Sets the given pixbuf as the source pattern for <em class="parameter"><code>cr</code></em>
 .</p>
 <p>The pattern has an extend mode of <code class="literal">CAIRO_EXTEND_NONE</code> and is aligned
@@ -555,7 +555,7 @@ so that the origin of <em class="parameter"><code>pixbuf</code></em>
 </tr>
 <tr>
 <td class="parameter_name"><p>pixbuf</p></td>
-<td class="parameter_description"><p>a <a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a></p></td>
+<td class="parameter_description"><p>a <span class="type">GdkPixbuf</span></p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -581,8 +581,8 @@ so that the origin of <em class="parameter"><code>pixbuf</code></em>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gdk_cairo_set_source_window (<em class="parameter"><code><span class="type">cairo_t</span> *cr</code></em>,
                              <em class="parameter"><code><a class="link" href="gdk3-Windows.html#GdkWindow"><span class="type">GdkWindow</span></a> *window</code></em>,
-                             <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> x</code></em>,
-                             <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> y</code></em>);</pre>
+                             <em class="parameter"><code><span class="type">gdouble</span> x</code></em>,
+                             <em class="parameter"><code><span class="type">gdouble</span> y</code></em>);</pre>
 <p>Sets the given window as the source pattern for <em class="parameter"><code>cr</code></em>
 .</p>
 <p>The pattern has an extend mode of <code class="literal">CAIRO_EXTEND_NONE</code> and is aligned
@@ -729,7 +729,7 @@ set with <code class="function">cairo_surface_set_device_offset()</code>.</p>
 <div class="refsect2">
 <a name="gdk-cairo-surface-create-from-pixbuf"></a><h3>gdk_cairo_surface_create_from_pixbuf ()</h3>
 <pre class="programlisting"><span class="returnvalue">cairo_surface_t</span> *
-gdk_cairo_surface_create_from_pixbuf (<em class="parameter"><code>const <a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> *pixbuf</code></em>,
+gdk_cairo_surface_create_from_pixbuf (<em class="parameter"><code>const <span class="type">GdkPixbuf</span> *pixbuf</code></em>,
                                       <em class="parameter"><code><span class="type">int</span> scale</code></em>,
                                       <em class="parameter"><code><a class="link" href="gdk3-Windows.html#GdkWindow"><span class="type">GdkWindow</span></a> *for_window</code></em>);</pre>
 <p>Creates an image surface with the same contents as
@@ -745,7 +745,7 @@ the pixbuf.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>pixbuf</p></td>
-<td class="parameter_description"><p>a <a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a></p></td>
+<td class="parameter_description"><p>a <span class="type">GdkPixbuf</span></p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 <tr>
@@ -756,7 +756,7 @@ the pixbuf.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>for_window</p></td>
-<td class="parameter_description"><p> The window this will be drawn to, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_description"><p>The window this will be drawn to, or <code class="literal">NULL</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -872,6 +872,6 @@ to start copying from in GL coordinates</p></td>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25.1</div>
+<hr>Generated by GTK-Doc V1.27</div>
 </body>
 </html>

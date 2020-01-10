@@ -91,6 +91,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@USE_WAYLAND_TRUE@am__append_1 = $(protocol_built_sources)
 subdir = modules/input
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_prog_cc_for_build.m4 \
@@ -267,6 +268,15 @@ im_viqr_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 @BUILD_DYNAMIC_MODULES_TRUE@@INCLUDE_IM_VIQR_FALSE@am_im_viqr_la_rpath =  \
 @BUILD_DYNAMIC_MODULES_TRUE@@INCLUDE_IM_VIQR_FALSE@	-rpath \
 @BUILD_DYNAMIC_MODULES_TRUE@@INCLUDE_IM_VIQR_FALSE@	$(moduledir)
+im_wayland_la_DEPENDENCIES = $(am__DEPENDENCIES_2)
+am__objects_1 = im_wayland_la-gtk-text-input-protocol.lo
+am_im_wayland_la_OBJECTS = im_wayland_la-imwayland.lo $(am__objects_1)
+im_wayland_la_OBJECTS = $(am_im_wayland_la_OBJECTS)
+im_wayland_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(im_wayland_la_LDFLAGS) $(LDFLAGS) -o $@
+@BUILD_DYNAMIC_MODULES_TRUE@@INCLUDE_IM_WAYLAND_FALSE@@USE_WAYLAND_TRUE@am_im_wayland_la_rpath = -rpath \
+@BUILD_DYNAMIC_MODULES_TRUE@@INCLUDE_IM_WAYLAND_FALSE@@USE_WAYLAND_TRUE@	$(moduledir)
 im_xim_la_DEPENDENCIES = $(am__DEPENDENCIES_2)
 am_im_xim_la_OBJECTS = gtkimcontextxim.lo imxim.lo
 im_xim_la_OBJECTS = $(am_im_xim_la_OBJECTS)
@@ -276,79 +286,86 @@ im_xim_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 @BUILD_DYNAMIC_MODULES_TRUE@@INCLUDE_IM_XIM_FALSE@@USE_X11_TRUE@am_im_xim_la_rpath = -rpath \
 @BUILD_DYNAMIC_MODULES_TRUE@@INCLUDE_IM_XIM_FALSE@@USE_X11_TRUE@	$(moduledir)
 libstatic_im_am_et_la_LIBADD =
-am__objects_1 = imam-et.lo
-am_libstatic_im_am_et_la_OBJECTS = $(am__objects_1)
+am__objects_2 = imam-et.lo
+am_libstatic_im_am_et_la_OBJECTS = $(am__objects_2)
 libstatic_im_am_et_la_OBJECTS = $(am_libstatic_im_am_et_la_OBJECTS)
 @INCLUDE_IM_AM_ET_TRUE@am_libstatic_im_am_et_la_rpath =
 libstatic_im_broadway_la_LIBADD =
-am__objects_2 = imbroadway.lo
-am_libstatic_im_broadway_la_OBJECTS = $(am__objects_2)
+am__objects_3 = imbroadway.lo
+am_libstatic_im_broadway_la_OBJECTS = $(am__objects_3)
 libstatic_im_broadway_la_OBJECTS =  \
 	$(am_libstatic_im_broadway_la_OBJECTS)
 @INCLUDE_IM_BROADWAY_TRUE@am_libstatic_im_broadway_la_rpath =
 libstatic_im_cedilla_la_LIBADD =
-am__objects_3 = imcedilla.lo
-am_libstatic_im_cedilla_la_OBJECTS = $(am__objects_3)
+am__objects_4 = imcedilla.lo
+am_libstatic_im_cedilla_la_OBJECTS = $(am__objects_4)
 libstatic_im_cedilla_la_OBJECTS =  \
 	$(am_libstatic_im_cedilla_la_OBJECTS)
 @INCLUDE_IM_CEDILLA_TRUE@am_libstatic_im_cedilla_la_rpath =
 libstatic_im_cyrillic_translit_la_LIBADD =
-am__objects_4 = imcyrillic-translit.lo
-am_libstatic_im_cyrillic_translit_la_OBJECTS = $(am__objects_4)
+am__objects_5 = imcyrillic-translit.lo
+am_libstatic_im_cyrillic_translit_la_OBJECTS = $(am__objects_5)
 libstatic_im_cyrillic_translit_la_OBJECTS =  \
 	$(am_libstatic_im_cyrillic_translit_la_OBJECTS)
 @INCLUDE_IM_CYRILLIC_TRANSLIT_TRUE@am_libstatic_im_cyrillic_translit_la_rpath =
 libstatic_im_ime_la_DEPENDENCIES =
-am__objects_5 = gtkimcontextime.lo imime.lo
-am_libstatic_im_ime_la_OBJECTS = $(am__objects_5)
+am__objects_6 = gtkimcontextime.lo imime.lo
+am_libstatic_im_ime_la_OBJECTS = $(am__objects_6)
 libstatic_im_ime_la_OBJECTS = $(am_libstatic_im_ime_la_OBJECTS)
 @INCLUDE_IM_IME_TRUE@@USE_WIN32_TRUE@am_libstatic_im_ime_la_rpath =
 libstatic_im_inuktitut_la_LIBADD =
-am__objects_6 = iminuktitut.lo
-am_libstatic_im_inuktitut_la_OBJECTS = $(am__objects_6)
+am__objects_7 = iminuktitut.lo
+am_libstatic_im_inuktitut_la_OBJECTS = $(am__objects_7)
 libstatic_im_inuktitut_la_OBJECTS =  \
 	$(am_libstatic_im_inuktitut_la_OBJECTS)
 @INCLUDE_IM_INUKTITUT_TRUE@am_libstatic_im_inuktitut_la_rpath =
 libstatic_im_ipa_la_LIBADD =
-am__objects_7 = imipa.lo
-am_libstatic_im_ipa_la_OBJECTS = $(am__objects_7)
+am__objects_8 = imipa.lo
+am_libstatic_im_ipa_la_OBJECTS = $(am__objects_8)
 libstatic_im_ipa_la_OBJECTS = $(am_libstatic_im_ipa_la_OBJECTS)
 @INCLUDE_IM_IPA_TRUE@am_libstatic_im_ipa_la_rpath =
 libstatic_im_multipress_la_LIBADD =
-am__objects_8 = libstatic_im_multipress_la-gtkimcontextmultipress.lo \
+am__objects_9 = libstatic_im_multipress_la-gtkimcontextmultipress.lo \
 	libstatic_im_multipress_la-immultipress.lo
-am_libstatic_im_multipress_la_OBJECTS = $(am__objects_8)
+am_libstatic_im_multipress_la_OBJECTS = $(am__objects_9)
 libstatic_im_multipress_la_OBJECTS =  \
 	$(am_libstatic_im_multipress_la_OBJECTS)
 @INCLUDE_IM_MULTIPRESS_TRUE@am_libstatic_im_multipress_la_rpath =
 libstatic_im_quartz_la_LIBADD =
-am__objects_9 = imquartz.lo
-am_libstatic_im_quartz_la_OBJECTS = $(am__objects_9)
+am__objects_10 = imquartz.lo
+am_libstatic_im_quartz_la_OBJECTS = $(am__objects_10)
 libstatic_im_quartz_la_OBJECTS = $(am_libstatic_im_quartz_la_OBJECTS)
 @INCLUDE_IM_QUARTZ_TRUE@am_libstatic_im_quartz_la_rpath =
 libstatic_im_thai_la_LIBADD =
-am__objects_10 = thai-charprop.lo gtkimcontextthai.lo imthai.lo
-am_libstatic_im_thai_la_OBJECTS = $(am__objects_10)
+am__objects_11 = thai-charprop.lo gtkimcontextthai.lo imthai.lo
+am_libstatic_im_thai_la_OBJECTS = $(am__objects_11)
 libstatic_im_thai_la_OBJECTS = $(am_libstatic_im_thai_la_OBJECTS)
 @INCLUDE_IM_THAI_TRUE@am_libstatic_im_thai_la_rpath =
 libstatic_im_ti_er_la_LIBADD =
-am__objects_11 = imti-er.lo
-am_libstatic_im_ti_er_la_OBJECTS = $(am__objects_11)
+am__objects_12 = imti-er.lo
+am_libstatic_im_ti_er_la_OBJECTS = $(am__objects_12)
 libstatic_im_ti_er_la_OBJECTS = $(am_libstatic_im_ti_er_la_OBJECTS)
 @INCLUDE_IM_TI_ER_TRUE@am_libstatic_im_ti_er_la_rpath =
 libstatic_im_ti_et_la_LIBADD =
-am__objects_12 = imti-et.lo
-am_libstatic_im_ti_et_la_OBJECTS = $(am__objects_12)
+am__objects_13 = imti-et.lo
+am_libstatic_im_ti_et_la_OBJECTS = $(am__objects_13)
 libstatic_im_ti_et_la_OBJECTS = $(am_libstatic_im_ti_et_la_OBJECTS)
 @INCLUDE_IM_TI_ET_TRUE@am_libstatic_im_ti_et_la_rpath =
 libstatic_im_viqr_la_LIBADD =
-am__objects_13 = imviqr.lo
-am_libstatic_im_viqr_la_OBJECTS = $(am__objects_13)
+am__objects_14 = imviqr.lo
+am_libstatic_im_viqr_la_OBJECTS = $(am__objects_14)
 libstatic_im_viqr_la_OBJECTS = $(am_libstatic_im_viqr_la_OBJECTS)
 @INCLUDE_IM_VIQR_TRUE@am_libstatic_im_viqr_la_rpath =
+libstatic_im_wayland_la_LIBADD =
+am__objects_15 = gtk-text-input-protocol.lo
+am__objects_16 = imwayland.lo $(am__objects_15)
+am_libstatic_im_wayland_la_OBJECTS = $(am__objects_16)
+libstatic_im_wayland_la_OBJECTS =  \
+	$(am_libstatic_im_wayland_la_OBJECTS)
+@INCLUDE_IM_WAYLAND_TRUE@am_libstatic_im_wayland_la_rpath =
 libstatic_im_xim_la_LIBADD =
-am__objects_14 = gtkimcontextxim.lo imxim.lo
-am_libstatic_im_xim_la_OBJECTS = $(am__objects_14)
+am__objects_17 = gtkimcontextxim.lo imxim.lo
+am_libstatic_im_xim_la_OBJECTS = $(am__objects_17)
 libstatic_im_xim_la_OBJECTS = $(am_libstatic_im_xim_la_OBJECTS)
 @INCLUDE_IM_XIM_TRUE@@USE_X11_TRUE@am_libstatic_im_xim_la_rpath =
 AM_V_P = $(am__v_P_@AM_V@)
@@ -391,8 +408,8 @@ SOURCES = $(im_am_et_la_SOURCES) $(im_broadway_la_SOURCES) \
 	$(im_ipa_la_SOURCES) $(im_multipress_la_SOURCES) \
 	$(im_quartz_la_SOURCES) $(im_thai_la_SOURCES) \
 	$(im_ti_er_la_SOURCES) $(im_ti_et_la_SOURCES) \
-	$(im_viqr_la_SOURCES) $(im_xim_la_SOURCES) \
-	$(libstatic_im_am_et_la_SOURCES) \
+	$(im_viqr_la_SOURCES) $(im_wayland_la_SOURCES) \
+	$(im_xim_la_SOURCES) $(libstatic_im_am_et_la_SOURCES) \
 	$(libstatic_im_broadway_la_SOURCES) \
 	$(libstatic_im_cedilla_la_SOURCES) \
 	$(libstatic_im_cyrillic_translit_la_SOURCES) \
@@ -404,15 +421,17 @@ SOURCES = $(im_am_et_la_SOURCES) $(im_broadway_la_SOURCES) \
 	$(libstatic_im_thai_la_SOURCES) \
 	$(libstatic_im_ti_er_la_SOURCES) \
 	$(libstatic_im_ti_et_la_SOURCES) \
-	$(libstatic_im_viqr_la_SOURCES) $(libstatic_im_xim_la_SOURCES)
+	$(libstatic_im_viqr_la_SOURCES) \
+	$(libstatic_im_wayland_la_SOURCES) \
+	$(libstatic_im_xim_la_SOURCES)
 DIST_SOURCES = $(im_am_et_la_SOURCES) $(im_broadway_la_SOURCES) \
 	$(im_cedilla_la_SOURCES) $(im_cyrillic_translit_la_SOURCES) \
 	$(im_ime_la_SOURCES) $(im_inuktitut_la_SOURCES) \
 	$(im_ipa_la_SOURCES) $(im_multipress_la_SOURCES) \
 	$(im_quartz_la_SOURCES) $(im_thai_la_SOURCES) \
 	$(im_ti_er_la_SOURCES) $(im_ti_et_la_SOURCES) \
-	$(im_viqr_la_SOURCES) $(im_xim_la_SOURCES) \
-	$(libstatic_im_am_et_la_SOURCES) \
+	$(im_viqr_la_SOURCES) $(im_wayland_la_SOURCES) \
+	$(im_xim_la_SOURCES) $(libstatic_im_am_et_la_SOURCES) \
 	$(libstatic_im_broadway_la_SOURCES) \
 	$(libstatic_im_cedilla_la_SOURCES) \
 	$(libstatic_im_cyrillic_translit_la_SOURCES) \
@@ -424,7 +443,9 @@ DIST_SOURCES = $(im_am_et_la_SOURCES) $(im_broadway_la_SOURCES) \
 	$(libstatic_im_thai_la_SOURCES) \
 	$(libstatic_im_ti_er_la_SOURCES) \
 	$(libstatic_im_ti_et_la_SOURCES) \
-	$(libstatic_im_viqr_la_SOURCES) $(libstatic_im_xim_la_SOURCES)
+	$(libstatic_im_viqr_la_SOURCES) \
+	$(libstatic_im_wayland_la_SOURCES) \
+	$(libstatic_im_xim_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -728,7 +749,7 @@ GTESTER = gtester -k		# in $PATH for non-GLIB packages
 GTESTER_REPORT = gtester-report		# in $PATH for non-GLIB packages
 
 # initialize variables for unconditional += appending
-EXTRA_DIST = README.multipress
+EXTRA_DIST = $(am__append_1) README.multipress
 TEST_PROGS = 
 
 ### testing rules
@@ -872,6 +893,17 @@ libstatic_im_broadway_la_SOURCES = $(im_broadway_la_SOURCES)
 im_broadway_la_LIBADD = $(LDADDS)
 @INCLUDE_IM_BROADWAY_TRUE@STATIC_BROADWAY_MODULE = libstatic-im-broadway.la
 @INCLUDE_IM_BROADWAY_FALSE@@USE_BROADWAY_TRUE@BROADWAY_MODULE = im-broadway.la
+protocol_built_sources = \
+	gtk-text-input-protocol.c	\
+	gtk-text-input-client-protocol.h
+
+im_wayland_la_CPPFLAGS = $(AM_CPPFLAGS)
+im_wayland_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module $(no_undefined)
+im_wayland_la_SOURCES = imwayland.c $(protocol_built_sources)
+libstatic_im_wayland_la_SOURCES = $(im_wayland_la_SOURCES)
+im_wayland_la_LIBADD = $(LDADDS)
+@INCLUDE_IM_WAYLAND_TRUE@STATIC_WAYLAND_MODULE = libstatic-im-wayland.la
+@INCLUDE_IM_WAYLAND_FALSE@@USE_WAYLAND_TRUE@WAYLAND_MODULE = im-wayland.la
 multipress_defs = -DMULTIPRESS_LOCALEDIR=\""$(mplocaledir)"\" -DMULTIPRESS_CONFDIR=\""$(sysconfdir)/gtk-2.0"\"
 im_multipress_la_CPPFLAGS = $(AM_CPPFLAGS) $(multipress_defs)
 libstatic_im_multipress_la_CPPFLAGS = $(im_multipress_la_CPPFLAGS)
@@ -899,6 +931,7 @@ dist_imconffile_DATA = im-multipress.conf
 @BUILD_DYNAMIC_MODULES_TRUE@	$(MULTIPRESS_MODULE)		\
 @BUILD_DYNAMIC_MODULES_TRUE@	$(QUARTZ_MODULE)		\
 @BUILD_DYNAMIC_MODULES_TRUE@	$(BROADWAY_MODULE)		\
+@BUILD_DYNAMIC_MODULES_TRUE@	$(WAYLAND_MODULE)		\
 @BUILD_DYNAMIC_MODULES_TRUE@	$(THAI_MODULE)			\
 @BUILD_DYNAMIC_MODULES_TRUE@	$(TI_ER_MODULE)			\
 @BUILD_DYNAMIC_MODULES_TRUE@	$(TI_ET_MODULE)			\
@@ -915,14 +948,17 @@ noinst_LTLIBRARIES = \
 	$(STATIC_MULTIPRESS_MODULE)		\
 	$(STATIC_QUARTZ_MODULE)			\
 	$(STATIC_BROADWAY_MODULE)		\
+	$(STATIC_WAYLAND_MODULE)		\
 	$(STATIC_THAI_MODULE)			\
 	$(STATIC_TI_ER_MODULE)			\
 	$(STATIC_TI_ET_MODULE)			\
 	$(STATIC_VIQR_MODULE)			\
 	$(STATIC_XIM_MODULE)
 
+@USE_WAYLAND_TRUE@BUILT_SOURCES = $(protocol_built_sources)
 CLEANFILES = immodules.cache
-all: all-am
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .lo .o .obj
@@ -1042,6 +1078,9 @@ im-ti-et.la: $(im_ti_et_la_OBJECTS) $(im_ti_et_la_DEPENDENCIES) $(EXTRA_im_ti_et
 im-viqr.la: $(im_viqr_la_OBJECTS) $(im_viqr_la_DEPENDENCIES) $(EXTRA_im_viqr_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(im_viqr_la_LINK) $(am_im_viqr_la_rpath) $(im_viqr_la_OBJECTS) $(im_viqr_la_LIBADD) $(LIBS)
 
+im-wayland.la: $(im_wayland_la_OBJECTS) $(im_wayland_la_DEPENDENCIES) $(EXTRA_im_wayland_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(im_wayland_la_LINK) $(am_im_wayland_la_rpath) $(im_wayland_la_OBJECTS) $(im_wayland_la_LIBADD) $(LIBS)
+
 im-xim.la: $(im_xim_la_OBJECTS) $(im_xim_la_DEPENDENCIES) $(EXTRA_im_xim_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(im_xim_la_LINK) $(am_im_xim_la_rpath) $(im_xim_la_OBJECTS) $(im_xim_la_LIBADD) $(LIBS)
 
@@ -1084,6 +1123,9 @@ libstatic-im-ti-et.la: $(libstatic_im_ti_et_la_OBJECTS) $(libstatic_im_ti_et_la_
 libstatic-im-viqr.la: $(libstatic_im_viqr_la_OBJECTS) $(libstatic_im_viqr_la_DEPENDENCIES) $(EXTRA_libstatic_im_viqr_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK) $(am_libstatic_im_viqr_la_rpath) $(libstatic_im_viqr_la_OBJECTS) $(libstatic_im_viqr_la_LIBADD) $(LIBS)
 
+libstatic-im-wayland.la: $(libstatic_im_wayland_la_OBJECTS) $(libstatic_im_wayland_la_DEPENDENCIES) $(EXTRA_libstatic_im_wayland_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK) $(am_libstatic_im_wayland_la_rpath) $(libstatic_im_wayland_la_OBJECTS) $(libstatic_im_wayland_la_LIBADD) $(LIBS)
+
 libstatic-im-xim.la: $(libstatic_im_xim_la_OBJECTS) $(libstatic_im_xim_la_DEPENDENCIES) $(EXTRA_libstatic_im_xim_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(LINK) $(am_libstatic_im_xim_la_rpath) $(libstatic_im_xim_la_OBJECTS) $(libstatic_im_xim_la_LIBADD) $(LIBS)
 
@@ -1093,6 +1135,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtk-text-input-protocol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkimcontextime.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkimcontextthai.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkimcontextxim.Plo@am__quote@
@@ -1100,6 +1143,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/im_multipress_la-gtkimcontextmultipress.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/im_multipress_la-immultipress.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/im_quartz_la-imquartz.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/im_wayland_la-gtk-text-input-protocol.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/im_wayland_la-imwayland.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imam-et.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imbroadway.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imcedilla.Plo@am__quote@
@@ -1112,6 +1157,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imti-er.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imti-et.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imviqr.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imwayland.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imxim.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libstatic_im_multipress_la-gtkimcontextmultipress.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libstatic_im_multipress_la-immultipress.Plo@am__quote@
@@ -1168,6 +1214,20 @@ im_quartz_la-imquartz.lo: imquartz.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='imquartz.c' object='im_quartz_la-imquartz.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(im_quartz_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o im_quartz_la-imquartz.lo `test -f 'imquartz.c' || echo '$(srcdir)/'`imquartz.c
+
+im_wayland_la-imwayland.lo: imwayland.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(im_wayland_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT im_wayland_la-imwayland.lo -MD -MP -MF $(DEPDIR)/im_wayland_la-imwayland.Tpo -c -o im_wayland_la-imwayland.lo `test -f 'imwayland.c' || echo '$(srcdir)/'`imwayland.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/im_wayland_la-imwayland.Tpo $(DEPDIR)/im_wayland_la-imwayland.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='imwayland.c' object='im_wayland_la-imwayland.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(im_wayland_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o im_wayland_la-imwayland.lo `test -f 'imwayland.c' || echo '$(srcdir)/'`imwayland.c
+
+im_wayland_la-gtk-text-input-protocol.lo: gtk-text-input-protocol.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(im_wayland_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT im_wayland_la-gtk-text-input-protocol.lo -MD -MP -MF $(DEPDIR)/im_wayland_la-gtk-text-input-protocol.Tpo -c -o im_wayland_la-gtk-text-input-protocol.lo `test -f 'gtk-text-input-protocol.c' || echo '$(srcdir)/'`gtk-text-input-protocol.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/im_wayland_la-gtk-text-input-protocol.Tpo $(DEPDIR)/im_wayland_la-gtk-text-input-protocol.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtk-text-input-protocol.c' object='im_wayland_la-gtk-text-input-protocol.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(im_wayland_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o im_wayland_la-gtk-text-input-protocol.lo `test -f 'gtk-text-input-protocol.c' || echo '$(srcdir)/'`gtk-text-input-protocol.c
 
 libstatic_im_multipress_la-gtkimcontextmultipress.lo: gtkimcontextmultipress.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libstatic_im_multipress_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libstatic_im_multipress_la-gtkimcontextmultipress.lo -MD -MP -MF $(DEPDIR)/libstatic_im_multipress_la-gtkimcontextmultipress.Tpo -c -o libstatic_im_multipress_la-gtkimcontextmultipress.lo `test -f 'gtkimcontextmultipress.c' || echo '$(srcdir)/'`gtkimcontextmultipress.c
@@ -1294,14 +1354,16 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-local
-check: check-am
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
 @CROSS_COMPILING_TRUE@all-local:
 all-am: Makefile $(LTLIBRARIES) $(DATA) all-local
 installdirs:
 	for dir in "$(DESTDIR)$(moduledir)" "$(DESTDIR)$(imconffiledir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: install-am
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -1332,6 +1394,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-moduleLTLIBRARIES \
@@ -1405,7 +1468,8 @@ ps-am:
 uninstall-am: uninstall-dist_imconffileDATA uninstall-local \
 	uninstall-moduleLTLIBRARIES
 
-.MAKE: check-am install-am install-data-am install-strip
+.MAKE: all check check-am install install-am install-data-am \
+	install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am all-local check check-am \
 	check-local clean clean-generic clean-libtool \
@@ -1515,6 +1579,28 @@ immodules.cache: Makefile.am $(module_LTLIBRARIES)
 	$(AM_V_GEN) $(top_builddir)/gtk/gtk-query-immodules-3.0$(EXEEXT) $(module_LTLIBRARIES) > immodules.cache
 
 @CROSS_COMPILING_FALSE@all-local: immodules.cache
+
+.SECONDEXPANSION:
+
+define protostability
+$(shell echo $1 | sed 's/.*\(\<unstable\>\|\<stable\>\).*/\1/')
+endef
+
+define protoname
+$(shell echo $1 | sed 's/\([a-z\-]\+\)-[a-z]\+-v[0-9]\+/\1/')
+endef
+
+%-protocol.c : $(WAYLAND_PROTOCOLS_DATADIR)/$$(call protostability,$$*)/$$(call protoname,$$*)/$$*.xml
+	$(AM_V_GEN)$(WAYLAND_SCANNER) code < $< > $@
+	$(AM_V_GEN)$(SED) -i -e 's/WL_EXPORT //' $@
+%-client-protocol.h : $(WAYLAND_PROTOCOLS_DATADIR)/$$(call protostability,$$*)/$$(call protoname,$$*)/$$*.xml
+	$(AM_V_GEN)$(WAYLAND_SCANNER) client-header < $< > $@
+
+%-protocol.c : $(srcdir)/%.xml
+	$(AM_V_GEN)$(WAYLAND_SCANNER) code < $< > $@
+	$(AM_V_GEN)$(SED) -i -e 's/WL_EXPORT //' $@
+%-client-protocol.h : $(srcdir)/%.xml
+	$(AM_V_GEN)$(WAYLAND_SCANNER) client-header < $< > $@
 
 -include $(top_srcdir)/git.mk
 

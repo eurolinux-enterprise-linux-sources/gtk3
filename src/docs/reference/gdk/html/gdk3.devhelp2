@@ -65,7 +65,7 @@
     <keyword type="function" name="gdk_get_program_class ()" link="gdk3-General.html#gdk-get-program-class"/>
     <keyword type="function" name="gdk_set_program_class ()" link="gdk3-General.html#gdk-set-program-class"/>
     <keyword type="function" name="gdk_get_display ()" link="gdk3-General.html#gdk-get-display" deprecated=""/>
-    <keyword type="function" name="gdk_flush ()" link="gdk3-General.html#gdk-flush"/>
+    <keyword type="function" name="gdk_flush ()" link="gdk3-General.html#gdk-flush" deprecated=""/>
     <keyword type="function" name="gdk_screen_width ()" link="gdk3-General.html#gdk-screen-width" deprecated="3.22: Use per-monitor information"/>
     <keyword type="function" name="gdk_screen_height ()" link="gdk3-General.html#gdk-screen-height" deprecated="3.22: Use per-monitor information"/>
     <keyword type="function" name="gdk_screen_width_mm ()" link="gdk3-General.html#gdk-screen-width-mm" deprecated="3.22: Use per-monitor information"/>
@@ -73,13 +73,13 @@
     <keyword type="function" name="gdk_pointer_grab ()" link="gdk3-General.html#gdk-pointer-grab" deprecated="3.0: Use gdk_device_grab() instead."/>
     <keyword type="function" name="gdk_pointer_ungrab ()" link="gdk3-General.html#gdk-pointer-ungrab" deprecated=""/>
     <keyword type="function" name="gdk_pointer_is_grabbed ()" link="gdk3-General.html#gdk-pointer-is-grabbed" deprecated="3.0: Use gdk_display_device_is_grabbed() instead."/>
-    <keyword type="function" name="gdk_set_double_click_time ()" link="gdk3-General.html#gdk-set-double-click-time"/>
+    <keyword type="function" name="gdk_set_double_click_time ()" link="gdk3-General.html#gdk-set-double-click-time" deprecated=""/>
     <keyword type="function" name="gdk_keyboard_grab ()" link="gdk3-General.html#gdk-keyboard-grab" deprecated="3.0: Use gdk_device_grab() instead."/>
     <keyword type="function" name="gdk_keyboard_ungrab ()" link="gdk3-General.html#gdk-keyboard-ungrab" deprecated=""/>
-    <keyword type="function" name="gdk_beep ()" link="gdk3-General.html#gdk-beep"/>
-    <keyword type="function" name="gdk_error_trap_push ()" link="gdk3-General.html#gdk-error-trap-push"/>
-    <keyword type="function" name="gdk_error_trap_pop ()" link="gdk3-General.html#gdk-error-trap-pop"/>
-    <keyword type="function" name="gdk_error_trap_pop_ignored ()" link="gdk3-General.html#gdk-error-trap-pop-ignored" since="3.0"/>
+    <keyword type="function" name="gdk_beep ()" link="gdk3-General.html#gdk-beep" deprecated=""/>
+    <keyword type="function" name="gdk_error_trap_push ()" link="gdk3-General.html#gdk-error-trap-push" deprecated=""/>
+    <keyword type="function" name="gdk_error_trap_pop ()" link="gdk3-General.html#gdk-error-trap-pop" deprecated=""/>
+    <keyword type="function" name="gdk_error_trap_pop_ignored ()" link="gdk3-General.html#gdk-error-trap-pop-ignored" deprecated="" since="3.0"/>
     <keyword type="enum" name="enum GdkGrabStatus" link="gdk3-General.html#GdkGrabStatus"/>
     <keyword type="macro" name="GDK_WINDOWING_X11" link="gdk3-General.html#GDK-WINDOWING-X11:CAPS"/>
     <keyword type="macro" name="GDK_WINDOWING_WIN32" link="gdk3-General.html#GDK-WINDOWING-WIN32:CAPS"/>
@@ -682,7 +682,7 @@
     <keyword type="enum" name="enum GdkWindowState" link="gdk3-Event-Structures.html#GdkWindowState"/>
     <keyword type="enum" name="enum GdkSettingAction" link="gdk3-Event-Structures.html#GdkSettingAction"/>
     <keyword type="enum" name="enum GdkOwnerChange" link="gdk3-Event-Structures.html#GdkOwnerChange"/>
-    <keyword type="function" name="gdk_keymap_get_default ()" link="gdk3-Keyboard-Handling.html#gdk-keymap-get-default"/>
+    <keyword type="function" name="gdk_keymap_get_default ()" link="gdk3-Keyboard-Handling.html#gdk-keymap-get-default" deprecated="3.22: Use gdk_keymap_get_for_display() instead"/>
     <keyword type="function" name="gdk_keymap_get_for_display ()" link="gdk3-Keyboard-Handling.html#gdk-keymap-get-for-display" since="2.2"/>
     <keyword type="function" name="gdk_keymap_lookup_key ()" link="gdk3-Keyboard-Handling.html#gdk-keymap-lookup-key"/>
     <keyword type="function" name="gdk_keymap_translate_keyboard_state ()" link="gdk3-Keyboard-Handling.html#gdk-keymap-translate-keyboard-state"/>

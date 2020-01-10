@@ -2,7 +2,6 @@
 %global with_broadway 1
 %endif
 
-%global with_wayland 1
 %global glib2_version 2.49.4
 %global pango_version 1.37.3
 %global atk_version 2.15.1
@@ -10,7 +9,7 @@
 %global gdk_pixbuf_version 2.30.0
 %global xrandr_version 1.5.0
 %global wayland_version 1.9.91
-%global wayland_protocols_version 1.9
+%global wayland_protocols_version 1.12
 %global epoxy_version 1.0
 
 %global bin_version 3.0.0
@@ -21,8 +20,8 @@
 %global __provides_exclude_from ^%{_libdir}/gtk-3.0
 
 Name: gtk3
-Version: 3.22.26
-Release: 4%{?dist}
+Version: 3.22.30
+Release: 3%{?dist}
 Summary: GTK+ graphical user interface library
 
 License: LGPLv2+
@@ -34,13 +33,11 @@ Source1: ja.po
 # https://bugzilla.redhat.com/show_bug.cgi?id=1259292
 Patch18: app-chooser-fixes.patch
 
-Patch19: 0001-gdk-Always-emit-motion-after-enter.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1507113
+Patch19: 0001-Add-_gtk_printer_get_hard_margins_for_paper_size.patch
 
-# https://bugzilla.redhat.com/show_bug.cgi?id=1483942
-Patch20: x11-Dont-call-XInput-API-for-core-events.patch
-
-# https://bugzilla.redhat.com/show_bug.cgi?id=1502788
-Patch21: 0001-x11-Avoid-a-division-by-zero.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1571422
+Patch20: 0001-gdkseatdefault-Don-t-hide-GdkWindow-on-grab-failure.patch
 
 BuildRequires: pkgconfig(atk) >= %{atk_version}
 BuildRequires: pkgconfig(atk-bridge-2.0)
@@ -68,14 +65,12 @@ BuildRequires: pkgconfig(json-glib-1.0)
 BuildRequires: pkgconfig(colord)
 BuildRequires: pkgconfig(avahi-gobject)
 BuildRequires: desktop-file-utils
-%if 0%{?with_wayland}
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(wayland-client) >= %{wayland_version}
 BuildRequires: pkgconfig(wayland-cursor) >= %{wayland_version}
 BuildRequires: pkgconfig(wayland-egl) >= %{wayland_version}
 BuildRequires: pkgconfig(wayland-protocols) >= %{wayland_protocols_version}
 BuildRequires: pkgconfig(xkbcommon)
-%endif
 
 # standard icons
 Requires: adwaita-icon-theme
@@ -91,13 +86,11 @@ Requires: glib2%{?_isa} >= %{glib2_version}
 Requires: libepoxy%{?_isa} >= %{epoxy_version}
 Requires: libXrandr%{?_isa} >= %{xrandr_version}
 Requires: pango%{?_isa} >= %{pango_version}
-%if 0%{?with_wayland}
 Requires: libwayland-client%{?_isa} >= %{wayland_version}
 Requires: libwayland-cursor%{?_isa} >= %{wayland_version}
-%endif
 
 # make sure we have a reasonable gsettings backend
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 Recommends: dconf%{?_isa}
 %else
 Requires: dconf%{?_isa}
@@ -180,7 +173,6 @@ the functionality of the installed %{name} package.
 %patch18 -p1
 %patch19 -p1
 %patch20 -p1
-%patch21 -p1
 
 cp %{SOURCE1} po/
 
@@ -195,14 +187,13 @@ export CFLAGS='-fno-strict-aliasing %optflags'
         --enable-xcomposite \
         --enable-xdamage \
         --enable-x11-backend \
-%if 0%{?with_wayland}
         --enable-wayland-backend \
-%endif
 %if 0%{?with_broadway}
         --enable-broadway-backend \
 %endif
         --enable-colord \
-        --enable-installed-tests
+        --enable-installed-tests \
+        --with-included-immodules=wayland
 )
 
 # fight unused direct deps
@@ -372,6 +363,18 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/installed-tests
 
 %changelog
+* Thu Jun 21 2018 Benjamin Otte <otte@redhat.com> - 3.22.30-3
+- Don't hide GdkWindow on grab failure
+- Resolves: #1571422
+
+* Fri Jun 08 2018 Marek Kasik <mkasik@redhat.com> - 3.22.30-2
+- Get hard margins for current paper size when printing
+- Resolves: #1507113
+
+* Wed Apr 18 2018 Kalev Lember <klember@redhat.com> - 3.22.30-1
+- Update to 3.22.30
+- Resolves: #1569975
+
 * Mon Apr 09 2018 Debarshi Ray <rishi@fedoraproject.org> - 3.22.26-4
 - Avoid a division by zero with RandR 1.3
 - Resolves: #1502788

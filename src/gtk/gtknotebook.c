@@ -5146,7 +5146,7 @@ gtk_notebook_update_labels (GtkNotebook *notebook)
         {
           if (GTK_IS_LABEL (page->tab_label))
             gtk_label_set_text (GTK_LABEL (page->menu_label),
-                                gtk_label_get_label (GTK_LABEL (page->tab_label)));
+                                gtk_label_get_text (GTK_LABEL (page->tab_label)));
           else
             gtk_label_set_text (GTK_LABEL (page->menu_label), string);
         }
@@ -6350,7 +6350,7 @@ gtk_notebook_menu_item_create (GtkNotebook *notebook,
   if (page->default_menu)
     {
       if (GTK_IS_LABEL (page->tab_label))
-        page->menu_label = gtk_label_new (gtk_label_get_label (GTK_LABEL (page->tab_label)));
+        page->menu_label = gtk_label_new (gtk_label_get_text (GTK_LABEL (page->tab_label)));
       else
         page->menu_label = gtk_label_new ("");
       gtk_widget_set_halign (page->menu_label, GTK_ALIGN_START);
@@ -7949,7 +7949,8 @@ gtk_notebook_get_tab_detachable (GtkNotebook *notebook,
  *    notebook = gtk_drag_get_source_widget (context);
  *    child = (void*) gtk_selection_data_get_data (data);
  *
- *    process_widget (*child);
+ *    // process_widget (*child);
+ *
  *    gtk_notebook_detach_tab (GTK_NOTEBOOK (notebook), *child);
  *  }
  * ]|

@@ -1382,11 +1382,10 @@ toolbar {
   &.vertical separator { margin: 6px 1px 7px 0; }
 
   &:not(.inline-toolbar):not(.osd) {
-    switch,
-    scale,
-    entry,
-    spinbutton,
-    button {
+    // workaround: add margins to the children of tool items to simulate
+    // spacing, ignore the overflow button (.toggle) and the overflow menu
+    // (.popup)
+    > *:not(.toggle):not(.popup) > * {
       margin-right: 1px;
       margin-bottom: 1px;
     }
@@ -1404,7 +1403,7 @@ toolbar {
   border-radius: 0  0 5px 5px;
 }
 
-searchbar,
+searchbar > revealer > box,
 .location-bar {
   @extend %toolbar;
 
@@ -1412,6 +1411,12 @@ searchbar,
 
   border-width: 0 0 1px;
   padding: 3px;
+}
+
+searchbar > revealer > box {
+  // workaround: undo the GtkContainer:border-width and use CSS padding instead
+  margin: -6px;
+  padding: 6px;
 }
 
 %darkbar {
@@ -2928,7 +2933,7 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
 
 scale {
   // sizing
-  $_marks_lenght: 6px;
+  $_marks_length: 6px;
   $_marks_distance: 6px;
 
   min-height: 10px;
@@ -3079,7 +3084,7 @@ scale {
                                                      (bottom, right, left) {
       &.#{$marks_class} {
         margin-#{$marks_margin}: $_marks_distance;
-        margin-#{$marks_pos}: -($_marks_distance + $_marks_lenght);
+        margin-#{$marks_pos}: -($_marks_distance + $_marks_length);
       }
     }
   }
@@ -3091,27 +3096,27 @@ scale {
                                                      (bottom, right, left) {
       &.#{$marks_class} {
         margin-#{$marks_margin}: $_marks_distance;
-        margin-#{$marks_pos}: -($_marks_distance + $_marks_lenght - 3px);
+        margin-#{$marks_pos}: -($_marks_distance + $_marks_length - 3px);
       }
     }
   }
 
   &.horizontal {
     indicator {
-      min-height: $_marks_lenght;
+      min-height: $_marks_length;
       min-width: 1px;
     }
 
-    &.fine-tune indicator { min-height: ($_marks_lenght - 3px); }
+    &.fine-tune indicator { min-height: ($_marks_length - 3px); }
   }
 
   &.vertical {
     indicator {
       min-height: 1px;
-      min-width: $_marks_lenght;
+      min-width: $_marks_length;
     }
 
-    &.fine-tune indicator { min-width: ($_marks_lenght - 3px); }
+    &.fine-tune indicator { min-width: ($_marks_length - 3px); }
   }
 
   // *WARNING* scale with marks madness following
@@ -3661,14 +3666,15 @@ row {
  * Expanders *
  *************/
 expander {
-  arrow {
+  title > arrow {
     min-width: 16px;
     min-height: 16px;
     -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
     &:hover { color: lighten($fg_color,30%); } //only lightens the arrow
+    &:disabled { color: $insensitive_fg_color; }
+    &:disabled:backdrop { color: $backdrop_insensitive_color; }
 
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
   }

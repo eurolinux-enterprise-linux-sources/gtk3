@@ -116,10 +116,11 @@ noinst_PROGRAMS = $(am__EXEEXT_1) overlayscroll$(EXEEXT) \
 	testgtk$(EXEEXT) testheaderbar$(EXEEXT) \
 	testheightforwidth$(EXEEXT) testiconview$(EXEEXT) \
 	testiconview-keynav$(EXEEXT) testicontheme$(EXEEXT) \
-	testimage$(EXEEXT) testinput$(EXEEXT) \
+	testimage$(EXEEXT) testinfobar$(EXEEXT) testinput$(EXEEXT) \
 	testkineticscrolling$(EXEEXT) testlist$(EXEEXT) \
-	testlist2$(EXEEXT) testlist3$(EXEEXT) testlevelbar$(EXEEXT) \
-	testlockbutton$(EXEEXT) testmenubutton$(EXEEXT) \
+	testlist2$(EXEEXT) testlist3$(EXEEXT) testlist4$(EXEEXT) \
+	testlevelbar$(EXEEXT) testlockbutton$(EXEEXT) \
+	testmenubutton$(EXEEXT) testmodelbutton$(EXEEXT) \
 	testmountoperation$(EXEEXT) testmultidisplay$(EXEEXT) \
 	testnotebookdnd$(EXEEXT) testnumerableicon$(EXEEXT) \
 	testnouiprint$(EXEEXT) testoffscreen$(EXEEXT) \
@@ -143,7 +144,7 @@ noinst_PROGRAMS = $(am__EXEEXT_1) overlayscroll$(EXEEXT) \
 	testtooltips$(EXEEXT) testexpand$(EXEEXT) \
 	testexpander$(EXEEXT) testvolumebutton$(EXEEXT) \
 	testscrolledwindow$(EXEEXT) testscrolledge$(EXEEXT) \
-	testswitch$(EXEEXT) testcellarea$(EXEEXT) testswitch$(EXEEXT) \
+	testcellarea$(EXEEXT) testswitch$(EXEEXT) \
 	styleexamples$(EXEEXT) testtreemenu$(EXEEXT) \
 	testtoplevelembed$(EXEEXT) testnoscreen$(EXEEXT) \
 	testtreepos$(EXEEXT) testsensitive$(EXEEXT) \
@@ -463,6 +464,12 @@ testiconview_keynav_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
 testimage_SOURCES = testimage.c
 testimage_OBJECTS = testimage.$(OBJEXT)
 testimage_LDADD = $(LDADD)
+testinfobar_SOURCES = testinfobar.c
+testinfobar_OBJECTS = testinfobar.$(OBJEXT)
+testinfobar_LDADD = $(LDADD)
+testinfobar_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
+	$(top_builddir)/gdk/libgdk-3.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 testinput_SOURCES = testinput.c
 testinput_OBJECTS = testinput.$(OBJEXT)
 testinput_LDADD = $(LDADD)
@@ -484,6 +491,12 @@ testlist3_LDADD = $(LDADD)
 testlist3_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
 	$(top_builddir)/gdk/libgdk-3.la $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
+testlist4_SOURCES = testlist4.c
+testlist4_OBJECTS = testlist4.$(OBJEXT)
+testlist4_LDADD = $(LDADD)
+testlist4_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
+	$(top_builddir)/gdk/libgdk-3.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 testlockbutton_SOURCES = testlockbutton.c
 testlockbutton_OBJECTS = testlockbutton.$(OBJEXT)
 testlockbutton_LDADD = $(LDADD)
@@ -496,6 +509,12 @@ testmenubutton_LDADD = $(LDADD)
 am_testmerge_OBJECTS = testmerge.$(OBJEXT)
 testmerge_OBJECTS = $(am_testmerge_OBJECTS)
 testmerge_LDADD = $(LDADD)
+testmodelbutton_SOURCES = testmodelbutton.c
+testmodelbutton_OBJECTS = testmodelbutton.$(OBJEXT)
+testmodelbutton_LDADD = $(LDADD)
+testmodelbutton_DEPENDENCIES = $(top_builddir)/gtk/libgtk-3.la \
+	$(top_builddir)/gdk/libgdk-3.la $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 testmountoperation_SOURCES = testmountoperation.c
 testmountoperation_OBJECTS = testmountoperation.$(OBJEXT)
 testmountoperation_LDADD = $(LDADD)
@@ -774,12 +793,13 @@ SOURCES = $(animated_resizing_SOURCES) $(animated_revealing_SOURCES) \
 	$(testglblending_SOURCES) testgmenu.c $(testgrid_SOURCES) \
 	$(testgrouping_SOURCES) $(testgtk_SOURCES) testheaderbar.c \
 	testheightforwidth.c testicontheme.c $(testiconview_SOURCES) \
-	$(testiconview_keynav_SOURCES) testimage.c testinput.c \
-	$(testkineticscrolling_SOURCES) testlevelbar.c testlist.c \
-	testlist2.c testlist3.c testlockbutton.c testlogout.c \
-	$(testmenubutton_SOURCES) $(testmerge_SOURCES) \
-	testmountoperation.c testmultidisplay.c testnoscreen.c \
-	testnotebookdnd.c testnouiprint.c $(testnumerableicon_SOURCES) \
+	$(testiconview_keynav_SOURCES) testimage.c testinfobar.c \
+	testinput.c $(testkineticscrolling_SOURCES) testlevelbar.c \
+	testlist.c testlist2.c testlist3.c testlist4.c \
+	testlockbutton.c testlogout.c $(testmenubutton_SOURCES) \
+	$(testmerge_SOURCES) testmodelbutton.c testmountoperation.c \
+	testmultidisplay.c testnoscreen.c testnotebookdnd.c \
+	testnouiprint.c $(testnumerableicon_SOURCES) \
 	$(testoffscreen_SOURCES) $(testoffscreenwindow_SOURCES) \
 	testorientable.c $(testoverlay_SOURCES) \
 	$(testoverlaystyleclass_SOURCES) $(testpixbuf_color_SOURCES) \
@@ -831,12 +851,13 @@ DIST_SOURCES = $(animated_resizing_SOURCES) \
 	$(testglblending_SOURCES) testgmenu.c $(testgrid_SOURCES) \
 	$(testgrouping_SOURCES) $(testgtk_SOURCES) testheaderbar.c \
 	testheightforwidth.c testicontheme.c $(testiconview_SOURCES) \
-	$(testiconview_keynav_SOURCES) testimage.c testinput.c \
-	$(testkineticscrolling_SOURCES) testlevelbar.c testlist.c \
-	testlist2.c testlist3.c testlockbutton.c testlogout.c \
-	$(testmenubutton_SOURCES) $(testmerge_SOURCES) \
-	testmountoperation.c testmultidisplay.c testnoscreen.c \
-	testnotebookdnd.c testnouiprint.c $(testnumerableicon_SOURCES) \
+	$(testiconview_keynav_SOURCES) testimage.c testinfobar.c \
+	testinput.c $(testkineticscrolling_SOURCES) testlevelbar.c \
+	testlist.c testlist2.c testlist3.c testlist4.c \
+	testlockbutton.c testlogout.c $(testmenubutton_SOURCES) \
+	$(testmerge_SOURCES) testmodelbutton.c testmountoperation.c \
+	testmultidisplay.c testnoscreen.c testnotebookdnd.c \
+	testnouiprint.c $(testnumerableicon_SOURCES) \
 	$(testoffscreen_SOURCES) $(testoffscreenwindow_SOURCES) \
 	testorientable.c $(testoverlay_SOURCES) \
 	$(testoverlaystyleclass_SOURCES) $(testpixbuf_color_SOURCES) \
@@ -1942,6 +1963,10 @@ testimage$(EXEEXT): $(testimage_OBJECTS) $(testimage_DEPENDENCIES) $(EXTRA_testi
 	@rm -f testimage$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testimage_OBJECTS) $(testimage_LDADD) $(LIBS)
 
+testinfobar$(EXEEXT): $(testinfobar_OBJECTS) $(testinfobar_DEPENDENCIES) $(EXTRA_testinfobar_DEPENDENCIES) 
+	@rm -f testinfobar$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(testinfobar_OBJECTS) $(testinfobar_LDADD) $(LIBS)
+
 testinput$(EXEEXT): $(testinput_OBJECTS) $(testinput_DEPENDENCIES) $(EXTRA_testinput_DEPENDENCIES) 
 	@rm -f testinput$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testinput_OBJECTS) $(testinput_LDADD) $(LIBS)
@@ -1966,6 +1991,10 @@ testlist3$(EXEEXT): $(testlist3_OBJECTS) $(testlist3_DEPENDENCIES) $(EXTRA_testl
 	@rm -f testlist3$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testlist3_OBJECTS) $(testlist3_LDADD) $(LIBS)
 
+testlist4$(EXEEXT): $(testlist4_OBJECTS) $(testlist4_DEPENDENCIES) $(EXTRA_testlist4_DEPENDENCIES) 
+	@rm -f testlist4$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(testlist4_OBJECTS) $(testlist4_LDADD) $(LIBS)
+
 testlockbutton$(EXEEXT): $(testlockbutton_OBJECTS) $(testlockbutton_DEPENDENCIES) $(EXTRA_testlockbutton_DEPENDENCIES) 
 	@rm -f testlockbutton$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testlockbutton_OBJECTS) $(testlockbutton_LDADD) $(LIBS)
@@ -1981,6 +2010,10 @@ testmenubutton$(EXEEXT): $(testmenubutton_OBJECTS) $(testmenubutton_DEPENDENCIES
 testmerge$(EXEEXT): $(testmerge_OBJECTS) $(testmerge_DEPENDENCIES) $(EXTRA_testmerge_DEPENDENCIES) 
 	@rm -f testmerge$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testmerge_OBJECTS) $(testmerge_LDADD) $(LIBS)
+
+testmodelbutton$(EXEEXT): $(testmodelbutton_OBJECTS) $(testmodelbutton_DEPENDENCIES) $(EXTRA_testmodelbutton_DEPENDENCIES) 
+	@rm -f testmodelbutton$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(testmodelbutton_OBJECTS) $(testmodelbutton_LDADD) $(LIBS)
 
 testmountoperation$(EXEEXT): $(testmountoperation_OBJECTS) $(testmountoperation_DEPENDENCIES) $(EXTRA_testmountoperation_DEPENDENCIES) 
 	@rm -f testmountoperation$(EXEEXT)
@@ -2317,16 +2350,19 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testiconview-keynav.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testiconview.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testimage.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testinfobar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testinput.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testkineticscrolling.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlevelbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist3.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlist4.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlockbutton.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testlogout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testmenubutton.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testmerge.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testmodelbutton.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testmountoperation.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testmultidisplay.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testnoscreen.Po@am__quote@

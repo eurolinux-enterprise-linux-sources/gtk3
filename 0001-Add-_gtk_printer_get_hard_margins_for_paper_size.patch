@@ -1,0 +1,224 @@
+From fff08fa319dff8542a3f3481a5273523bdfd5dd9 Mon Sep 17 00:00:00 2001
+From: Adrian Johnson <ajohnson@redneon.com>
+Date: Mon, 16 Apr 2018 13:53:44 +0200
+Subject: [PATCH] Add _gtk_printer_get_hard_margins_for_paper_size()
+
+to retreive paper size specific hard margins and use this
+to set the hard margins in the print context.
+(modified by Marek Kasik <mkasik@redhat.com>)
+
+https://bugzilla.gnome.org/show_bug.cgi?id=686109
+---
+ gtk/gtkprintbackend.c                         | 18 +++++++
+ gtk/gtkprintbackend.h                         |  8 +++-
+ gtk/gtkprinter-private.h                      |  6 +++
+ gtk/gtkprinter.c                              | 13 +++++
+ gtk/gtkprintoperation-unix.c                  |  4 +-
+ .../printbackends/cups/gtkprintbackendcups.c  | 48 +++++++++++++++++++
+ 6 files changed, 95 insertions(+), 2 deletions(-)
+
+diff --git a/gtk/gtkprintbackend.c b/gtk/gtkprintbackend.c
+index cccdbcaaf7..1a730ee3a2 100644
+--- a/gtk/gtkprintbackend.c
++++ b/gtk/gtkprintbackend.c
+@@ -350,6 +350,12 @@ static gboolean             fallback_printer_get_hard_margins      (GtkPrinter
+                                                                     gdouble             *bottom,
+                                                                     gdouble             *left,
+                                                                     gdouble             *right);
++static gboolean             fallback_printer_get_hard_margins_for_paper_size (GtkPrinter          *printer,
++									      GtkPaperSize        *paper_size,
++									      gdouble             *top,
++									      gdouble             *bottom,
++									      gdouble             *left,
++									      gdouble             *right);
+ static GList *              fallback_printer_list_papers           (GtkPrinter          *printer);
+ static GtkPageSetup *       fallback_printer_get_default_page_size (GtkPrinter          *printer);
+ static GtkPrintCapabilities fallback_printer_get_capabilities      (GtkPrinter          *printer);
+@@ -376,6 +382,7 @@ gtk_print_backend_class_init (GtkPrintBackendClass *class)
+   class->printer_request_details = fallback_printer_request_details;
+   class->printer_mark_conflicts = fallback_printer_mark_conflicts;
+   class->printer_get_hard_margins = fallback_printer_get_hard_margins;
++  class->printer_get_hard_margins_for_paper_size = fallback_printer_get_hard_margins_for_paper_size;
+   class->printer_list_papers = fallback_printer_list_papers;
+   class->printer_get_default_page_size = fallback_printer_get_default_page_size;
+   class->printer_get_capabilities = fallback_printer_get_capabilities;
+@@ -499,6 +506,17 @@ fallback_printer_get_hard_margins (GtkPrinter *printer,
+   return FALSE;
+ }
+ 
++static gboolean
++fallback_printer_get_hard_margins_for_paper_size (GtkPrinter   *printer,
++						  GtkPaperSize *paper_size,
++						  gdouble      *top,
++						  gdouble      *bottom,
++						  gdouble      *left,
++						  gdouble      *right)
++{
++  return FALSE;
++}
++
+ static GList *
+ fallback_printer_list_papers (GtkPrinter *printer)
+ {
+diff --git a/gtk/gtkprintbackend.h b/gtk/gtkprintbackend.h
+index f4524e8965..2fa236a8ac 100644
+--- a/gtk/gtkprintbackend.h
++++ b/gtk/gtkprintbackend.h
+@@ -133,11 +133,17 @@ struct _GtkPrintBackendClass
+                                                               gchar              **auth_info,
+                                                               gboolean             store_auth_info);
+ 
++  gboolean              (*printer_get_hard_margins_for_paper_size) (GtkPrinter    *printer,
++								    GtkPaperSize  *paper_size,
++								    gdouble       *top,
++								    gdouble       *bottom,
++								    gdouble       *left,
++								    gdouble       *right);
++
+   /* Padding for future expansion */
+   void (*_gtk_reserved1) (void);
+   void (*_gtk_reserved2) (void);
+   void (*_gtk_reserved3) (void);
+-  void (*_gtk_reserved4) (void);
+ };
+ 
+ GDK_AVAILABLE_IN_ALL
+diff --git a/gtk/gtkprinter-private.h b/gtk/gtkprinter-private.h
+index 51ec1a861f..a2c551156a 100644
+--- a/gtk/gtkprinter-private.h
++++ b/gtk/gtkprinter-private.h
+@@ -44,6 +44,12 @@ cairo_surface_t *    _gtk_printer_create_cairo_surface      (GtkPrinter
+ 							     gdouble              height,
+ 							     GIOChannel          *cache_io);
+ GHashTable *         _gtk_printer_get_custom_widgets        (GtkPrinter          *printer);
++gboolean             _gtk_printer_get_hard_margins_for_paper_size (GtkPrinter       *printer,
++								   GtkPaperSize     *paper_size,
++								   gdouble          *top,
++								   gdouble          *bottom,
++								   gdouble          *left,
++								   gdouble          *right);
+ 
+ /* GtkPrintJob private methods: */
+ GDK_AVAILABLE_IN_ALL
+diff --git a/gtk/gtkprinter.c b/gtk/gtkprinter.c
+index 5e145ddd69..579fba0859 100644
+--- a/gtk/gtkprinter.c
++++ b/gtk/gtkprinter.c
+@@ -941,6 +941,19 @@ _gtk_printer_create_cairo_surface (GtkPrinter       *printer,
+ 						      width, height, cache_io);
+ }
+ 
++gboolean
++_gtk_printer_get_hard_margins_for_paper_size (GtkPrinter   *printer,
++					      GtkPaperSize *paper_size,
++					      gdouble      *top,
++					      gdouble      *bottom,
++					      gdouble      *left,
++					      gdouble      *right)
++{
++  GtkPrintBackendClass *backend_class = GTK_PRINT_BACKEND_GET_CLASS (printer->priv->backend);
++
++  return backend_class->printer_get_hard_margins_for_paper_size (printer, paper_size, top, bottom, left, right);
++}
++
+ /**
+  * gtk_printer_list_papers:
+  * @printer: a #GtkPrinter
+diff --git a/gtk/gtkprintoperation-unix.c b/gtk/gtkprintoperation-unix.c
+index 9baf69438e..5dfdfe7e71 100644
+--- a/gtk/gtkprintoperation-unix.c
++++ b/gtk/gtkprintoperation-unix.c
+@@ -32,6 +32,7 @@
+ #include "gtkprintoperation-private.h"
+ #include "gtkprintoperation-portal.h"
+ #include "gtkmessagedialog.h"
++#include "gtkprinter-private.h"
+ 
+ #include <cairo-pdf.h>
+ #include <cairo-ps.h>
+@@ -536,7 +537,8 @@ finish_print (PrintResponseData *rdata,
+ 
+       if (gtk_print_settings_get_number_up (settings) < 2)
+         {
+-	  if (printer && gtk_printer_get_hard_margins (printer, &top, &bottom, &left, &right))
++	  if (printer && (_gtk_printer_get_hard_margins_for_paper_size (printer, gtk_page_setup_get_paper_size (page_setup), &top, &bottom, &left, &right) ||
++			  gtk_printer_get_hard_margins (printer, &top, &bottom, &left, &right)))
+ 	    _gtk_print_context_set_hard_margins (priv->print_context, top, bottom, left, right);
+ 	}
+       else
+diff --git a/modules/printbackends/cups/gtkprintbackendcups.c b/modules/printbackends/cups/gtkprintbackendcups.c
+index 7d061c5fc9..ccd08e50a0 100644
+--- a/modules/printbackends/cups/gtkprintbackendcups.c
++++ b/modules/printbackends/cups/gtkprintbackendcups.c
+@@ -195,6 +195,12 @@ static gboolean             cups_printer_get_hard_margins          (GtkPrinter
+ 								    gdouble                           *bottom,
+ 								    gdouble                           *left,
+ 								    gdouble                           *right);
++static gboolean             cups_printer_get_hard_margins_for_paper_size (GtkPrinter                  *printer,
++									  GtkPaperSize                *paper_size,
++									  gdouble                     *top,
++									  gdouble                     *bottom,
++									  gdouble                     *left,
++									  gdouble                     *right);
+ static GtkPrintCapabilities cups_printer_get_capabilities          (GtkPrinter                        *printer);
+ static void                 set_option_from_settings               (GtkPrinterOption                  *option,
+ 								    GtkPrintSettings                  *setting);
+@@ -372,6 +378,7 @@ gtk_print_backend_cups_class_init (GtkPrintBackendCupsClass *class)
+   backend_class->printer_list_papers = cups_printer_list_papers;
+   backend_class->printer_get_default_page_size = cups_printer_get_default_page_size;
+   backend_class->printer_get_hard_margins = cups_printer_get_hard_margins;
++  backend_class->printer_get_hard_margins_for_paper_size = cups_printer_get_hard_margins_for_paper_size;
+   backend_class->printer_get_capabilities = cups_printer_get_capabilities;
+   backend_class->set_password = gtk_print_backend_cups_set_password;
+ }
+@@ -6741,6 +6748,47 @@ cups_printer_get_hard_margins (GtkPrinter *printer,
+   return result;
+ }
+ 
++static gboolean
++cups_printer_get_hard_margins_for_paper_size (GtkPrinter   *printer,
++					      GtkPaperSize *paper_size,
++					      gdouble      *top,
++					      gdouble      *bottom,
++					      gdouble      *left,
++					      gdouble      *right)
++{
++  ppd_file_t *ppd_file;
++  ppd_size_t *size;
++  const gchar *paper_name;
++  int i;
++
++  ppd_file = gtk_printer_cups_get_ppd (GTK_PRINTER_CUPS (printer));
++  if (ppd_file == NULL)
++    return FALSE;
++
++  paper_name = gtk_paper_size_get_ppd_name (paper_size);
++
++  for (i = 0; i < ppd_file->num_sizes; i++)
++    {
++      size = &ppd_file->sizes[i];
++      if (g_strcmp0(size->name, paper_name) == 0)
++        {
++	   *top = size->length - size->top;
++	   *bottom = size->bottom;
++	   *left = size->left;
++	   *right = size->width - size->right;
++	   return TRUE;
++	}
++    }
++
++  /* Custom size */
++  *left = ppd_file->custom_margins[0];
++  *bottom = ppd_file->custom_margins[1];
++  *right = ppd_file->custom_margins[2];
++  *top = ppd_file->custom_margins[3];
++
++  return TRUE;
++}
++
+ static GtkPrintCapabilities
+ cups_printer_get_capabilities (GtkPrinter *printer)
+ {
+-- 
+2.17.1
+

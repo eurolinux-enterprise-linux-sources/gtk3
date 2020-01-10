@@ -35,6 +35,7 @@
    <ClCompile Include="..\..\..\demos\gtk-demo\expander.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\demos\gtk-demo\filtermodel.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\demos\gtk-demo\fishbowl.c"><Filter>Source Files</Filter></ClCompile>
+   <ClCompile Include="..\..\..\demos\gtk-demo\widgetbowl.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\demos\gtk-demo\foreigndrawing.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\demos\gtk-demo\gestures.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\demos\gtk-demo\glarea.c"><Filter>Source Files</Filter></ClCompile>

@@ -59,9 +59,10 @@
  * int
  * main (int argc, char **argv)
  * {
+ *  GtkWidget *mainwin;
  *   // Initialize i18n support with bindtextdomain(), etc.
  *
- *   ...
+ *   // ...
  *
  *   // Initialize the widget set
  *   gtk_init (&argc, &argv);
@@ -71,7 +72,7 @@
  *
  *   // Set up our GUI elements
  *
- *   ...
+ *   // ...
  *
  *   // Show the application window
  *   gtk_widget_show_all (mainwin);
@@ -761,7 +762,7 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 
   display_manager = gdk_display_manager_get ();
   if (gdk_display_manager_get_default_display (display_manager) != NULL)
-    _gtk_accessibility_init ();
+    default_display_notify_cb (display_manager);
 
   g_signal_connect (display_manager, "notify::default-display",
                     G_CALLBACK (default_display_notify_cb),
@@ -1321,7 +1322,10 @@ gtk_main (void)
       gdk_threads_leave ();
       g_main_loop_run (loop);
       gdk_threads_enter ();
+
+      G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
       gdk_flush ();
+      G_GNUC_END_IGNORE_DEPRECATIONS;
     }
 
   main_loops = g_slist_remove (main_loops, loop);

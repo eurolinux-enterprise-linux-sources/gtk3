@@ -90,14 +90,17 @@ noinst_PROGRAMS =  $(TEST_PROGS)	\
 	testiconview-keynav		\
 	testicontheme			\
 	testimage			\
+	testinfobar                     \
 	testinput			\
 	testkineticscrolling		\
 	testlist			\
 	testlist2			\
 	testlist3			\
+	testlist4			\
 	testlevelbar			\
 	testlockbutton			\
 	testmenubutton			\
+	testmodelbutton	                \
 	testmountoperation		\
 	testmultidisplay		\
 	testnotebookdnd			\
@@ -145,7 +148,6 @@ noinst_PROGRAMS =  $(TEST_PROGS)	\
 	testvolumebutton		\
 	testscrolledwindow		\
 	testscrolledge			\
-	testswitch			\
 	testcellarea			\
 	testswitch			\
 	styleexamples			\

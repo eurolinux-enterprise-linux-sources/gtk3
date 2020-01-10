@@ -46,6 +46,10 @@
 
 #define BUTTON_BASE (BTN_LEFT - 1) /* Used to translate to 1-indexed buttons */
 
+#ifndef BTN_STYLUS3
+#define BTN_STYLUS3 0x149 /* Linux 4.15 */
+#endif
+
 typedef struct _GdkWaylandDevicePad GdkWaylandDevicePad;
 typedef struct _GdkWaylandDevicePadClass GdkWaylandDevicePadClass;
 
@@ -756,8 +760,12 @@ gdk_wayland_device_grab (GdkDevice    *device,
   if (gdk_device_get_source (device) == GDK_SOURCE_KEYBOARD)
     {
       /* Device is a keyboard */
-      gdk_wayland_window_inhibit_shortcuts (window,
-                                            gdk_device_get_seat (device));
+      if (gdk_window_get_window_type (window) == GDK_WINDOW_TOPLEVEL)
+        {
+          gdk_wayland_window_inhibit_shortcuts (window,
+                                                gdk_device_get_seat (device));
+        }
+
       return GDK_GRAB_SUCCESS;
     }
   else
@@ -3815,6 +3823,8 @@ tablet_tool_handle_button (void                      *data,
     n_button = GDK_BUTTON_SECONDARY;
   else if (button == BTN_STYLUS2)
     n_button = GDK_BUTTON_MIDDLE;
+  else if (button == BTN_STYLUS3)
+    n_button = 8; /* Back */
   else
     return;
 
@@ -3966,7 +3976,7 @@ tablet_pad_ring_handle_angle (void                          *data,
   GdkWaylandTabletPadGroupData *group = data;
 
   GDK_NOTE (EVENTS,
-            g_message ("tablet pad ring handle angle, %s ring = %p angle = %f",
+            g_message ("tablet pad ring handle angle, ring = %p angle = %f",
                        wp_tablet_pad_ring, wl_fixed_to_double (angle)));
 
   group->axis_tmp_info.value = wl_fixed_to_double (angle);
@@ -4787,8 +4797,9 @@ gdk_wayland_seat_grab (GdkSeat                *seat,
                                     evtime,
                                     FALSE);
 
-      /* Inhibit shortcuts if the seat grab is for the keyboard only */
-      if (capabilities == GDK_SEAT_CAPABILITY_KEYBOARD)
+      /* Inhibit shortcuts on toplevels if the seat grab is for the keyboard only */
+      if (capabilities == GDK_SEAT_CAPABILITY_KEYBOARD &&
+          native->window_type == GDK_WINDOW_TOPLEVEL)
         gdk_wayland_window_inhibit_shortcuts (window, seat);
     }
 

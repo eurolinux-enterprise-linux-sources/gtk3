@@ -14123,10 +14123,14 @@ gtk_tree_view_get_visible_range (GtkTreeView  *tree_view,
  * @tree_view: A #GtkTreeView
  * @x: The x position to be identified (relative to bin_window)
  * @y: The y position to be identified (relative to bin_window)
- * @path: (out) (allow-none): A pointer to a #GtkTreePath pointer to be filled in, or %NULL
- * @column: (out) (allow-none): A pointer to a #GtkTreeViewColumn pointer to be filled in, or %NULL
- * @cell_x: (out) (allow-none): A pointer where the X coordinate relative to the cell can be placed, or %NULL
- * @cell_y: (out) (allow-none): A pointer where the Y coordinate relative to the cell can be placed, or %NULL
+ * @path: (out) (optional) (nullable): A pointer to a #GtkTreePath pointer to
+ *   be filled in, or %NULL
+ * @column: (out) (transfer none) (optional) (nullable): A pointer to a
+ *   #GtkTreeViewColumn pointer to be filled in, or %NULL
+ * @cell_x: (out) (optional): A pointer where the X coordinate relative to the
+ *   cell can be placed, or %NULL
+ * @cell_y: (out) (optional): A pointer where the Y coordinate relative to the
+ *   cell can be placed, or %NULL
  *
  * Determine whether the point (@x, @y) in @tree_view is blank, that is no
  * cell content nor an expander arrow is drawn at the location. If so, the
@@ -14981,7 +14985,7 @@ gtk_tree_view_set_search_entry (GtkTreeView *tree_view,
 
   if (entry)
     {
-      tree_view->priv->search_entry = g_object_ref (entry);
+      tree_view->priv->search_entry = GTK_WIDGET (g_object_ref (entry));
       tree_view->priv->search_custom_entry_set = TRUE;
 
       if (tree_view->priv->search_entry_changed_id == 0)
