@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<book xmlns="http://www.devhelp.net/book" title="GDK 3 Reference Manual" link="index.html" author="" name="gdk3" version="2" language="c" online="http://developer.gnome.org/gdk3/">
+<book xmlns="http://www.devhelp.net/book" title="GDK 3 Reference Manual" link="index.html" author="" name="gdk3" version="2" language="c" online="https://developer.gnome.org/gdk3/">
   <chapters>
     <sub name="API Reference" link="reference.html">
       <sub name="General" link="gdk3-General.html"/>
@@ -1315,6 +1315,14 @@
     <keyword type="constant" name="GDK_WINDOW_STATE_BELOW" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-BELOW:CAPS"/>
     <keyword type="constant" name="GDK_WINDOW_STATE_FOCUSED" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-FOCUSED:CAPS"/>
     <keyword type="constant" name="GDK_WINDOW_STATE_TILED" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-TILED:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_TOP_TILED" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-TOP-TILED:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_TOP_RESIZABLE" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-TOP-RESIZABLE:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_RIGHT_TILED" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-RIGHT-TILED:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_RIGHT_RESIZABLE" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-RIGHT-RESIZABLE:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_BOTTOM_TILED" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-BOTTOM-TILED:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_BOTTOM_RESIZABLE" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-BOTTOM-RESIZABLE:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_LEFT_TILED" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-LEFT-TILED:CAPS"/>
+    <keyword type="constant" name="GDK_WINDOW_STATE_LEFT_RESIZABLE" link="gdk3-Event-Structures.html#GDK-WINDOW-STATE-LEFT-RESIZABLE:CAPS"/>
     <keyword type="constant" name="GDK_SETTING_ACTION_NEW" link="gdk3-Event-Structures.html#GDK-SETTING-ACTION-NEW:CAPS"/>
     <keyword type="constant" name="GDK_SETTING_ACTION_CHANGED" link="gdk3-Event-Structures.html#GDK-SETTING-ACTION-CHANGED:CAPS"/>
     <keyword type="constant" name="GDK_SETTING_ACTION_DELETED" link="gdk3-Event-Structures.html#GDK-SETTING-ACTION-DELETED:CAPS"/>

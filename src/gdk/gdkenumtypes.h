@@ -65,13 +65,13 @@ GDK_AVAILABLE_IN_ALL GType gdk_setting_action_get_type (void) G_GNUC_CONST;
 GDK_AVAILABLE_IN_ALL GType gdk_owner_change_get_type (void) G_GNUC_CONST;
 #define GDK_TYPE_OWNER_CHANGE (gdk_owner_change_get_type ())
 
-/* enumerations from "gdkframeclock.h" */
-GDK_AVAILABLE_IN_ALL GType gdk_frame_clock_phase_get_type (void) G_GNUC_CONST;
-#define GDK_TYPE_FRAME_CLOCK_PHASE (gdk_frame_clock_phase_get_type ())
-
 /* enumerations from "gdkmonitor.h" */
 GDK_AVAILABLE_IN_ALL GType gdk_subpixel_layout_get_type (void) G_GNUC_CONST;
 #define GDK_TYPE_SUBPIXEL_LAYOUT (gdk_subpixel_layout_get_type ())
+
+/* enumerations from "gdkframeclock.h" */
+GDK_AVAILABLE_IN_ALL GType gdk_frame_clock_phase_get_type (void) G_GNUC_CONST;
+#define GDK_TYPE_FRAME_CLOCK_PHASE (gdk_frame_clock_phase_get_type ())
 
 /* enumerations from "gdkproperty.h" */
 GDK_AVAILABLE_IN_ALL GType gdk_prop_mode_get_type (void) G_GNUC_CONST;

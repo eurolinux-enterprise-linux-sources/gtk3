@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<book xmlns="http://www.devhelp.net/book" title="GTK+ 3 Reference Manual" link="index.html" author="" name="gtk3" version="2" language="c" online="http://developer.gnome.org/gtk3/">
+<book xmlns="http://www.devhelp.net/book" title="GTK+ 3 Reference Manual" link="index.html" author="" name="gtk3" version="2" language="c" online="https://developer.gnome.org/gtk3/">
   <chapters>
     <sub name="GTK+ Overview" link="gtk.html">
       <sub name="Getting Started with GTK+" link="gtk-getting-started.html">
@@ -1846,6 +1846,7 @@
     <keyword type="property" name="The “secondary-icon-tooltip-text” property" link="GtkEntry.html#GtkEntry--secondary-icon-tooltip-text"/>
     <keyword type="property" name="The “selection-bound” property" link="GtkEntry.html#GtkEntry--selection-bound"/>
     <keyword type="property" name="The “shadow-type” property" link="GtkEntry.html#GtkEntry--shadow-type"/>
+    <keyword type="property" name="The “show-emoji-icon” property" link="GtkEntry.html#GtkEntry--show-emoji-icon"/>
     <keyword type="property" name="The “tabs” property" link="GtkEntry.html#GtkEntry--tabs"/>
     <keyword type="property" name="The “text” property" link="GtkEntry.html#GtkEntry--text"/>
     <keyword type="property" name="The “text-length” property" link="GtkEntry.html#GtkEntry--text-length"/>
@@ -3972,6 +3973,7 @@
     <keyword type="property" name="The “show-enter-location” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-enter-location"/>
     <keyword type="property" name="The “show-other-locations” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-other-locations"/>
     <keyword type="property" name="The “show-recent” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-recent"/>
+    <keyword type="property" name="The “show-starred-location” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-starred-location"/>
     <keyword type="property" name="The “show-trash” property" link="GtkPlacesSidebar.html#GtkPlacesSidebar--show-trash"/>
     <keyword type="signal" name="The “drag-action-ask” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-drag-action-ask"/>
     <keyword type="signal" name="The “drag-action-requested” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-drag-action-requested"/>
@@ -3984,6 +3986,7 @@
     <keyword type="signal" name="The “show-error-message” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-error-message"/>
     <keyword type="signal" name="The “show-other-locations” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-other-locations"/>
     <keyword type="signal" name="The “show-other-locations-with-flags” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-other-locations-with-flags"/>
+    <keyword type="signal" name="The “show-starred-location” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-show-starred-location"/>
     <keyword type="signal" name="The “unmount” signal" link="GtkPlacesSidebar.html#GtkPlacesSidebar-unmount"/>
     <keyword type="function" name="gtk_frame_new ()" link="GtkFrame.html#gtk-frame-new"/>
     <keyword type="function" name="gtk_frame_set_label ()" link="GtkFrame.html#gtk-frame-set-label"/>
@@ -5591,7 +5594,7 @@
     <keyword type="function" name="gtk_paint_shadow ()" link="GtkStyle.html#gtk-paint-shadow" deprecated="3.0: Use gtk_render_frame() instead"/>
     <keyword type="function" name="gtk_paint_shadow_gap ()" link="GtkStyle.html#gtk-paint-shadow-gap" deprecated="3.0: Use gtk_render_frame_gap() instead"/>
     <keyword type="function" name="gtk_paint_slider ()" link="GtkStyle.html#gtk-paint-slider" deprecated="3.0: Use gtk_render_slider() instead"/>
-    <keyword type="function" name="gtk_paint_spinner ()" link="GtkStyle.html#gtk-paint-spinner" deprecated="3.0: Use gtk_render_activity() instead"/>
+    <keyword type="function" name="gtk_paint_spinner ()" link="GtkStyle.html#gtk-paint-spinner" deprecated=""/>
     <keyword type="function" name="gtk_paint_tab ()" link="GtkStyle.html#gtk-paint-tab" deprecated="3.0: Use cairo instead"/>
     <keyword type="function" name="gtk_paint_vline ()" link="GtkStyle.html#gtk-paint-vline" deprecated="3.0: Use gtk_render_line() instead"/>
     <keyword type="function" name="gtk_paint_expander ()" link="GtkStyle.html#gtk-paint-expander" deprecated="3.0: Use gtk_render_expander() instead"/>
@@ -7082,6 +7085,8 @@
     <keyword type="constant" name="GTK_INPUT_HINT_UPPERCASE_SENTENCES" link="GtkEntry.html#GTK-INPUT-HINT-UPPERCASE-SENTENCES:CAPS"/>
     <keyword type="constant" name="GTK_INPUT_HINT_INHIBIT_OSK" link="GtkEntry.html#GTK-INPUT-HINT-INHIBIT-OSK:CAPS"/>
     <keyword type="constant" name="GTK_INPUT_HINT_VERTICAL_WRITING" link="GtkEntry.html#GTK-INPUT-HINT-VERTICAL-WRITING:CAPS"/>
+    <keyword type="constant" name="GTK_INPUT_HINT_EMOJI" link="GtkEntry.html#GTK-INPUT-HINT-EMOJI:CAPS"/>
+    <keyword type="constant" name="GTK_INPUT_HINT_NO_EMOJI" link="GtkEntry.html#GTK-INPUT-HINT-NO-EMOJI:CAPS"/>
     <keyword type="constant" name="GTK_UPDATE_ALWAYS" link="GtkSpinButton.html#GTK-UPDATE-ALWAYS:CAPS"/>
     <keyword type="constant" name="GTK_UPDATE_IF_VALID" link="GtkSpinButton.html#GTK-UPDATE-IF-VALID:CAPS"/>
     <keyword type="constant" name="GTK_SPIN_STEP_FORWARD" link="GtkSpinButton.html#GTK-SPIN-STEP-FORWARD:CAPS"/>
@@ -7101,6 +7106,7 @@
     <keyword type="constant" name="GTK_TEXT_VIEW_LAYER_ABOVE" link="GtkTextView.html#GTK-TEXT-VIEW-LAYER-ABOVE:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_VIEW_LAYER_BELOW_TEXT" link="GtkTextView.html#GTK-TEXT-VIEW-LAYER-BELOW-TEXT:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_VIEW_LAYER_ABOVE_TEXT" link="GtkTextView.html#GTK-TEXT-VIEW-LAYER-ABOVE-TEXT:CAPS"/>
+    <keyword type="constant" name="GTK_TEXT_WINDOW_PRIVATE" link="GtkTextView.html#GTK-TEXT-WINDOW-PRIVATE:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_WINDOW_WIDGET" link="GtkTextView.html#GTK-TEXT-WINDOW-WIDGET:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_WINDOW_TEXT" link="GtkTextView.html#GTK-TEXT-WINDOW-TEXT:CAPS"/>
     <keyword type="constant" name="GTK_TEXT_WINDOW_LEFT" link="GtkTextView.html#GTK-TEXT-WINDOW-LEFT:CAPS"/>

@@ -1,8 +1,8 @@
 %if 0%{?fedora}
-%global with_wayland 1
 %global with_broadway 1
 %endif
 
+%global with_wayland 1
 %global glib2_version 2.49.4
 %global pango_version 1.37.3
 %global atk_version 2.15.1
@@ -10,27 +10,34 @@
 %global gdk_pixbuf_version 2.30.0
 %global xrandr_version 1.5.0
 %global wayland_version 1.9.91
-%global wayland_protocols_version 1.7
+%global wayland_protocols_version 1.9
 %global epoxy_version 1.0
 
 %global bin_version 3.0.0
 
 %global _changelog_trimtime %(date +%s -d "1 year ago")
 
+# Filter provides for private modules
+%global __provides_exclude_from ^%{_libdir}/gtk-3.0
+
 Name: gtk3
-Version: 3.22.10
-Release: 5%{?dist}
-Summary: The GIMP ToolKit (GTK+), a library for creating GUIs for X
+Version: 3.22.26
+Release: 3%{?dist}
+Summary: GTK+ graphical user interface library
 
 License: LGPLv2+
 URL: http://www.gtk.org
 Source0: http://download.gnome.org/sources/gtk+/3.22/gtk+-%{version}.tar.xz
-source1: ja.po
+Source1: ja.po
 
 # Downstream fix to filter out X-RHEL-AliasOf
 # https://bugzilla.redhat.com/show_bug.cgi?id=1259292
 Patch18: app-chooser-fixes.patch
+
 Patch19: 0001-gdk-Always-emit-motion-after-enter.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1483942
+Patch20: x11-Dont-call-XInput-API-for-core-events.patch
 
 BuildRequires: pkgconfig(atk) >= %{atk_version}
 BuildRequires: pkgconfig(atk-bridge-2.0)
@@ -59,6 +66,7 @@ BuildRequires: pkgconfig(colord)
 BuildRequires: pkgconfig(avahi-gobject)
 BuildRequires: desktop-file-utils
 %if 0%{?with_wayland}
+BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(wayland-client) >= %{wayland_version}
 BuildRequires: pkgconfig(wayland-cursor) >= %{wayland_version}
 BuildRequires: pkgconfig(wayland-egl) >= %{wayland_version}
@@ -168,6 +176,7 @@ the functionality of the installed %{name} package.
 %setup -q -n gtk+-%{version}
 %patch18 -p1
 %patch19 -p1
+%patch20 -p1
 
 cp %{SOURCE1} po/
 
@@ -286,9 +295,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %ghost %{_libdir}/gtk-3.0/%{bin_version}/immodules.cache
 %{_mandir}/man1/gtk-query-immodules-3.0*
 %{_mandir}/man1/gtk-launch.1*
-%{_datadir}/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gtk.exampleapp.gschema.xml
 %if 0%{?with_broadway}
 %{_bindir}/broadwayd
@@ -358,9 +368,25 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/installed-tests
 
 %changelog
-* Fri Dec 15 2017 Carlos Garnacho <cgarnach@redhat.com> - 3.22.10-5
+* Tue Feb 13 2018 Ray Strode <rstrode@redhat.com> - 3.22.26-3
+- Fix emacs on Xming
+  Resolves: #1483942
+
+* Wed Dec 06 2017 Carlos Garnacho <cgarnach@redhat.com> - 3.22.26-2
 - Fix touch emulated pointer motion event delivery with spice-gtk
-Resolves: #1524317
+- Resolves: #1494822
+
+* Tue Nov 07 2017 Kalev Lember <klember@redhat.com> - 3.22.26-1
+- Update to 3.22.26
+- Resolves: #1481414
+
+* Wed Nov 01 2017 Kalev Lember <klember@redhat.com> - 3.22.25-1
+- Update to 3.22.25
+- Resolves: #1481414
+
+* Thu Sep 14 2017 Olivier Fourdan <ofourdan@redhat.com> - 3.22.21-1
+- Update to 3.22.21 and enable Wayland backend
+Resolves: rhbz#1257171
 
 * Tue May 30 2017 Matthias Clasen <mclasen@redhat.com> - 3.22.10-4
 - Update Japanese translations

@@ -1273,6 +1273,9 @@ calendar_arrow_rectangle (GtkCalendar  *calendar,
         rect->x = (allocation.width - padding.left - padding.right
                    - 3 - priv->arrow_width);
       break;
+
+    default:
+      g_assert_not_reached ();
     }
 
   rect->x += padding.left;
@@ -2257,13 +2260,13 @@ calendar_paint_header (GtkCalendar *calendar, cairo_t *cr)
       x = header_width - (3 + max_month_width
                           - (max_month_width - logical_rect.width)/2);
     else
-    x = 3 + (max_month_width - logical_rect.width) / 2;
+      x = 3 + (max_month_width - logical_rect.width) / 2;
   else
     if (year_left)
       x = header_width - (3 + priv->arrow_width + max_month_width
                           - (max_month_width - logical_rect.width)/2);
     else
-    x = 3 + priv->arrow_width + (max_month_width - logical_rect.width)/2;
+      x = 3 + priv->arrow_width + (max_month_width - logical_rect.width)/2;
 
   gtk_render_layout (context, cr, x, y, layout);
   g_object_unref (layout);

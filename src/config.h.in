@@ -21,6 +21,9 @@
    the CoreFoundation framework. */
 #undef HAVE_CFPREFERENCESCOPYAPPVALUE
 
+/* Define if libcloudproviders is available */
+#undef HAVE_CLOUDPROVIDERS
+
 /* define if we have colord */
 #undef HAVE_COLORD
 

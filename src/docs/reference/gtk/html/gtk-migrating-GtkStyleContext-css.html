@@ -118,9 +118,9 @@
         xthickness <span class="gtkdoc opt">=</span> <span class="number">1</span>
         ythickness <span class="gtkdoc opt">=</span> <span class="number">1</span>
 
-        GtkButton<span class="gtkdoc opt">::</span>child<span class="gtkdoc opt">-</span>displacement<span class="gtkdoc opt">-</span>x <span class="gtkdoc opt">=</span> <span class="number">1</span>
-        GtkButton<span class="gtkdoc opt">::</span>child<span class="gtkdoc opt">-</span>displacement<span class="gtkdoc opt">-</span>y <span class="gtkdoc opt">=</span> <span class="number">1</span>
-        GtkCheckButton<span class="gtkdoc opt">::</span>indicator<span class="gtkdoc opt">-</span>size <span class="gtkdoc opt">=</span> <span class="number">14</span>
+        <span class="gtkdoc kwc">GtkButton</span><span class="gtkdoc opt">::</span>child<span class="gtkdoc opt">-</span>displacement<span class="gtkdoc opt">-</span>x <span class="gtkdoc opt">=</span> <span class="number">1</span>
+        <span class="gtkdoc kwc">GtkButton</span><span class="gtkdoc opt">::</span>child<span class="gtkdoc opt">-</span>displacement<span class="gtkdoc opt">-</span>y <span class="gtkdoc opt">=</span> <span class="number">1</span>
+        <span class="gtkdoc kwc">GtkCheckButton</span><span class="gtkdoc opt">::</span>indicator<span class="gtkdoc opt">-</span>size <span class="gtkdoc opt">=</span> <span class="number">14</span>
 
         bg<span class="gtkdoc opt">[</span>NORMAL<span class="gtkdoc opt">]        =</span> &#64;bg_color
         bg<span class="gtkdoc opt">[</span>PRELIGHT<span class="gtkdoc opt">]      =</span> <span class="function">shade</span> <span class="gtkdoc opt">(</span><span class="number">1.02</span><span class="gtkdoc opt">,</span> &#64;bg_color<span class="gtkdoc opt">)</span>
@@ -385,7 +385,7 @@ color1 <span class="gtkdoc opt">= &amp;</span>style<span class="gtkdoc opt">-&gt
 </div>
 
 <p>
-      With <a class="link" href="GtkStyleContext.html" title="GtkStyleContext"><span class="type">GtkStyleContext</span></a>, you generally use <a href="http://developer.gnome.org/gdk3/gdk4-RGBA-Colors.html#GdkRGBA"><span class="type">GdkRGBA</span></a> instead of <span class="type">GdkColor</span>
+      With <a class="link" href="GtkStyleContext.html" title="GtkStyleContext"><span class="type">GtkStyleContext</span></a>, you generally use <a href="../gdk4/gdk4-RGBA-Colors.html#GdkRGBA"><span class="type">GdkRGBA</span></a> instead of <span class="type">GdkColor</span>
       and the code looks like this:
       </p>
 <div class="informalexample">
@@ -413,7 +413,7 @@ GdkRGBA  color2<span class="gtkdoc opt">;</span>
 
 <span class="gtkdoc opt">...</span>
 
-<span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-RGBA-Colors.html#gdk-rgba-free">gdk_rgba_free</a></span> <span class="gtkdoc opt">(</span>color1<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../gdk4/gdk4-RGBA-Colors.html#gdk-rgba-free">gdk_rgba_free</a></span> <span class="gtkdoc opt">(</span>color1<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -427,7 +427,7 @@ GdkRGBA  color2<span class="gtkdoc opt">;</span>
     </p>
 <p>
       It is worth mentioning that the new file format does not support
-      custom keybindings nor stock icon mappings as the RC format did.
+      stock icon mappings as the RC format did.
     </p>
 </div>
 <div class="footer">

@@ -423,7 +423,14 @@ _gdk_quartz_display_before_process_all_updates (GdkDisplay *display)
 {
   in_process_all_updates = TRUE;
 
-  NSDisableScreenUpdates ();
+  if (gdk_quartz_osx_version () >= GDK_OSX_EL_CAPITAN)
+    {
+      [NSAnimationContext endGrouping];
+    }
+  else
+    {
+      NSDisableScreenUpdates ();
+    }
 }
 
 void
@@ -453,7 +460,14 @@ _gdk_quartz_display_after_process_all_updates (GdkDisplay *display)
 
   in_process_all_updates = FALSE;
 
-  NSEnableScreenUpdates ();
+  if (gdk_quartz_osx_version() >= GDK_OSX_EL_CAPITAN)
+    {
+      [NSAnimationContext beginGrouping];
+    }
+  else
+    {
+      NSEnableScreenUpdates ();
+    }
 }
 
 static const gchar *
@@ -2496,7 +2510,7 @@ gdk_quartz_window_set_functions (GdkWindow    *window,
 
   if (impl->toplevel)
     {
-      NSWindowStyleMask mask = [impl->toplevel styleMask];
+      NSUInteger mask = [impl->toplevel styleMask];
 
       if (min)
         mask = mask | NSMiniaturizableWindowMask;

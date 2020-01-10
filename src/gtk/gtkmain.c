@@ -950,8 +950,9 @@ gtk_get_option_group (gboolean open_default_display)
  * `--help` output. Note that your program will
  * be terminated after writing out the help output.
  *
- * Returns: %TRUE if the windowing system has been successfully
- *     initialized, %FALSE otherwise
+ * Returns: %TRUE if the commandline arguments (if any) were valid and
+ *     if the windowing system has been successfully initialized,
+ *     %FALSE otherwise
  *
  * Since: 2.6
  */
@@ -991,15 +992,22 @@ gtk_init_with_args (gint                 *argc,
     return FALSE;
 
 done:
-  if (GDK_PRIVATE_CALL (gdk_display_open_default) () != NULL)
+  if (GDK_PRIVATE_CALL (gdk_display_open_default) () == NULL)
     {
-      if (gtk_get_debug_flags () & GTK_DEBUG_INTERACTIVE)
-        gtk_window_set_interactive_debugging (TRUE);
+      const char *display_name = gdk_get_display_arg_name ();
+      g_set_error (error,
+                   G_OPTION_ERROR,
+                   G_OPTION_ERROR_FAILED,
+                   _("Cannot open display: %s"),
+                   display_name ? display_name : "" );
 
-      return TRUE;
+      return FALSE;
     }
 
-  return FALSE;
+  if (gtk_get_debug_flags () & GTK_DEBUG_INTERACTIVE)
+    gtk_window_set_interactive_debugging (TRUE);
+
+  return TRUE;
 }
 
 
@@ -1071,15 +1079,17 @@ gtk_parse_args (int    *argc,
  *     understood by GTK+ are stripped before return.
  *
  * This function does the same work as gtk_init() with only a single
- * change: It does not terminate the program if the windowing system
- * can’t be initialized. Instead it returns %FALSE on failure.
+ * change: It does not terminate the program if the commandline
+ * arguments couldn’t be parsed or the windowing system can’t be
+ * initialized. Instead it returns %FALSE on failure.
  *
  * This way the application can fall back to some other means of
  * communication with the user - for example a curses or command line
  * interface.
  *
- * Returns: %TRUE if the windowing system has been successfully
- *     initialized, %FALSE otherwise
+ * Returns: %TRUE if the commandline arguments (if any) were valid and
+ *     the windowing system has been successfully initialized, %FALSE
+ *     otherwise
  */
 gboolean
 gtk_init_check (int    *argc,

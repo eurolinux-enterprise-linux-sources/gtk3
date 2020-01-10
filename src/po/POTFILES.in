@@ -135,6 +135,7 @@ gtk/gtkdragdest.c
 gtk/gtkdragsource.c
 gtk/gtkdrawingarea.c
 gtk/gtkeditable.c
+gtk/gtkemojichooser.c
 gtk/gtkentrybuffer.c
 gtk/gtkentry.c
 gtk/gtkentrycompletion.c
@@ -147,6 +148,7 @@ gtk/gtkfilechooserdialog.c
 gtk/gtkfilechooserembed.c
 gtk/gtkfilechooserentry.c
 gtk/gtkfilechoosernative.c
+gtk/gtkfilechoosernativequartz.c
 gtk/gtkfilechooserutils.c
 gtk/gtkfilechooserwidget.c
 gtk/gtkfilefilter.c
@@ -352,6 +354,7 @@ gtk/ui/gtkcolorchooserdialog.ui
 gtk/ui/gtkcoloreditor.ui
 gtk/ui/gtkdialog.ui
 gtk/ui/gtkfilechooserbutton.ui
+gtk/ui/gtkemojichooser.ui
 gtk/ui/gtkfilechooserdialog.ui
 gtk/ui/gtkfilechooserwidget.ui
 gtk/ui/gtkfontbutton.ui
@@ -367,6 +370,7 @@ gtk/ui/gtkplacesview.ui
 gtk/ui/gtkprintunixdialog.ui
 gtk/ui/gtkrecentchooserdefault.ui
 gtk/ui/gtkscalebutton.ui
+gtk/ui/gtksidebarrow.ui
 gtk/ui/gtkstatusbar.ui
 gtk/ui/gtkvolumebutton.ui
 gtk/updateiconcache.c

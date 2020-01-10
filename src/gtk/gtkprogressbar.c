@@ -75,18 +75,18 @@
  *
  * |[<!-- language="plain" -->
  * progressbar[.osd]
+ * ├── [text]
  * ╰── trough[.empty][.full]
- *     ├── [text]
  *     ╰── progress[.pulse]
  * ]|
  *
  * GtkProgressBar has a main CSS node with name progressbar and subnodes with
- * names text, trough and progress. The text subnode is only present if text
- * is shown. The progress subnode has the style class .pulse when in activity
- * mode. It gets the style classes .left, .right, .top or .bottom added when
- * the progress 'touches' the corresponding end of the GtkProgressBar.
- * The .osd class on the progressbar node is for use in overlays like the one
- * epiphany has for page loading progress.
+ * names text and trough, of which the latter has a subnode named progress. The
+ * text subnode is only present if text is shown. The progress subnode has the
+ * style class .pulse when in activity mode. It gets the style classes .left,
+ * .right, .top or .bottom added when the progress 'touches' the corresponding
+ * end of the GtkProgressBar. The .osd class on the progressbar node is for use
+ * in overlays like the one Epiphany has for page loading progress.
  */
 
 #define MIN_HORIZONTAL_BAR_WIDTH   150
@@ -1260,12 +1260,10 @@ gtk_progress_bar_act_mode_enter (GtkProgressBar *pbar)
 {
   GtkProgressBarPrivate *priv = pbar->priv;
   GtkWidget *widget = GTK_WIDGET (pbar);
-  GtkOrientation orientation;
   gboolean inverted;
 
   gtk_css_gadget_add_class (priv->progress_gadget, GTK_STYLE_CLASS_PULSE);
 
-  orientation = priv->orientation;
   inverted = priv->inverted;
   if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
     {
@@ -1274,32 +1272,15 @@ gtk_progress_bar_act_mode_enter (GtkProgressBar *pbar)
     }
 
   /* calculate start pos */
-
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+  if (!inverted)
     {
-      if (!inverted)
-        {
-          priv->activity_pos = 0.0;
-          priv->activity_dir = 0;
-        }
-      else
-        {
-          priv->activity_pos = 1.0;
-          priv->activity_dir = 1;
-        }
+      priv->activity_pos = 0.0;
+      priv->activity_dir = 0;
     }
   else
     {
-      if (!inverted)
-        {
-          priv->activity_pos = 0.0;
-          priv->activity_dir = 0;
-        }
-      else
-        {
-          priv->activity_pos = 1.0;
-          priv->activity_dir = 1;
-        }
+      priv->activity_pos = 1.0;
+      priv->activity_dir = 1;
     }
 
   update_node_classes (pbar);

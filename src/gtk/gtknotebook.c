@@ -5544,7 +5544,6 @@ gtk_notebook_calculate_shown_tabs (GtkNotebook          *notebook,
           priv->first_tab = priv->focus_tab;
           *last_child = gtk_notebook_search_page (notebook, priv->focus_tab,
                                                   STEP_NEXT, TRUE);
-          page = priv->first_tab->data;
           *n = 1;
         }
       else
@@ -5953,8 +5952,7 @@ gtk_notebook_calculate_tabs_allocation (GtkNotebook          *notebook,
         {
         case GTK_POS_TOP:
         case GTK_POS_BOTTOM:
-          if (priv->operation != DRAG_OPERATION_REORDER ||
-              (priv->operation == DRAG_OPERATION_REORDER && page != priv->cur_page))
+          if (priv->operation != DRAG_OPERATION_REORDER || page != priv->cur_page)
             {
               if (priv->operation == DRAG_OPERATION_REORDER)
                 {
@@ -5975,8 +5973,7 @@ gtk_notebook_calculate_tabs_allocation (GtkNotebook          *notebook,
           break;
         case GTK_POS_LEFT:
         case GTK_POS_RIGHT:
-          if (priv->operation != DRAG_OPERATION_REORDER  ||
-              (priv->operation == DRAG_OPERATION_REORDER && page != priv->cur_page))
+          if (priv->operation != DRAG_OPERATION_REORDER || page != priv->cur_page)
             {
               if (priv->operation == DRAG_OPERATION_REORDER)
                 {
@@ -6003,8 +6000,7 @@ gtk_notebook_calculate_tabs_allocation (GtkNotebook          *notebook,
     }
 
   /* Don't move the current tab past the last position during tabs reordering */
-  if (children &&
-      priv->operation == DRAG_OPERATION_REORDER &&
+  if (priv->operation == DRAG_OPERATION_REORDER &&
       direction == STEP_NEXT)
     {
       switch (tab_pos)
@@ -7311,7 +7307,7 @@ gtk_notebook_popup_disable (GtkNotebook *notebook)
  * %NULL is returned if @child is not in @notebook or
  * if no tab label has specifically been set for @child.
  *
- * Returns: (transfer none): the tab label
+ * Returns: (transfer none) (nullable): the tab label
  */
 GtkWidget *
 gtk_notebook_get_tab_label (GtkNotebook *notebook,

@@ -583,6 +583,7 @@
 ..\..\gtk\gtkdragsource.c
 ..\..\gtk\gtkdrawingarea.c
 ..\..\gtk\gtkeditable.c
+..\..\gtk\gtkemojichooser.c
 ..\..\gtk\gtkentry.c
 ..\..\gtk\gtkentrybuffer.c
 ..\..\gtk\gtkentrycompletion.c

@@ -33,7 +33,7 @@
   </p>
 <p>
     Starting with GLib 2.26, D-Bus support has been integrated into GIO
-    in the form of GDBus, and <a href="https://developer.gnome.org/gio/unstable/GApplication.html#GApplication-struct"><span class="type">GApplication</span></a> has been added to provide
+    in the form of GDBus, and <a href="../gio/GApplication.html#GApplication-struct"><span class="type">GApplication</span></a> has been added to provide
     the same level of application support as libunique.
   </p>
 <div class="example">
@@ -92,7 +92,7 @@
       UniqueResponse response<span class="gtkdoc opt">;</span>
 
       response <span class="gtkdoc opt">=</span> <span class="function">unique_app_send_message</span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">,</span> UNIQUE_ACTIVATE<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
-      <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span>
+      <span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span>
 
       <span class="keyword">return</span> response <span class="gtkdoc opt">==</span> UNIQUE_RESPONSE_OK <span class="gtkdoc opt">?</span> <span class="number">0</span> <span class="gtkdoc opt">:</span> <span class="number">1</span><span class="gtkdoc opt">;</span>
     <span class="gtkdoc opt">}</span>
@@ -105,7 +105,7 @@
 
   <span class="function"><a href="gtk3-General.html#gtk-main">gtk_main</a></span> <span class="gtkdoc opt">();</span>
 
-  <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span>
 
   <span class="keyword">return</span> <span class="number">0</span><span class="gtkdoc opt">;</span>
 <span class="gtkdoc opt">}</span></pre></td>
@@ -183,11 +183,11 @@ The same application using GtkApplication:
   gint status<span class="gtkdoc opt">;</span>
 
   app <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkApplication.html#gtk-application-new">gtk_application_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;org.gtk.TestApplication&quot;</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span>
-  <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">,</span> <span class="string">&quot;activate&quot;</span><span class="gtkdoc opt">,</span> <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span> <span class="gtkdoc opt">(</span>activate<span class="gtkdoc opt">),</span> NULL<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="../gobject/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">,</span> <span class="string">&quot;activate&quot;</span><span class="gtkdoc opt">,</span> <span class="function"><a href="../gobject/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span> <span class="gtkdoc opt">(</span>activate<span class="gtkdoc opt">),</span> NULL<span class="gtkdoc opt">);</span>
 
-  status <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/gio/unstable/GApplication.html#g-application-run">g_application_run</a></span> <span class="gtkdoc opt">(</span><span class="function">G_APPLICATION</span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">),</span> argc<span class="gtkdoc opt">,</span> argv<span class="gtkdoc opt">);</span>
+  status <span class="gtkdoc opt">=</span> <span class="function"><a href="../gio/GApplication.html#g-application-run">g_application_run</a></span> <span class="gtkdoc opt">(</span><span class="function">G_APPLICATION</span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">),</span> argc<span class="gtkdoc opt">,</span> argv<span class="gtkdoc opt">);</span>
 
-  <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>app<span class="gtkdoc opt">);</span>
 
   <span class="keyword">return</span> status<span class="gtkdoc opt">;</span>
 <span class="gtkdoc opt">}</span></pre></td>
@@ -205,19 +205,19 @@ The same application using GtkApplication:
 <a name="id-1.6.5.5"></a>Uniqueness</h2></div></div></div>
 <p>
       Instead of creating a UniqueApp with unique_app_new(), create
-      a <a href="https://developer.gnome.org/gio/unstable/GApplication.html#GApplication-struct"><span class="type">GApplication</span></a> with <a href="https://developer.gnome.org/gio/unstable/GApplication.html#g-application-new"><code class="function">g_application_new()</code></a> or a <a class="link" href="GtkApplication.html" title="GtkApplication"><span class="type">GtkApplication</span></a>
+      a <a href="../gio/GApplication.html#GApplication-struct"><span class="type">GApplication</span></a> with <a href="../gio/GApplication.html#g-application-new"><code class="function">g_application_new()</code></a> or a <a class="link" href="GtkApplication.html" title="GtkApplication"><span class="type">GtkApplication</span></a>
       with <a class="link" href="GtkApplication.html#gtk-application-new" title="gtk_application_new ()"><code class="function">gtk_application_new()</code></a>. The <em class="parameter"><code>name</code></em> that was used with
       <code class="function">unique_app_new()</code> is very likely usable as the <em class="parameter"><code>application_id</code></em> for
-      <a href="https://developer.gnome.org/gio/unstable/GApplication.html#g-application-new"><code class="function">g_application_new()</code></a> without any changes, and GtkApplication passes
+      <a href="../gio/GApplication.html#g-application-new"><code class="function">g_application_new()</code></a> without any changes, and GtkApplication passes
       the <code class="envar">DESKTOP_STARTUP_ID</code> environment variable
       automatically.
     </p>
 <p>
       While libunique expects you to check for an already running instance
       yourself and activate it manually, GApplication handles all this on
-      its own in <a href="https://developer.gnome.org/gio/unstable/GApplication.html#g-application-run"><code class="function">g_application_run()</code></a>. If you still need to find out if there
+      its own in <a href="../gio/GApplication.html#g-application-run"><code class="function">g_application_run()</code></a>. If you still need to find out if there
       is a running instance of your application, use
-      <a href="https://developer.gnome.org/gio/unstable/GApplication.html#g-application-get-is-remote"><code class="function">g_application_get_is_remote()</code></a> instead of <code class="function">unique_app_is_running()</code>.
+      <a href="../gio/GApplication.html#g-application-get-is-remote"><code class="function">g_application_get_is_remote()</code></a> instead of <code class="function">unique_app_is_running()</code>.
     </p>
 </div>
 </div>

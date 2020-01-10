@@ -31,6 +31,10 @@ BUILT_SOURCES = 				\
 	gtk-primary-selection-protocol.c			\
 	tablet-unstable-v2-client-protocol.h	\
 	tablet-unstable-v2-protocol.c		\
+	keyboard-shortcuts-inhibit-unstable-v1-client-protocol.h \
+	keyboard-shortcuts-inhibit-unstable-v1-protocol.c	\
+	server-decoration-client-protocol.h		\
+	server-decoration-protocol.c			\
 	gtk-shell-client-protocol.h		\
 	gtk-shell-protocol.c
 
@@ -100,6 +104,7 @@ endef
 
 EXTRA_DIST += 					\
 	protocol/gtk-primary-selection.xml	\
-	protocol/gtk-shell.xml
+	protocol/gtk-shell.xml			\
+	protocol/server-decoration.xml
 
 -include $(top_srcdir)/git.mk

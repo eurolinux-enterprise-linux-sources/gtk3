@@ -116,9 +116,10 @@ mkdir $(CopyDir)\include\gail-$(ApiVersion)\libgail-util
 for &#37;&#37;s in (16 22 24 32 48 256) do ((mkdir $(CopyDir)\share\icons\hicolor\&#37;&#37;sx&#37;&#37;s\apps) &amp; (copy /b ..\..\..\demos\gtk-demo\data\&#37;&#37;sx&#37;&#37;s\gtk3-demo.png $(CopyDir)\share\icons\hicolor\&#37;&#37;sx&#37;&#37;s\apps))
 
 mkdir $(CopyDir)\share\glib-2.0\schemas
-copy ..\..\..\gtk\org.gtk.Settings.FileChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas
 copy ..\..\..\gtk\org.gtk.Settings.ColorChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas
 copy ..\..\..\gtk\org.gtk.Settings.Debug.gschema.xml $(CopyDir)\share\glib-2.0\schemas
+copy ..\..\..\gtk\org.gtk.Settings.EmojiChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas
+copy ..\..\..\gtk\org.gtk.Settings.FileChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas
 copy ..\..\..\demos\gtk-demo\org.gtk.Demo.gschema.xml $(CopyDir)\share\glib-2.0\schemas
     </GtkDoInstall>
     <GtkDoInstallBroadwayHeaders>
@@ -133,8 +134,8 @@ $(GlibEtcInstallRoot)\bin\glib-compile-schemas.exe $(CopyDir)\share\glib-2.0\sch
 echo "Generating icon cache......"
 $(CopyDir)\bin\gtk-update-icon-cache.exe --ignore-theme-index --force "$(CopyDir)\share\icons\hicolor"
     </GtkPostInstall>
-    <GenerateGtkPC>$(PythonPath)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=i686-pc-vs$(VSVer)</GenerateGtkPC>
-    <GenerateGtkPCX64>$(PythonPathX64)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=x86_64-pc-vs$(VSVer)</GenerateGtkPCX64>
+    <GenerateGtkPC>$(PythonDir)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=i686-pc-vs$(VSVer)</GenerateGtkPC>
+    <GenerateGtkPCX64>$(PythonDirX64)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=x86_64-pc-vs$(VSVer)</GenerateGtkPCX64>
     <GtkPCFiles>..\gdk-3.0.pc;..\gtk+-3.0.pc;..\gail-3.0.pc</GtkPCFiles>
   </PropertyGroup>
   <PropertyGroup>

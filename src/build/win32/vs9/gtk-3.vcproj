@@ -532,6 +532,7 @@
    <File RelativePath="..\..\..\gtk\gtkdragsource.c" />
    <File RelativePath="..\..\..\gtk\gtkdrawingarea.c" />
    <File RelativePath="..\..\..\gtk\gtkeditable.c" />
+   <File RelativePath="..\..\..\gtk\gtkemojichooser.c" />
    <File RelativePath="..\..\..\gtk\gtkentry.c" />
    <File RelativePath="..\..\..\gtk\gtkentrybuffer.c" />
    <File RelativePath="..\..\..\gtk\gtkentrycompletion.c" />

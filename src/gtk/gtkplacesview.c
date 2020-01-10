@@ -56,6 +56,7 @@ struct _GtkPlacesViewPrivate
 
   GFile                         *server_list_file;
   GFileMonitor                  *server_list_monitor;
+  GFileMonitor                  *network_monitor;
 
   GCancellable                  *cancellable;
 
@@ -398,6 +399,9 @@ gtk_places_view_destroy (GtkWidget *widget)
 
   g_signal_handlers_disconnect_by_func (priv->volume_monitor, update_places, widget);
 
+  if (priv->network_monitor)
+    g_signal_handlers_disconnect_by_func (priv->network_monitor, update_places, widget);
+
   g_cancellable_cancel (priv->cancellable);
   g_cancellable_cancel (priv->networks_fetching_cancellable);
 
@@ -417,6 +421,7 @@ gtk_places_view_finalize (GObject *object)
   g_clear_object (&priv->server_list_file);
   g_clear_object (&priv->server_list_monitor);
   g_clear_object (&priv->volume_monitor);
+  g_clear_object (&priv->network_monitor);
   g_clear_object (&priv->cancellable);
   g_clear_object (&priv->networks_fetching_cancellable);
   g_clear_object (&priv->path_size_group);
@@ -902,6 +907,40 @@ update_network_state (GtkPlacesView *view)
 }
 
 static void
+monitor_network (GtkPlacesView *self)
+{
+  GtkPlacesViewPrivate *priv;
+  GFile *network_file;
+  GError *error;
+
+  priv = gtk_places_view_get_instance_private (self);
+
+  if (priv->network_monitor)
+    return;
+
+  error = NULL;
+  network_file = g_file_new_for_uri ("network:///");
+  priv->network_monitor = g_file_monitor (network_file,
+                                          G_FILE_MONITOR_NONE,
+                                          NULL,
+                                          &error);
+
+  g_clear_object (&network_file);
+
+  if (error)
+    {
+      g_warning ("Error monitoring network: %s", error->message);
+      g_clear_error (&error);
+      return;
+    }
+
+  g_signal_connect_swapped (priv->network_monitor,
+                            "changed",
+                            G_CALLBACK (update_places),
+                            self);
+}
+
+static void
 populate_networks (GtkPlacesView   *view,
                    GFileEnumerator *enumerator,
                    GList           *detected_networks)
@@ -974,6 +1013,7 @@ network_enumeration_next_files_finished (GObject      *source_object,
   if (!priv->destroyed)
     {
       update_network_state (view);
+      monitor_network (view);
       update_loading (view);
     }
 }
@@ -1381,7 +1421,6 @@ unmount_mount (GtkPlacesView *view,
 
   priv = gtk_places_view_get_instance_private (view);
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (view));
-  operation = gtk_mount_operation_new (GTK_WINDOW (toplevel));
 
   g_cancellable_cancel (priv->cancellable);
   g_clear_object (&priv->cancellable);
@@ -1496,82 +1535,33 @@ popup_menu_detach_cb (GtkWidget *attach_widget,
 }
 
 static void
-get_view_and_file (GtkPlacesViewRow  *row,
-                   GtkWidget        **view,
-                   GFile            **file)
-{
-  if (view)
-    *view = gtk_widget_get_ancestor (GTK_WIDGET (row), GTK_TYPE_PLACES_VIEW);
-
-  if (file)
-    {
-      GVolume *volume;
-      GMount *mount;
-
-      volume = gtk_places_view_row_get_volume (row);
-      mount = gtk_places_view_row_get_mount (row);
-
-      if (mount)
-        {
-          *file = g_mount_get_default_location (mount);
-        }
-      else if (volume)
-        {
-          *file = g_volume_get_activation_root (volume);
-        }
-      else
-        {
-          *file = gtk_places_view_row_get_file (row);
-          if (*file) {
-            g_object_ref (*file);
-          }
-        }
-    }
-}
-
-static void
 open_cb (GtkMenuItem      *item,
          GtkPlacesViewRow *row)
 {
-  GtkWidget *view;
-  GFile *file;
+  GtkPlacesView *self;
 
-  get_view_and_file (row, &view, &file);
-
-  if (file)
-    emit_open_location (GTK_PLACES_VIEW (view), file, GTK_PLACES_OPEN_NORMAL);
-
-  g_clear_object (&file);
+  self = GTK_PLACES_VIEW (gtk_widget_get_ancestor (GTK_WIDGET (row), GTK_TYPE_PLACES_VIEW));
+  activate_row (self, row, GTK_PLACES_OPEN_NORMAL);
 }
 
 static void
 open_in_new_tab_cb (GtkMenuItem      *item,
                     GtkPlacesViewRow *row)
 {
-  GtkWidget *view;
-  GFile *file;
+  GtkPlacesView *self;
 
-  get_view_and_file (row, &view, &file);
-
-  if (file)
-    emit_open_location (GTK_PLACES_VIEW (view), file, GTK_PLACES_OPEN_NEW_TAB);
-
-  g_clear_object (&file);
+  self = GTK_PLACES_VIEW (gtk_widget_get_ancestor (GTK_WIDGET (row), GTK_TYPE_PLACES_VIEW));
+  activate_row (self, row, GTK_PLACES_OPEN_NEW_TAB);
 }
 
 static void
 open_in_new_window_cb (GtkMenuItem      *item,
                        GtkPlacesViewRow *row)
 {
-  GtkWidget *view;
-  GFile *file;
+  GtkPlacesView *self;
 
-  get_view_and_file (row, &view, &file);
-
-  if (file)
-    emit_open_location (GTK_PLACES_VIEW (view), file, GTK_PLACES_OPEN_NEW_WINDOW);
-
-  g_clear_object (&file);
+  self = GTK_PLACES_VIEW (gtk_widget_get_ancestor (GTK_WIDGET (row), GTK_TYPE_PLACES_VIEW));
+  activate_row (self, row, GTK_PLACES_OPEN_NEW_WINDOW);
 }
 
 static void

@@ -80,12 +80,12 @@ widgets at fixed coordinates</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="property_type"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a></td>
+<td class="property_type"><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a></td>
 <td class="property_name"><a class="link" href="GtkFixed.html#GtkFixed--c-x" title="The “x” child property">x</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
 <tr>
-<td class="property_type"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a></td>
+<td class="property_type"><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a></td>
 <td class="property_name"><a class="link" href="GtkFixed.html#GtkFixed--c-y" title="The “y” child property">y</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
@@ -107,8 +107,8 @@ widgets at fixed coordinates</p>
 </div>
 <div class="refsect1">
 <a name="GtkFixed.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
-    <span class="lineart">╰──</span> <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GInitiallyUnowned">GInitiallyUnowned</a>
+<pre class="screen">    <a href="../gobject/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
+    <span class="lineart">╰──</span> <a href="../gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned">GInitiallyUnowned</a>
         <span class="lineart">╰──</span> <a class="link" href="GtkWidget.html" title="GtkWidget">GtkWidget</a>
             <span class="lineart">╰──</span> <a class="link" href="GtkContainer.html" title="GtkContainer">GtkContainer</a>
                 <span class="lineart">╰──</span> GtkFixed
@@ -140,17 +140,18 @@ other display bugs:</p>
 <li class="listitem"><p>Fonts other than the one you used to write the app will of course
 change the size of widgets containing text; keep in mind that
 users may use a larger font because of difficulty reading the
-default, or they may be using Windows or the framebuffer port of
-GTK+, where different fonts are available.</p></li>
+default, or they may be using a different OS that provides different fonts.</p></li>
 <li class="listitem"><p>Translation of text into other languages changes its size. Also,
 display of non-English text will use a different font in many
 cases.</p></li>
 </ul></div>
-<p>In addition, the fixed widget can’t properly be mirrored in
-right-to-left languages such as Hebrew and Arabic. i.e. normally
-GTK+ will flip the interface to put labels to the right of the
-thing they label, but it can’t do that with <a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a>. So your
-application will not be usable in right-to-left languages.</p>
+<p>In addition, <a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a> does not pay attention to text direction and thus may
+produce unwanted results if your app is run under right-to-left languages
+such as Hebrew or Arabic. That is: normally GTK+ will order containers
+appropriately for the text direction, e.g. to put labels to the right of the
+thing they label when using an RTL language, but it can’t do that with
+<a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a>. So if you need to reorder widgets depending on the text direction,
+you would need to manually detect it and adjust child positions accordingly.</p>
 <p>Finally, fixed positioning makes it kind of annoying to add/remove
 GUI elements, since you have to reposition all the other
 elements. This is a long-term maintenance problem for your
@@ -158,6 +159,8 @@ application.</p>
 <p>If you know none of these things are an issue for your application,
 and prefer the simplicity of <a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a>, by all means use the
 widget. But you should be aware of the tradeoffs.</p>
+<p>See also <a class="link" href="GtkLayout.html" title="GtkLayout"><span class="type">GtkLayout</span></a>, which shares the ability to perform fixed positioning
+of child widgets and additionally adds custom drawing and scrollability.</p>
 </div>
 <div class="refsect1">
 <a name="GtkFixed.functions_details"></a><h2>Functions</h2>
@@ -177,8 +180,8 @@ gtk_fixed_new (<em class="parameter"><code><span class="type">void</span></code>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_fixed_put (<em class="parameter"><code><a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a> *fixed</code></em>,
                <em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *widget</code></em>,
-               <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> x</code></em>,
-               <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> y</code></em>);</pre>
+               <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> x</code></em>,
+               <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> y</code></em>);</pre>
 <p>Adds a widget to a <a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a> container at the given position.</p>
 <div class="refsect3">
 <a name="gtk-fixed-put.parameters"></a><h4>Parameters</h4>
@@ -219,8 +222,8 @@ gtk_fixed_put (<em class="parameter"><code><a class="link" href="GtkFixed.html" 
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_fixed_move (<em class="parameter"><code><a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a> *fixed</code></em>,
                 <em class="parameter"><code><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> *widget</code></em>,
-                <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> x</code></em>,
-                <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> y</code></em>);</pre>
+                <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> x</code></em>,
+                <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> y</code></em>);</pre>
 <p>Moves a child of a <a class="link" href="GtkFixed.html" title="GtkFixed"><span class="type">GtkFixed</span></a> container to the given position.</p>
 <div class="refsect3">
 <a name="gtk-fixed-move.parameters"></a><h4>Parameters</h4>
@@ -267,7 +270,7 @@ gtk_fixed_move (<em class="parameter"><code><a class="link" href="GtkFixed.html"
 <a name="GtkFixed.child-property-details"></a><h2>Child Property Details</h2>
 <div class="refsect2">
 <a name="GtkFixed--c-x"></a><h3>The <code class="literal">“x”</code> child property</h3>
-<pre class="programlisting">  “x”                        <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a></pre>
+<pre class="programlisting">  “x”                        <a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a></pre>
 <p>X position of child widget.</p>
 <p>Flags: Read / Write</p>
 <p>Default value: 0</p>
@@ -275,11 +278,15 @@ gtk_fixed_move (<em class="parameter"><code><a class="link" href="GtkFixed.html"
 <hr>
 <div class="refsect2">
 <a name="GtkFixed--c-y"></a><h3>The <code class="literal">“y”</code> child property</h3>
-<pre class="programlisting">  “y”                        <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a></pre>
+<pre class="programlisting">  “y”                        <a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a></pre>
 <p>Y position of child widget.</p>
 <p>Flags: Read / Write</p>
 <p>Default value: 0</p>
 </div>
+</div>
+<div class="refsect1">
+<a name="GtkFixed.see-also"></a><h2>See Also</h2>
+<p><a class="link" href="GtkLayout.html" title="GtkLayout"><span class="type">GtkLayout</span></a></p>
 </div>
 </div>
 <div class="footer">

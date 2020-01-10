@@ -71,6 +71,7 @@
 #include "gtkcssnodeprivate.h"
 #include "gtkcsscustomgadgetprivate.h"
 #include "gtkprogresstrackerprivate.h"
+#include "gtkemojichooser.h"
 
 #include "a11y/gtkentryaccessible.h"
 
@@ -205,7 +206,6 @@ struct _GtkEntryPrivate
 
   gchar        *placeholder_text;
 
-  GtkWidget     *bubble_window;
   GtkTextHandle *text_handle;
   GtkWidget     *selection_bubble;
   guint          selection_bubble_timeout_id;
@@ -249,6 +249,7 @@ struct _GtkEntryPrivate
 
   guint         shadow_type             : 4;
   guint         editable                : 1;
+  guint         show_emoji_icon         : 1;
   guint         in_drag                 : 1;
   guint         overwrite_mode          : 1;
   guint         visible                 : 1;
@@ -375,6 +376,7 @@ enum {
   PROP_ATTRIBUTES,
   PROP_POPULATE_ALL,
   PROP_TABS,
+  PROP_SHOW_EMOJI_ICON,
   PROP_EDITING_CANCELED,
   NUM_PROPERTIES = PROP_EDITING_CANCELED
 };
@@ -697,6 +699,8 @@ static void         buffer_notify_max_length           (GtkEntryBuffer *buffer,
 static void         buffer_connect_signals             (GtkEntry       *entry);
 static void         buffer_disconnect_signals          (GtkEntry       *entry);
 static GtkEntryBuffer *get_buffer                      (GtkEntry       *entry);
+static void         set_show_emoji_icon                (GtkEntry       *entry,
+                                                        gboolean        value);
 
 static void     gtk_entry_measure  (GtkCssGadget        *gadget,
                                     GtkOrientation       orientation,
@@ -1513,6 +1517,21 @@ gtk_entry_class_init (GtkEntryClass *class)
                           P_("A list of tabstop locations to apply to the text of the entry"),
                           PANGO_TYPE_TAB_ARRAY,
                           GTK_PARAM_READWRITE|G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * GtkEntry::show-emoji-icon:
+   *
+   * When this is %TRUE, the entry will show an emoji icon in the secondary
+   * icon position that brings up the Emoji chooser when clicked.
+   *
+   * Since: 3.22.19
+   */
+  entry_props[PROP_SHOW_EMOJI_ICON] =
+      g_param_spec_boolean ("show-emoji-icon",
+                            P_("Emoji icon"),
+                            P_("Whether to show an icon for Emoji"),
+                            FALSE,
+                            GTK_PARAM_READWRITE|G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (gobject_class, NUM_PROPERTIES, entry_props);
 
@@ -2394,6 +2413,10 @@ gtk_entry_set_property (GObject         *object,
       gtk_entry_set_tabs (entry, g_value_get_boxed (value));
       break;
 
+    case PROP_SHOW_EMOJI_ICON:
+      set_show_emoji_icon (entry, g_value_get_boolean (value));
+      break;
+
     case PROP_SCROLL_OFFSET:
     case PROP_CURSOR_POSITION:
     default:
@@ -2644,6 +2667,10 @@ gtk_entry_get_property (GObject         *object,
 
     case PROP_TABS:
       g_value_set_boxed (value, priv->tabs);
+      break;
+
+    case PROP_SHOW_EMOJI_ICON:
+      g_value_set_boolean (value, priv->show_emoji_icon);
       break;
 
     default:
@@ -2916,6 +2943,8 @@ gtk_entry_dispose (GObject *object)
   gtk_entry_set_icon_from_pixbuf (entry, GTK_ENTRY_ICON_SECONDARY, NULL);
   gtk_entry_set_icon_tooltip_markup (entry, GTK_ENTRY_ICON_SECONDARY, NULL);
   gtk_entry_set_completion (entry, NULL);
+
+  priv->current_pos = 0;
 
   if (priv->buffer)
     {
@@ -4449,6 +4478,9 @@ gtk_entry_multipress_gesture_pressed (GtkGestureMultiPress *gesture,
          gtk_widget_get_modifier_mask (widget,
                                        GDK_MODIFIER_INTENT_EXTEND_SELECTION));
 
+      if (extend_selection)
+        gtk_entry_reset_im_context (entry);
+
       switch (n_press)
         {
         case 1:
@@ -4462,15 +4494,24 @@ gtk_entry_multipress_gesture_pressed (GtkGestureMultiPress *gesture,
                   else
                     gtk_entry_selection_bubble_popup_set (entry);
                 }
+              else if (extend_selection)
+                {
+                  /* Truncate current selection, but keep it as big as possible */
+                  if (tmp_pos - sel_start > sel_end - tmp_pos)
+                    gtk_entry_set_positions (entry, sel_start, tmp_pos);
+                  else
+                    gtk_entry_set_positions (entry, tmp_pos, sel_end);
+
+                  /* all done, so skip the extend_to_left stuff later */
+                  extend_selection = FALSE;
+                }
               else
                 {
-                  /* Click inside the selection - we'll either start a drag, or
-                   * clear the selection
-                   */
+                  /* We'll either start a drag, or clear the selection */
                   priv->in_drag = TRUE;
                   priv->drag_start_x = x;
                   priv->drag_start_y = y;
-               }
+                }
             }
           else
             {
@@ -4483,35 +4524,30 @@ gtk_entry_multipress_gesture_pressed (GtkGestureMultiPress *gesture,
                 }
               else
                 {
-                  gtk_entry_reset_im_context (entry);
-
-                  if (!have_selection) /* select from the current position to the clicked position */
+                  /* select from the current position to the clicked position */
+                  if (!have_selection)
                     sel_start = sel_end = priv->current_pos;
 
-                  if (tmp_pos > sel_start && tmp_pos < sel_end)
-                    {
-                      /* Truncate current selection, but keep it as big as possible */
-                      if (tmp_pos - sel_start > sel_end - tmp_pos)
-                        gtk_entry_set_positions (entry, sel_start, tmp_pos);
-                      else
-                        gtk_entry_set_positions (entry, tmp_pos, sel_end);
-                    }
+                  gtk_entry_set_positions (entry, tmp_pos, tmp_pos);
                 }
             }
 
           break;
+
         case 2:
           priv->select_words = TRUE;
           gtk_entry_select_word (entry);
           if (is_touchscreen)
             mode = GTK_TEXT_HANDLE_MODE_SELECTION;
           break;
+
         case 3:
           priv->select_lines = TRUE;
           gtk_entry_select_line (entry);
           if (is_touchscreen)
             mode = GTK_TEXT_HANDLE_MODE_SELECTION;
           break;
+
         default:
           break;
         }
@@ -7362,8 +7398,8 @@ gtk_entry_update_primary_selection (GtkEntry *entry)
 }
 
 static void
-gtk_entry_clear (GtkEntry             *entry,
-                 GtkEntryIconPosition  icon_pos)
+gtk_entry_clear_icon (GtkEntry             *entry,
+                      GtkEntryIconPosition  icon_pos)
 {
   GtkEntryPrivate *priv = entry->priv;
   EntryIconInfo *icon_info = priv->icons[icon_pos];
@@ -8449,7 +8485,7 @@ gtk_entry_set_icon_from_pixbuf (GtkEntry             *entry,
       g_object_unref (pixbuf);
     }
   else
-    gtk_entry_clear (entry, icon_pos);
+    gtk_entry_clear_icon (entry, icon_pos);
 
   if (gtk_widget_get_visible (GTK_WIDGET (entry)))
     gtk_widget_queue_resize (GTK_WIDGET (entry));
@@ -8509,7 +8545,7 @@ gtk_entry_set_icon_from_stock (GtkEntry             *entry,
           gdk_window_show_unraised (icon_info->window);
     }
   else
-    gtk_entry_clear (entry, icon_pos);
+    gtk_entry_clear_icon (entry, icon_pos);
 
   if (gtk_widget_get_visible (GTK_WIDGET (entry)))
     gtk_widget_queue_resize (GTK_WIDGET (entry));
@@ -8571,7 +8607,7 @@ gtk_entry_set_icon_from_icon_name (GtkEntry             *entry,
           gdk_window_show_unraised (icon_info->window);
     }
   else
-    gtk_entry_clear (entry, icon_pos);
+    gtk_entry_clear_icon (entry, icon_pos);
 
   if (gtk_widget_get_visible (GTK_WIDGET (entry)))
     gtk_widget_queue_resize (GTK_WIDGET (entry));
@@ -8631,7 +8667,7 @@ gtk_entry_set_icon_from_gicon (GtkEntry             *entry,
           gdk_window_show_unraised (icon_info->window);
     }
   else
-    gtk_entry_clear (entry, icon_pos);
+    gtk_entry_clear_icon (entry, icon_pos);
 
   if (gtk_widget_get_visible (GTK_WIDGET (entry)))
     gtk_widget_queue_resize (GTK_WIDGET (entry));
@@ -9005,14 +9041,11 @@ gtk_entry_get_icon_at_pos (GtkEntry *entry,
   for (i = 0; i < MAX_ICONS; i++)
     {
       EntryIconInfo *icon_info = priv->icons[i];
-      GtkAllocation allocation;
 
       if (icon_info == NULL)
         continue;
 
-      gtk_css_gadget_get_border_allocation (icon_info->gadget, &allocation, NULL);
-      if (x >= allocation.x && x < allocation.x + allocation.width &&
-          y >= allocation.y && y < allocation.y + allocation.height)
+      if (gtk_css_gadget_border_box_contains_point (icon_info->gadget, x, y))
         return i;
     }
 
@@ -9117,7 +9150,8 @@ gtk_entry_get_current_icon_drag_source (GtkEntry *entry)
  * entry in a draw callback.
  *
  * If the entry is not realized or has no icon at the given position,
- * @icon_area is filled with zeros.
+ * @icon_area is filled with zeros. Otherwise, @icon_area will be filled
+ * with the icon’s allocation, relative to @entry’s allocation.
  *
  * See also gtk_entry_get_text_area()
  *
@@ -9158,23 +9192,28 @@ gtk_entry_get_icon_area (GtkEntry             *entry,
 static void
 ensure_has_tooltip (GtkEntry *entry)
 {
-  GtkEntryPrivate *priv;
-  EntryIconInfo *icon_info;
-  int i;
-  gboolean has_tooltip = FALSE;
+  gchar *text = gtk_widget_get_tooltip_text (GTK_WIDGET (entry));
+  gboolean has_tooltip = text != NULL;
 
-  priv = entry->priv;
-
-  for (i = 0; i < MAX_ICONS; i++)
+  if (!has_tooltip)
     {
-      if ((icon_info = priv->icons[i]) != NULL)
+      GtkEntryPrivate *priv = entry->priv;
+      int i;
+
+      for (i = 0; i < MAX_ICONS; i++)
         {
-          if (icon_info->tooltip != NULL)
+          EntryIconInfo *icon_info = priv->icons[i];
+
+          if (icon_info != NULL && icon_info->tooltip != NULL)
             {
               has_tooltip = TRUE;
               break;
             }
         }
+    }
+  else
+    {
+      g_free (text);
     }
 
   gtk_widget_set_has_tooltip (GTK_WIDGET (entry), has_tooltip);
@@ -9231,6 +9270,12 @@ gtk_entry_get_icon_tooltip_text (GtkEntry             *entry,
  *
  * See also gtk_widget_set_tooltip_text() and 
  * gtk_entry_set_icon_tooltip_markup().
+ *
+ * If you unset the widget tooltip via gtk_widget_set_tooltip_text() or
+ * gtk_widget_set_tooltip_markup(), this sets GtkWidget:has-tooltip to %FALSE,
+ * which suppresses icon tooltips too. You can resolve this by then calling
+ * gtk_widget_set_has_tooltip() to set GtkWidget:has-tooltip back to %TRUE, or
+ * setting at least one non-empty tooltip on any icon achieves the same result.
  *
  * Since: 2.16
  */
@@ -9477,6 +9522,8 @@ typedef struct
   GdkEvent *trigger_event;
 } PopupInfo;
 
+static void gtk_entry_choose_emoji (GtkEntry *entry);
+
 static void
 popup_targets_received (GtkClipboard     *clipboard,
 			GtkSelectionData *data,
@@ -9533,6 +9580,19 @@ popup_targets_received (GtkClipboard     *clipboard,
                                 G_CALLBACK (gtk_entry_select_all), entry);
       gtk_widget_show (menuitem);
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+
+      if (info_entry_priv->show_emoji_icon ||
+          (gtk_entry_get_input_hints (entry) & GTK_INPUT_HINT_NO_EMOJI) == 0)
+        {
+          menuitem = gtk_menu_item_new_with_mnemonic (_("Insert _Emoji"));
+          gtk_widget_set_sensitive (menuitem,
+                                    mode == DISPLAY_NORMAL &&
+                                    info_entry_priv->editable);
+          g_signal_connect_swapped (menuitem, "activate",
+                                    G_CALLBACK (gtk_entry_choose_emoji), entry);
+          gtk_widget_show (menuitem);
+          gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+        }
 
       g_signal_emit (entry, signals[POPULATE_POPUP], 0, menu);
 
@@ -10985,4 +11045,86 @@ gtk_entry_get_tabs (GtkEntry *entry)
   g_return_val_if_fail (GTK_IS_ENTRY (entry), NULL);
 
   return entry->priv->tabs;
+}
+
+static void
+gtk_entry_choose_emoji (GtkEntry *entry)
+{
+  GtkWidget *chooser;
+  GdkRectangle rect;
+
+  chooser = GTK_WIDGET (g_object_get_data (G_OBJECT (entry), "gtk-emoji-chooser"));
+  if (!chooser)
+    {
+      chooser = gtk_emoji_chooser_new ();
+      g_object_set_data (G_OBJECT (entry), "gtk-emoji-chooser", chooser);
+
+      gtk_popover_set_relative_to (GTK_POPOVER (chooser), GTK_WIDGET (entry));
+      if (entry->priv->show_emoji_icon)
+        {
+          gtk_entry_get_icon_area (entry, GTK_ENTRY_ICON_SECONDARY, &rect);
+          gtk_popover_set_pointing_to (GTK_POPOVER (chooser), &rect);
+        }
+      g_signal_connect_swapped (chooser, "emoji-picked", G_CALLBACK (gtk_entry_enter_text), entry);
+    }
+
+  gtk_popover_popup (GTK_POPOVER (chooser));
+}
+
+static void
+pick_emoji (GtkEntry *entry,
+            int       icon,
+            GdkEvent *event,
+            gpointer  data)
+{
+  if (icon == GTK_ENTRY_ICON_SECONDARY)
+    gtk_entry_choose_emoji (entry);
+}
+
+static void
+set_show_emoji_icon (GtkEntry *entry,
+                     gboolean  value)
+{
+  GtkEntryPrivate *priv = entry->priv;
+
+  if (priv->show_emoji_icon == value)
+    return;
+
+  priv->show_emoji_icon = value;
+
+  if (priv->show_emoji_icon)
+    {
+      gtk_entry_set_icon_from_icon_name (entry,
+                                         GTK_ENTRY_ICON_SECONDARY,
+                                         "face-smile-symbolic");
+
+      gtk_entry_set_icon_sensitive (entry,
+                                    GTK_ENTRY_ICON_SECONDARY,
+                                    TRUE);
+
+      gtk_entry_set_icon_activatable (entry,
+                                      GTK_ENTRY_ICON_SECONDARY,
+                                      TRUE);
+
+      gtk_entry_set_icon_tooltip_text (entry,
+                                       GTK_ENTRY_ICON_SECONDARY,
+                                       _("Insert Emoji"));
+
+      g_signal_connect (entry, "icon-press", G_CALLBACK (pick_emoji), NULL);
+    }
+  else
+    {
+      g_signal_handlers_disconnect_by_func (entry, pick_emoji, NULL);
+
+      gtk_entry_set_icon_from_icon_name (entry,
+                                         GTK_ENTRY_ICON_SECONDARY,
+                                         NULL);
+
+      gtk_entry_set_icon_tooltip_text (entry,
+                                       GTK_ENTRY_ICON_SECONDARY,
+                                       NULL);
+    }
+
+  g_object_notify_by_pspec (G_OBJECT (entry), entry_props[PROP_SHOW_EMOJI_ICON]);
+  gtk_widget_queue_resize (GTK_WIDGET (entry));
 }

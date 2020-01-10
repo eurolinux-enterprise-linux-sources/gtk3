@@ -484,9 +484,10 @@ copy ..\..\..\demos\gtk-demo\data\48x48\gtk3-demo.png $(CopyDir)\share\icons\hic
 mkdir $(CopyDir)\share\icons\hicolor\256x256\apps&#x0D;&#x0A;
 copy ..\..\..\demos\gtk-demo\data\256x256\gtk3-demo.png $(CopyDir)\share\icons\hicolor\256x256\apps\&#x0D;&#x0A;
 mkdir $(CopyDir)\share\glib-2.0\schemas&#x0D;&#x0A;
-copy ..\..\..\gtk\org.gtk.Settings.FileChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas&#x0D;&#x0A;
 copy ..\..\..\gtk\org.gtk.Settings.ColorChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas&#x0D;&#x0A;
 copy ..\..\..\gtk\org.gtk.Settings.Debug.gschema.xml $(CopyDir)\share\glib-2.0\schemas&#x0D;&#x0A;
+copy ..\..\..\gtk\org.gtk.Settings.EmojiChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas&#x0D;&#x0A;
+copy ..\..\..\gtk\org.gtk.Settings.FileChooser.gschema.xml $(CopyDir)\share\glib-2.0\schemas&#x0D;&#x0A;
 copy ..\..\..\demos\gtk-demo\org.gtk.Demo.gschema.xml $(CopyDir)\share\glib-2.0\schemas&#x0D;&#x0A;
         "
  />
@@ -513,10 +514,10 @@ copy ..\..\..\gdk\broadway\gdkbroadwayvisual.h $(CopyDir)\include\gtk-3.0\gdk\br
  />
  <UserMacro
   Name="GenerateGtkPC"
-  Value="$(PythonPath)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=i686-pc-vs$(VSVer)"
+  Value="$(PythonDir)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=i686-pc-vs$(VSVer)"
  />
  <UserMacro
   Name="GenerateGtkPCX64"
-  Value="$(PythonPathX64)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=x86_64-pc-vs$(VSVer)"
+  Value="$(PythonDirX64)\python ..\gtkpc.py --prefix=$(CopyDir) --version=$(GtkVersion) --host=x86_64-pc-vs$(VSVer)"
  />
 </VisualStudioPropertySheet>

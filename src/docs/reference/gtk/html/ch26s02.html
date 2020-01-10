@@ -356,8 +356,8 @@
 
       <span class="function"><a href="GtkWidget.html#gtk-widget-get-preferred-height">gtk_widget_get_preferred_height</a></span> <span class="gtkdoc opt">(</span>child<span class="gtkdoc opt">-&gt;</span>widget<span class="gtkdoc opt">, &amp;</span>child_min<span class="gtkdoc opt">, &amp;</span>child_nat<span class="gtkdoc opt">);</span>
 
-      <span class="gtkdoc opt">*</span>minimum <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#MAX:CAPS">MAX</a></span> <span class="gtkdoc opt">(*</span>minimum<span class="gtkdoc opt">,</span> child<span class="gtkdoc opt">-&gt;</span>y <span class="gtkdoc opt">+</span> child_min<span class="gtkdoc opt">);</span>
-      <span class="gtkdoc opt">*</span>natural <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#MAX:CAPS">MAX</a></span> <span class="gtkdoc opt">(*</span>natural<span class="gtkdoc opt">,</span> child<span class="gtkdoc opt">-&gt;</span>y <span class="gtkdoc opt">+</span> child_nat<span class="gtkdoc opt">);</span>
+      <span class="gtkdoc opt">*</span>minimum <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-Standard-Macros.html#MAX:CAPS">MAX</a></span> <span class="gtkdoc opt">(*</span>minimum<span class="gtkdoc opt">,</span> child<span class="gtkdoc opt">-&gt;</span>y <span class="gtkdoc opt">+</span> child_min<span class="gtkdoc opt">);</span>
+      <span class="gtkdoc opt">*</span>natural <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-Standard-Macros.html#MAX:CAPS">MAX</a></span> <span class="gtkdoc opt">(*</span>natural<span class="gtkdoc opt">,</span> child<span class="gtkdoc opt">-&gt;</span>y <span class="gtkdoc opt">+</span> child_nat<span class="gtkdoc opt">);</span>
     <span class="gtkdoc opt">}</span>
 <span class="gtkdoc opt">}</span></pre></td>
       </tr>
@@ -418,15 +418,15 @@
 <td><span class="type">cairo_region_t</span></td>
 </tr>
 <tr>
-<td><a href="http://developer.gnome.org/gdk3/gdk4-Points-Rectangles-and-Regions.html#GdkRectangle"><span class="type">GdkRectangle</span></a></td>
+<td><a href="../gdk4/gdk4-Points-Rectangles-and-Regions.html#GdkRectangle"><span class="type">GdkRectangle</span></a></td>
 <td><span class="type">cairo_rectangle_int_t</span></td>
 </tr>
 <tr>
-<td><a href="http://developer.gnome.org/gdk3/gdk4-Points-Rectangles-and-Regions.html#gdk-rectangle-intersect"><code class="function">gdk_rectangle_intersect()</code></a></td>
+<td><a href="../gdk4/gdk4-Points-Rectangles-and-Regions.html#gdk-rectangle-intersect"><code class="function">gdk_rectangle_intersect()</code></a></td>
 <td>this function is still there</td>
 </tr>
 <tr>
-<td><a href="http://developer.gnome.org/gdk3/gdk4-Points-Rectangles-and-Regions.html#gdk-rectangle-union"><code class="function">gdk_rectangle_union()</code></a></td>
+<td><a href="../gdk4/gdk4-Points-Rectangles-and-Regions.html#gdk-rectangle-union"><code class="function">gdk_rectangle_union()</code></a></td>
 <td>this function is still there</td>
 </tr>
 <tr>
@@ -558,7 +558,7 @@ cr <span class="gtkdoc opt">=</span> <span class="function">gdk_cairo_create</sp
 
 cursor <span class="gtkdoc opt">=</span> <span class="function">gdk_cursor_new_from_pixmap</span> <span class="gtkdoc opt">(</span>pixmap<span class="gtkdoc opt">,</span> pixmap<span class="gtkdoc opt">, &amp;</span>fg<span class="gtkdoc opt">, &amp;</span>fg<span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span>
 
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>pixmap<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>pixmap<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -603,15 +603,15 @@ cr <span class="gtkdoc opt">=</span> <span class="function">cairo_create</span> 
 <span class="function">cairo_fill</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 <span class="function">cairo_destroy</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 
-pixbuf <span class="gtkdoc opt">=</span> <span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Pixbufs.html#gdk-pixbuf-get-from-surface">gdk_pixbuf_get_from_surface</a></span> <span class="gtkdoc opt">(</span>s<span class="gtkdoc opt">,</span>
+pixbuf <span class="gtkdoc opt">=</span> <span class="function"><a href="../gdk4/gdk4-Pixbufs.html#gdk-pixbuf-get-from-surface">gdk_pixbuf_get_from_surface</a></span> <span class="gtkdoc opt">(</span>s<span class="gtkdoc opt">,</span>
                                       <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">,</span>
                                       <span class="number">3</span><span class="gtkdoc opt">,</span> <span class="number">3</span><span class="gtkdoc opt">);</span>
 
 <span class="function">cairo_surface_destroy</span> <span class="gtkdoc opt">(</span>s<span class="gtkdoc opt">);</span>
 
-cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Cursors.html#gdk-cursor-new-from-pixbuf">gdk_cursor_new_from_pixbuf</a></span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">,</span> pixbuf<span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span>
+cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="../gdk4/gdk4-Cursors.html#gdk-cursor-new-from-pixbuf">gdk_cursor_new_from_pixbuf</a></span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">,</span> pixbuf<span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span>
 
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -628,7 +628,7 @@ cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="http://
 <a name="id-1.6.3.4.6"></a>Replace GdkColormap by GdkVisual</h3></div></div></div>
 <p>
       For drawing with cairo, it is not necessary to allocate colors, and
-      a <a href="http://developer.gnome.org/gdk3/gdk4-Visuals.html#GdkVisual-struct"><span class="type">GdkVisual</span></a> provides enough information for cairo to handle colors
+      a <a href="../gdk4/gdk4-Visuals.html#GdkVisual-struct"><span class="type">GdkVisual</span></a> provides enough information for cairo to handle colors
       in 'native' surfaces. Therefore, <span class="type">GdkColormap</span> and related functions
       have been removed in GTK+ 3, and visuals are used instead. The
       colormap-handling functions of <a class="link" href="GtkWidget.html" title="GtkWidget"><span class="type">GtkWidget</span></a> (<code class="function">gtk_widget_set_colormap()</code>,
@@ -722,9 +722,9 @@ cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="http://
 <a name="id-1.6.3.4.7"></a>GdkDrawable is gone</h3></div></div></div>
 <p>
       <span class="type">GdkDrawable</span> has been removed in GTK+ 3, together with <span class="type">GdkPixmap</span>
-      and <span class="type">GdkImage</span>. The only remaining drawable class is <a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#GdkWindow-struct"><span class="type">GdkWindow</span></a>.
+      and <span class="type">GdkImage</span>. The only remaining drawable class is <a href="../gdk4/gdk4-Windows.html#GdkWindow-struct"><span class="type">GdkWindow</span></a>.
       For dealing with image data, you should use a <span class="type">cairo_surface_t</span> or
-      a <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a>.
+      a <a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a>.
     </p>
 <p>
       GdkDrawable functions that are useful with windows have been replaced
@@ -749,8 +749,8 @@ cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="http://
 <tr>
 <td><code class="function">gdk_drawable_get_size()</code></td>
 <td>
-<a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-get-width"><code class="function">gdk_window_get_width()</code></a>
-                                                              <a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-get-height"><code class="function">gdk_window_get_height()</code></a>
+<a href="../gdk4/gdk4-Windows.html#gdk-window-get-width"><code class="function">gdk_window_get_width()</code></a>
+                                                              <a href="../gdk4/gdk4-Windows.html#gdk-window-get-height"><code class="function">gdk_window_get_height()</code></a>
 </td>
 </tr>
 <tr>
@@ -759,11 +759,11 @@ cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="http://
 </tr>
 <tr>
 <td><code class="function">gdk_drawable_get_clip_region()</code></td>
-<td><a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-get-clip-region"><code class="function">gdk_window_get_clip_region()</code></a></td>
+<td><a href="../gdk4/gdk4-Windows.html#gdk-window-get-clip-region"><code class="function">gdk_window_get_clip_region()</code></a></td>
 </tr>
 <tr>
 <td><code class="function">gdk_drawable_get_visible_region()</code></td>
-<td><a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-get-visible-region"><code class="function">gdk_window_get_visible_region()</code></a></td>
+<td><a href="../gdk4/gdk4-Windows.html#gdk-window-get-visible-region"><code class="function">gdk_window_get_visible_region()</code></a></td>
 </tr>
 </tbody>
 </table></div>
@@ -781,7 +781,7 @@ cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="http://
 <p>
       The special-purpose GdkEventClient events and the <code class="function">gdk_add_client_message_filter()</code> and <code class="function">gdk_display_add_client_message_filter()</code> functions have been
       removed. Receiving X11 ClientMessage events is still possible, using
-      the general <a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-add-filter"><code class="function">gdk_window_add_filter()</code></a> API. A client message filter like
+      the general <a href="../gdk4/gdk4-Windows.html#gdk-window-add-filter"><code class="function">gdk_window_add_filter()</code></a> API. A client message filter like
 </p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
@@ -809,7 +809,7 @@ cursor <span class="gtkdoc opt">=</span> <span class="function"><a href="http://
 
  <span class="gtkdoc opt">...</span>
 
-message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Properties-and-Atoms.html#gdk-atom-intern">gdk_atom_intern</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;MANAGER&quot;</span><span class="gtkdoc opt">,</span> FALSE<span class="gtkdoc opt">);</span>
+message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="../gdk4/gdk4-Properties-and-Atoms.html#gdk-atom-intern">gdk_atom_intern</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;MANAGER&quot;</span><span class="gtkdoc opt">,</span> FALSE<span class="gtkdoc opt">);</span>
 <span class="function">gdk_display_add_client_message_filter</span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">,</span> message_type<span class="gtkdoc opt">,</span> message_filter<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -864,7 +864,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
 
  <span class="gtkdoc opt">...</span>
 
-<span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-add-filter">gdk_window_add_filter</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">,</span> message_filter<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../gdk4/gdk4-Windows.html#gdk-window-add-filter">gdk_window_add_filter</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">,</span> message_filter<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -873,7 +873,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
 <p>
       One advantage of using an event filter is that you can actually
       remove the filter when you don't need it anymore, using
-      <a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-remove-filter"><code class="function">gdk_window_remove_filter()</code></a>.
+      <a href="../gdk4/gdk4-Windows.html#gdk-window-remove-filter"><code class="function">gdk_window_remove_filter()</code></a>.
     </p>
 <p>
       The other difference to be aware of when working with event filters
@@ -881,7 +881,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
       means that your application does not receive core X11 key or button
       events. Instead, all input events are delivered as XIDeviceEvents.
       As a short-term workaround for this, you can force your application
-      to not use XI2, with <a href="http://developer.gnome.org/gdk3/GdkDeviceManager.html#gdk-disable-multidevice"><code class="function">gdk_disable_multidevice()</code></a>. In the long term,
+      to not use XI2, with <a href="../gdk4/GdkDeviceManager.html#gdk-disable-multidevice"><code class="function">gdk_disable_multidevice()</code></a>. In the long term,
       you probably want to rewrite your event filter to deal with
       XIDeviceEvents.
     </p>
@@ -891,7 +891,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
 <a name="id-1.6.3.4.9"></a>Backend-specific code</h3></div></div></div>
 <p>
       In GTK+ 2.x, GDK could only be compiled for one backend at a time,
-      and the <a href="http://developer.gnome.org/gdk3/gdk4-General.html#GDK-WINDOWING-X11:CAPS"><code class="literal">GDK_WINDOWING_X11</code></a> or <code class="literal">GDK_WINDOWING_WIN32</code> macros could
+      and the <a href="../gdk4/gdk4-General.html#GDK-WINDOWING-X11:CAPS"><code class="literal">GDK_WINDOWING_X11</code></a> or <code class="literal">GDK_WINDOWING_WIN32</code> macros could
       be used to find out which one you are dealing with:
       </p>
 <div class="informalexample">
@@ -907,7 +907,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
 7</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="gtkdoc ppc">#ifdef GDK_WINDOWING_X11</span>
       <span class="keyword">if</span> <span class="gtkdoc opt">(</span>timestamp <span class="gtkdoc opt">!=</span> GDK_CURRENT_TIME<span class="gtkdoc opt">)</span>
-        <span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-X-Window-System-Interaction.html#gdk-x11-window-set-user-time">gdk_x11_window_set_user_time</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span> timestamp<span class="gtkdoc opt">);</span>
+        <span class="function"><a href="../gdk4/gdk4-X-Window-System-Interaction.html#gdk-x11-window-set-user-time">gdk_x11_window_set_user_time</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span> timestamp<span class="gtkdoc opt">);</span>
 <span class="gtkdoc ppc">#endif</span>
 <span class="gtkdoc ppc">#ifdef GDK_WINDOWING_WIN32</span>
         <span class="comment">/* ... win32 specific code ... */</span>
@@ -920,7 +920,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
 <p>
       In GTK+ 3, GDK can be built with multiple backends, and currently
       used backend has to be determined at runtime, typically using
-      type-check macros on a <a href="http://developer.gnome.org/gdk3/GdkDisplay.html#GdkDisplay-struct"><span class="type">GdkDisplay</span></a> or <a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#GdkWindow-struct"><span class="type">GdkWindow</span></a>. You still need
+      type-check macros on a <a href="../gdk4/GdkDisplay.html#GdkDisplay-struct"><span class="type">GdkDisplay</span></a> or <a href="../gdk4/gdk4-Windows.html#GdkWindow-struct"><span class="type">GdkWindow</span></a>. You still need
       to use the GDK_WINDOWING macros to only compile code referring
       to supported backends:
       </p>
@@ -950,7 +950,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
       <span class="keyword">if</span> <span class="gtkdoc opt">(</span><span class="function">GDK_IS_X11_DISPLAY</span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">))</span>
         <span class="gtkdoc opt">{</span>
           <span class="keyword">if</span> <span class="gtkdoc opt">(</span>timestamp <span class="gtkdoc opt">!=</span> GDK_CURRENT_TIME<span class="gtkdoc opt">)</span>
-            <span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-X-Window-System-Interaction.html#gdk-x11-window-set-user-time">gdk_x11_window_set_user_time</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span> timestamp<span class="gtkdoc opt">);</span>
+            <span class="function"><a href="../gdk4/gdk4-X-Window-System-Interaction.html#gdk-x11-window-set-user-time">gdk_x11_window_set_user_time</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span> timestamp<span class="gtkdoc opt">);</span>
         <span class="gtkdoc opt">}</span>
       <span class="keyword">else</span>
 <span class="gtkdoc ppc">#endif</span>
@@ -962,7 +962,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
       <span class="keyword">else</span>
 <span class="gtkdoc ppc">#endif</span>
        <span class="gtkdoc opt">{</span>
-         <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Message-Logging.html#g-warning">g_warning</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Unsupported GDK backend&quot;</span><span class="gtkdoc opt">);</span>
+         <span class="function"><a href="../glib/glib-Message-Logging.html#g-warning">g_warning</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Unsupported GDK backend&quot;</span><span class="gtkdoc opt">);</span>
        <span class="gtkdoc opt">}</span></pre></td>
       </tr>
     </tbody>
@@ -1158,7 +1158,7 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
   width <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-get-allocated-width">gtk_widget_get_allocated_width</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">);</span>
   height <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-get-allocated-height">gtk_widget_get_allocated_height</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">);</span>
 
-  extent <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#MIN:CAPS">MIN</a></span> <span class="gtkdoc opt">(</span>width <span class="gtkdoc opt">-</span> <span class="number">2</span> <span class="gtkdoc opt">*</span> PAD<span class="gtkdoc opt">,</span> height <span class="gtkdoc opt">-</span> <span class="number">2</span> <span class="gtkdoc opt">*</span> PAD<span class="gtkdoc opt">);</span>
+  extent <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-Standard-Macros.html#MIN:CAPS">MIN</a></span> <span class="gtkdoc opt">(</span>width <span class="gtkdoc opt">-</span> <span class="number">2</span> <span class="gtkdoc opt">*</span> PAD<span class="gtkdoc opt">,</span> height <span class="gtkdoc opt">-</span> <span class="number">2</span> <span class="gtkdoc opt">*</span> PAD<span class="gtkdoc opt">);</span>
   x <span class="gtkdoc opt">=</span> PAD<span class="gtkdoc opt">;</span>
   y <span class="gtkdoc opt">=</span> PAD<span class="gtkdoc opt">;</span>
 
@@ -1273,8 +1273,8 @@ message_type <span class="gtkdoc opt">=</span> <span class="function"><a href="h
       GtkObject has been removed in GTK+ 3. Its remaining functionality,
       the ::destroy signal, has been moved to GtkWidget. If you have non-widget
       classes that are directly derived from GtkObject, you have to make
-      them derive from <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GInitiallyUnowned"><span class="type">GInitiallyUnowned</span></a> (or, if you don't need the floating
-      functionality, <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a>). If you have widgets that override the
+      them derive from <a href="../gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"><span class="type">GInitiallyUnowned</span></a> (or, if you don't need the floating
+      functionality, <a href="../gobject/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a>). If you have widgets that override the
       destroy class handler, you have to adjust your class_init function,
       since destroy is now a member of GtkWidgetClass:
       </p>

@@ -61,7 +61,6 @@
 #define MAX_TIMER_CALLS       5
 #define EPSILON               1e-10
 #define MAX_DIGITS            20
-#define MIN_ARROW_WIDTH       6
 #define TIMEOUT_INITIAL       500
 #define TIMEOUT_REPEAT        50
 
@@ -91,6 +90,8 @@
  *
  * |[<!-- language="plain" -->
  * spinbutton.horizontal
+ * ├── undershoot.left
+ * ├── undershoot.right
  * ├── entry
  * │   ╰── ...
  * ├── button.down
@@ -99,6 +100,8 @@
  *
  * |[<!-- language="plain" -->
  * spinbutton.vertical
+ * ├── undershoot.left
+ * ├── undershoot.right
  * ├── button.up
  * ├── entry
  * │   ╰── ...
@@ -442,7 +445,7 @@ gtk_spin_button_class_init (GtkSpinButtonClass *class)
   /**
    * GtkSpinButton:shadow-type:
    *
-   * Style of bevel around the sping button.
+   * Style of bevel around the spin button.
    *
    * Deprecated: 3.20: Use CSS to determine the style of the border;
    *     the value of this style property is ignored.

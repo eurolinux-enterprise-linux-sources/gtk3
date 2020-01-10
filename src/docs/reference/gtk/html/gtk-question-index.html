@@ -57,11 +57,11 @@ How do I get started with GTK+?
 <tr class="answer">
 <td align="left" valign="top"></td>
 <td align="left" valign="top"><p>
-The GTK+ <a class="ulink" href="http://www.gtk.org" target="_top">website</a> offers some
-<a class="ulink" href="http://www.gtk.org/documentation.php" target="_top">tutorials</a> and other
+The GTK+ <a class="ulink" href="https://www.gtk.org" target="_top">website</a> offers some
+<a class="ulink" href="https://www.gtk.org/documentation.php" target="_top">tutorials</a> and other
 documentation (most of it about GTK+ 2.x, but mostly still applicable).
 More documentation ranging from whitepapers to online books can be found at
-the <a class="ulink" href="http://developer.gnome.org" target="_top">GNOME developer's site</a>.
+the <a class="ulink" href="https://developer.gnome.org" target="_top">GNOME developer's site</a>.
 After studying these materials you should be well prepared to come back to
 this reference manual for details.
 </p></td>
@@ -98,7 +98,7 @@ specific widgets and functions.
 </p>
 <p>
 If you have a question not covered in the manual, feel free to
-ask on the mailing lists and please <a class="ulink" href="http://bugzilla.gnome.org" target="_top">file a bug report</a> against the
+ask on the mailing lists and please <a class="ulink" href="https://bugzilla.gnome.org" target="_top">file a bug report</a> against the
 documentation.
 </p>
 </td>
@@ -116,16 +116,16 @@ from functions?
 <td align="left" valign="top"></td>
 <td align="left" valign="top">
 <p>
-See the documentation for <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a> and <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GInitiallyUnowned"><span class="type">GInitiallyUnowned</span></a>. For <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a> note
-specifically <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-ref"><code class="function">g_object_ref()</code></a> and <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>. <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GInitiallyUnowned"><span class="type">GInitiallyUnowned</span></a> is a
-subclass of <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a> so the same points apply, except that it has a "floating"
+See the documentation for <a href="../gobject/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a> and <a href="../gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"><span class="type">GInitiallyUnowned</span></a>. For <a href="../gobject/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a> note
+specifically <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-ref"><code class="function">g_object_ref()</code></a> and <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>. <a href="../gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"><span class="type">GInitiallyUnowned</span></a> is a
+subclass of <a href="../gobject/gobject-The-Base-Object-Type.html#GObject-struct"><span class="type">GObject</span></a> so the same points apply, except that it has a "floating"
 state (explained in its documentation).
 </p>
 <p>
 For strings returned from functions, they will be declared "const"
 if they should not be freed. Non-const strings should be
-freed with <a href="https://developer.gnome.org/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>. Arrays follow the same rule. If you find an
-undocumented exception to the rules, please report a bug to <a class="ulink" href="http://bugzilla.gnome.org" target="_top">http://bugzilla.gnome.org</a>.
+freed with <a href="../glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>. Arrays follow the same rule. If you find an
+undocumented exception to the rules, please report a bug to <a class="ulink" href="https://bugzilla.gnome.org" target="_top">https://bugzilla.gnome.org</a>.
 </p>
 </td>
 </tr>
@@ -175,7 +175,7 @@ creating it:
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
         <td class="listing_code"><pre class="programlisting">foo <span class="gtkdoc opt">=</span> <span class="function">gtk_foo_new</span> <span class="gtkdoc opt">();</span>
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-ref-sink">g_object_ref_sink</a></span> <span class="gtkdoc opt">(</span>foo<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-ref-sink">g_object_ref_sink</a></span> <span class="gtkdoc opt">(</span>foo<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -193,7 +193,7 @@ reference:
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="function"><a href="GtkWidget.html#gtk-widget-destroy">gtk_widget_destroy</a></span> <span class="gtkdoc opt">(</span>foo<span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>foo<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>foo<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -235,7 +235,7 @@ How do I internationalize a GTK+ program?
 <td align="left" valign="top"></td>
 <td align="left" valign="top">
 <p>
-Most people use <a class="ulink" href="http://www.gnu.org/software/gettext/" target="_top">GNU
+Most people use <a class="ulink" href="https://www.gnu.org/software/gettext/" target="_top">GNU
 gettext</a>, already required in order to install GLib. On a UNIX
 or Linux system with gettext installed, type <code class="literal">info gettext</code>
 to read the documentation.
@@ -268,13 +268,13 @@ Conventionally, people define macros as follows for convenience:
 </div>
 
 <p>
-You use <a href="https://developer.gnome.org/glib/unstable/glib-I18N.html#N-:CAPS"><code class="function">N_()</code></a> (N stands for no-op) to mark a string for translation in
+You use <a href="../glib/glib-I18N.html#N-:CAPS"><code class="function">N_()</code></a> (N stands for no-op) to mark a string for translation in
 a location where a function call to <code class="function">gettext()</code> is not allowed, such as
 in an array initializer.
 You eventually have to call <code class="function">gettext()</code> on the string to actually fetch
 the translation. <code class="function">_()</code> both marks the string for translation and actually
 translates it.
-The <a href="https://developer.gnome.org/glib/unstable/glib-I18N.html#C-:CAPS"><code class="function">C_()</code></a> macro (C stands for context) adds an additional context to
+The <a href="../glib/glib-I18N.html#C-:CAPS"><code class="function">C_()</code></a> macro (C stands for context) adds an additional context to
 the string that is marked for translation, which can help to disambiguate
 short strings that might need different translations in different
 parts of your program.
@@ -301,7 +301,7 @@ Code using these macros ends up looking like this:
 13</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="gtkdoc ppc">#include &lt;gi18n.h&gt;</span>
 
-<span class="gtkdoc kwb">static const char</span> <span class="gtkdoc opt">*</span>global_variable <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-I18N.html#N-:CAPS">N_</a></span><span class="gtkdoc opt">(</span><span class="string">&quot;Translate this string&quot;</span><span class="gtkdoc opt">);</span>
+<span class="gtkdoc kwb">static const char</span> <span class="gtkdoc opt">*</span>global_variable <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-I18N.html#N-:CAPS">N_</a></span><span class="gtkdoc opt">(</span><span class="string">&quot;Translate this string&quot;</span><span class="gtkdoc opt">);</span>
 
 <span class="gtkdoc kwb">static void</span>
 <span class="function">make_widgets</span> <span class="gtkdoc opt">(</span><span class="gtkdoc kwb">void</span><span class="gtkdoc opt">)</span>
@@ -378,10 +378,10 @@ zero-terminated strings.
 </ul></div>
 <p>
 More information about Unicode and UTF-8 can be found in the
-<a class="ulink" href="http://www.cl.cam.ac.uk/~mgk25/unicode.html" target="_top">UTF-8 and Unicode
+<a class="ulink" href="https://www.cl.cam.ac.uk/~mgk25/unicode.html" target="_top">UTF-8 and Unicode
 FAQ for Unix/Linux</a>.
 GLib provides functions for converting strings between UTF-8 and other
-encodings, see <a href="https://developer.gnome.org/glib/unstable/glib-Character-Set-Conversion.html#g-locale-to-utf8"><code class="function">g_locale_to_utf8()</code></a> and <a href="https://developer.gnome.org/glib/unstable/glib-Character-Set-Conversion.html#g-convert"><code class="function">g_convert()</code></a>.
+encodings, see <a href="../glib/glib-Character-Set-Conversion.html#g-locale-to-utf8"><code class="function">g_locale_to_utf8()</code></a> and <a href="../glib/glib-Character-Set-Conversion.html#g-convert"><code class="function">g_convert()</code></a>.
 </p>
 <p>
 Text coming from external sources (e.g. files or user input), has to be
@@ -415,17 +415,17 @@ writes the content of a IS0-8859-1 encoded text file to
 gsize length<span class="gtkdoc opt">;</span>
 GError <span class="gtkdoc opt">*</span>error <span class="gtkdoc opt">=</span> NULL<span class="gtkdoc opt">;</span>
 
-<span class="keyword">if</span> <span class="gtkdoc opt">(</span><span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-File-Utilities.html#g-file-get-contents">g_file_get_contents</a></span> <span class="gtkdoc opt">(</span>filename<span class="gtkdoc opt">, &amp;</span>text<span class="gtkdoc opt">, &amp;</span>length<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">))</span>
+<span class="keyword">if</span> <span class="gtkdoc opt">(</span><span class="function"><a href="../glib/glib-File-Utilities.html#g-file-get-contents">g_file_get_contents</a></span> <span class="gtkdoc opt">(</span>filename<span class="gtkdoc opt">, &amp;</span>text<span class="gtkdoc opt">, &amp;</span>length<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">))</span>
   <span class="gtkdoc opt">{</span>
-     utf8_text <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Character-Set-Conversion.html#g-convert">g_convert</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">,</span> length<span class="gtkdoc opt">,</span> <span class="string">&quot;UTF-8&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;ISO-8859-1&quot;</span><span class="gtkdoc opt">,</span>
+     utf8_text <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-Character-Set-Conversion.html#g-convert">g_convert</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">,</span> length<span class="gtkdoc opt">,</span> <span class="string">&quot;UTF-8&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;ISO-8859-1&quot;</span><span class="gtkdoc opt">,</span>
                             NULL<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">, &amp;</span>error<span class="gtkdoc opt">);</span>
      <span class="keyword">if</span> <span class="gtkdoc opt">(</span>error <span class="gtkdoc opt">!=</span> NULL<span class="gtkdoc opt">)</span>
        <span class="gtkdoc opt">{</span>
          <span class="function">fprintf</span> <span class="gtkdoc opt">(</span><span class="string">&quot;Couldn&apos;t convert file %s to UTF-8</span><span class="gtkdoc esc">\n</span><span class="string">&quot;</span><span class="gtkdoc opt">,</span> filename<span class="gtkdoc opt">);</span>
-         <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#g-error-free">g_error_free</a></span> <span class="gtkdoc opt">(</span>error<span class="gtkdoc opt">);</span>
+         <span class="function"><a href="../glib/glib-Error-Reporting.html#g-error-free">g_error_free</a></span> <span class="gtkdoc opt">(</span>error<span class="gtkdoc opt">);</span>
        <span class="gtkdoc opt">}</span>
      <span class="keyword">else</span>
-       <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span> <span class="gtkdoc opt">(</span>utf8_text<span class="gtkdoc opt">);</span>
+       <span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-print">g_print</a></span> <span class="gtkdoc opt">(</span>utf8_text<span class="gtkdoc opt">);</span>
   <span class="gtkdoc opt">}</span>
 <span class="keyword">else</span>
   <span class="function">fprintf</span> <span class="gtkdoc opt">(</span>stderr<span class="gtkdoc opt">,</span> <span class="string">&quot;Unable to read file %s</span><span class="gtkdoc esc">\n</span><span class="string">&quot;</span><span class="gtkdoc opt">,</span> filename<span class="gtkdoc opt">);</span></pre></td>
@@ -471,7 +471,7 @@ Be careful when mixing hexadecimal escapes with ordinary text;
 <td><p>
 If the string literals can be represented in an encoding which your
 toolchain can handle (e.g. IS0-8859-1), you can write your source files
-in that encoding and use <a href="https://developer.gnome.org/glib/unstable/glib-Character-Set-Conversion.html#g-convert"><code class="function">g_convert()</code></a> to convert the strings to UTF-8 at
+in that encoding and use <a href="../glib/glib-Character-Set-Conversion.html#g-convert"><code class="function">g_convert()</code></a> to convert the strings to UTF-8 at
 runtime. Note that this has some runtime overhead, so you may want to move
 the conversion out of inner loops.
 </p></td>
@@ -493,11 +493,11 @@ a string literal:
 3
 4
 5</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;direct UTF-8: ©&quot;</span><span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;escaped UTF-8:</span> <span class="gtkdoc esc">\302\251</span><span class="string">&quot;</span><span class="gtkdoc opt">);</span>
-text <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Character-Set-Conversion.html#g-convert">g_convert</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;runtime conversion: ©&quot;</span><span class="gtkdoc opt">, -</span><span class="number">1</span><span class="gtkdoc opt">,</span> <span class="string">&quot;ISO-8859-1&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;UTF-8&quot;</span><span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Memory-Allocation.html#g-free">g_free</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-print">g_print</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;direct UTF-8: ©&quot;</span><span class="gtkdoc opt">);</span>
+<span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-print">g_print</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;escaped UTF-8:</span> <span class="gtkdoc esc">\302\251</span><span class="string">&quot;</span><span class="gtkdoc opt">);</span>
+text <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-Character-Set-Conversion.html#g-convert">g_convert</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;runtime conversion: ©&quot;</span><span class="gtkdoc opt">, -</span><span class="number">1</span><span class="gtkdoc opt">,</span> <span class="string">&quot;ISO-8859-1&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;UTF-8&quot;</span><span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../glib/glib-Memory-Allocation.html#g-free">g_free</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -527,7 +527,7 @@ How do I use GTK+ with C++?
 There are two ways to approach this. The GTK+ header files use the subset
 of C that's also valid C++, so you can simply use the normal GTK+ API
 in a C++ program. Alternatively, you can use a "C++ binding"
-such as <a class="ulink" href="http://gtkmm.sourceforge.net/" target="_top">gtkmm</a>
+such as <a class="ulink" href="https://www.gtkmm.org/" target="_top">gtkmm</a>
 which provides a native C++ API.
 </p>
 <p>
@@ -547,7 +547,7 @@ code:
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="../gdk4/gdk4-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
                        GDK_BUTTON_PRESS_MASK <span class="gtkdoc opt">|</span> GDK_BUTTON_RELEASE_MASK<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -563,7 +563,7 @@ while in C++ you must write:
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="../gdk4/gdk4-Windows.html#gdk-window-set-events">gdk_window_set_events</a></span> <span class="gtkdoc opt">(</span>gdk_window<span class="gtkdoc opt">,</span>
                        <span class="gtkdoc opt">(</span>GdkEventMask<span class="gtkdoc opt">)</span> GDK_BUTTON_PRESS_MASK <span class="gtkdoc opt">|</span> GDK_BUTTON_RELEASE_MASK<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -586,8 +586,8 @@ How do I use GTK+ with other non-C languages?
 <tr class="answer">
 <td align="left" valign="top"></td>
 <td align="left" valign="top"><p>
-See the <a class="ulink" href="http://www.gtk.org/language-bindings.php" target="_top">list of language
-bindings</a> on <a class="ulink" href="http://www.gtk.org" target="_top">http://www.gtk.org</a>.
+See the <a class="ulink" href="https://www.gtk.org/language-bindings.php" target="_top">list of language
+bindings</a> on <a class="ulink" href="https://www.gtk.org" target="_top">https://www.gtk.org</a>.
 </p></td>
 </tr>
 <tr class="question">
@@ -604,15 +604,15 @@ How do I load an image or animation from a file?
 <p>
 To load an image file straight into a display widget, use
 <a class="link" href="GtkImage.html#gtk-image-new-from-file" title="gtk_image_new_from_file ()"><code class="function">gtk_image_new_from_file()</code></a> <a href="#ftn.id-1.2.5.3.3.1.12.2.1.2" class="footnote" name="id-1.2.5.3.3.1.12.2.1.2"><sup class="footnote">[1]</sup></a>.
-To load an image for another purpose, use <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-File-Loading.html#gdk-pixbuf-new-from-file"><code class="function">gdk_pixbuf_new_from_file()</code></a>. To
-load an animation, use <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-Animations.html#gdk-pixbuf-animation-new-from-file"><code class="function">gdk_pixbuf_animation_new_from_file()</code></a>.
-<a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-Animations.html#gdk-pixbuf-animation-new-from-file"><code class="function">gdk_pixbuf_animation_new_from_file()</code></a> can also load non-animated images, so
-use it in combination with <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-Animations.html#gdk-pixbuf-animation-is-static-image"><code class="function">gdk_pixbuf_animation_is_static_image()</code></a> to load a
+To load an image for another purpose, use <a href="../gdk-pixbuf/gdk-pixbuf-File-Loading.html#gdk-pixbuf-new-from-file"><code class="function">gdk_pixbuf_new_from_file()</code></a>. To
+load an animation, use <a href="../gdk-pixbuf/gdk-pixbuf-Animations.html#gdk-pixbuf-animation-new-from-file"><code class="function">gdk_pixbuf_animation_new_from_file()</code></a>.
+<a href="../gdk-pixbuf/gdk-pixbuf-Animations.html#gdk-pixbuf-animation-new-from-file"><code class="function">gdk_pixbuf_animation_new_from_file()</code></a> can also load non-animated images, so
+use it in combination with <a href="../gdk-pixbuf/gdk-pixbuf-Animations.html#gdk-pixbuf-animation-is-static-image"><code class="function">gdk_pixbuf_animation_is_static_image()</code></a> to load a
 file of unknown type.
 </p>
 <p>
 To load an image or animation file asynchronously (without blocking), use
-<a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/GdkPixbufLoader.html#GdkPixbufLoader-struct"><span class="type">GdkPixbufLoader</span></a>.
+<a href="../gdk-pixbuf/GdkPixbufLoader.html#GdkPixbufLoader-struct"><span class="type">GdkPixbufLoader</span></a>.
 </p>
 </td>
 </tr>
@@ -628,7 +628,7 @@ How do I draw text ?
 <td align="left" valign="top"></td>
 <td align="left" valign="top">
 <p>
-To draw a piece of text, use a Pango layout and <a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Cairo-Rendering.html#pango-cairo-show-layout"><code class="function">pango_cairo_show_layout()</code></a>.
+To draw a piece of text, use a Pango layout and <a href="../pango/pango-Cairo-Rendering.html#pango-cairo-show-layout"><code class="function">pango_cairo_show_layout()</code></a>.
 </p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
@@ -641,11 +641,11 @@ To draw a piece of text, use a Pango layout and <a href="/home/mclasen/gnome/sha
 5
 6</pre></td>
         <td class="listing_code"><pre class="programlisting">layout <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-create-pango-layout">gtk_widget_create_pango_layout</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">,</span> text<span class="gtkdoc opt">);</span>
-fontdesc <span class="gtkdoc opt">=</span> <span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Fonts.html#pango-font-description-from-string">pango_font_description_from_string</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Luxi Mono 12&quot;</span><span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Layout-Objects.html#pango-layout-set-font-description">pango_layout_set_font_description</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">,</span> fontdesc<span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Cairo-Rendering.html#pango-cairo-show-layout">pango_cairo_show_layout</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> layout<span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Fonts.html#pango-font-description-free">pango_font_description_free</a></span> <span class="gtkdoc opt">(</span>fontdesc<span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">);</span></pre></td>
+fontdesc <span class="gtkdoc opt">=</span> <span class="function"><a href="../pango/pango-Fonts.html#pango-font-description-from-string">pango_font_description_from_string</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Luxi Mono 12&quot;</span><span class="gtkdoc opt">);</span>
+<span class="function"><a href="../pango/pango-Layout-Objects.html#pango-layout-set-font-description">pango_layout_set_font_description</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">,</span> fontdesc<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../pango/pango-Cairo-Rendering.html#pango-cairo-show-layout">pango_cairo_show_layout</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> layout<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../pango/pango-Fonts.html#pango-font-description-free">pango_font_description_free</a></span> <span class="gtkdoc opt">(</span>fontdesc<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -655,8 +655,8 @@ fontdesc <span class="gtkdoc opt">=</span> <span class="function"><a href="/home
 </p>
 <p>
 See also the
-<a class="ulink" href="http://developer.gnome.org/pango/stable/pango-Cairo-Rendering.html" target="_top">Cairo Rendering</a>
-section of <a class="ulink" href="http://developer.gnome.org/pango/stable/" target="_top">Pango manual</a>.
+<a class="ulink" href="https://developer.gnome.org/pango/stable/pango-Cairo-Rendering.html" target="_top">Cairo Rendering</a>
+section of <a class="ulink" href="https://developer.gnome.org/pango/stable/" target="_top">Pango manual</a>.
 </p>
 </td>
 </tr>
@@ -673,7 +673,7 @@ How do I measure the size of a piece of text ?
 <td align="left" valign="top">
 <p>
 To obtain the size of a piece of text, use a Pango layout and
-<a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Layout-Objects.html#pango-layout-get-pixel-size"><code class="function">pango_layout_get_pixel_size()</code></a>, using code like the following:
+<a href="../pango/pango-Layout-Objects.html#pango-layout-get-pixel-size"><code class="function">pango_layout_get_pixel_size()</code></a>, using code like the following:
 </p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
@@ -686,11 +686,11 @@ To obtain the size of a piece of text, use a Pango layout and
 5
 6</pre></td>
         <td class="listing_code"><pre class="programlisting">layout <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-create-pango-layout">gtk_widget_create_pango_layout</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">,</span> text<span class="gtkdoc opt">);</span>
-fontdesc <span class="gtkdoc opt">=</span> <span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Fonts.html#pango-font-description-from-string">pango_font_description_from_string</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Luxi Mono 12&quot;</span><span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Layout-Objects.html#pango-layout-set-font-description">pango_layout_set_font_description</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">,</span> fontdesc<span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Layout-Objects.html#pango-layout-get-pixel-size">pango_layout_get_pixel_size</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">, &amp;</span>width<span class="gtkdoc opt">, &amp;</span>height<span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Fonts.html#pango-font-description-free">pango_font_description_free</a></span> <span class="gtkdoc opt">(</span>fontdesc<span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">);</span></pre></td>
+fontdesc <span class="gtkdoc opt">=</span> <span class="function"><a href="../pango/pango-Fonts.html#pango-font-description-from-string">pango_font_description_from_string</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Luxi Mono 12&quot;</span><span class="gtkdoc opt">);</span>
+<span class="function"><a href="../pango/pango-Layout-Objects.html#pango-layout-set-font-description">pango_layout_set_font_description</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">,</span> fontdesc<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../pango/pango-Layout-Objects.html#pango-layout-get-pixel-size">pango_layout_get_pixel_size</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">, &amp;</span>width<span class="gtkdoc opt">, &amp;</span>height<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../pango/pango-Fonts.html#pango-font-description-free">pango_font_description_free</a></span> <span class="gtkdoc opt">(</span>fontdesc<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>layout<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -700,8 +700,8 @@ fontdesc <span class="gtkdoc opt">=</span> <span class="function"><a href="/home
 </p>
 <p>
 See also the
-<a class="ulink" href="http://developer.gnome.org/pango/stable/pango-Layout-Objects.html" target="_top">Layout Objects</a>
-section of <a class="ulink" href="http://developer.gnome.org/pango/stable/" target="_top">Pango manual</a>.
+<a class="ulink" href="https://developer.gnome.org/pango/stable/pango-Layout-Objects.html" target="_top">Layout Objects</a>
+section of <a class="ulink" href="https://developer.gnome.org/pango/stable/" target="_top">Pango manual</a>.
 </p>
 </td>
 </tr>
@@ -720,7 +720,7 @@ macro ?
 <p>
 The <code class="literal">GTK_TYPE_BLAH</code> macros are defined as calls to
 <code class="literal">gtk_blah_get_type()</code>, and the <code class="literal">_get_type()</code>
-functions are declared as <a href="https://developer.gnome.org/glib/unstable/glib-Miscellaneous-Macros.html#G-GNUC-CONST:CAPS"><code class="literal">G_GNUC_CONST</code></a> which allows the compiler to optimize
+functions are declared as <a href="../glib/glib-Miscellaneous-Macros.html#G-GNUC-CONST:CAPS"><code class="literal">G_GNUC_CONST</code></a> which allows the compiler to optimize
 the call away if it appears that the value is not being used.
 </p>
 <p>
@@ -757,7 +757,7 @@ How do I create a transparent toplevel window ?
 To make a window transparent, it needs to use a visual which supports that.
 This is done by getting the RGBA visual of the screen with
 <code class="function">gdk_screen_get_rgba_visual()</code> and setting it on the window. Note that
-<code class="function">gdk_screen_get_rgba_visual()</code> will return <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if transparent windows
+<code class="function">gdk_screen_get_rgba_visual()</code> will return <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if transparent windows
 are not supported on the screen, you should fall back to
 <code class="function">gdk_screen_get_system_visual()</code> in that case. Additionally, note that this
 will change from screen to screen, so it needs to be repeated whenever the
@@ -920,10 +920,10 @@ achieve. One option is <a class="link" href="GtkWidget.html#gtk-widget-override-
 2
 3
 4</pre></td>
-        <td class="listing_code"><pre class="programlisting">PangoFontDesc <span class="gtkdoc opt">*</span>font_desc <span class="gtkdoc opt">=</span> <span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Fonts.html#pango-font-description-new">pango_font_description_new</a></span> <span class="gtkdoc opt">();</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Fonts.html#pango-font-description-set-size">pango_font_description_set_size</a></span> <span class="gtkdoc opt">(</span>font_desc<span class="gtkdoc opt">,</span> <span class="number">40</span><span class="gtkdoc opt">);</span>
+        <td class="listing_code"><pre class="programlisting">PangoFontDesc <span class="gtkdoc opt">*</span>font_desc <span class="gtkdoc opt">=</span> <span class="function"><a href="../pango/pango-Fonts.html#pango-font-description-new">pango_font_description_new</a></span> <span class="gtkdoc opt">();</span>
+<span class="function"><a href="../pango/pango-Fonts.html#pango-font-description-set-size">pango_font_description_set_size</a></span> <span class="gtkdoc opt">(</span>font_desc<span class="gtkdoc opt">,</span> <span class="number">40</span><span class="gtkdoc opt">);</span>
 <span class="function"><a href="GtkWidget.html#gtk-widget-override-font">gtk_widget_override_font</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">,</span> font<span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Fonts.html#pango-font-description-free">pango_font_description_free</a></span> <span class="gtkdoc opt">(</span>font_desc<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../pango/pango-Fonts.html#pango-font-description-free">pango_font_description_free</a></span> <span class="gtkdoc opt">(</span>font_desc<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -948,7 +948,7 @@ If you want to make the text of a label larger, you can use
 
 <p>
 This is preferred for many apps because it's a relative size to the
-user's chosen font size. See <a href="https://developer.gnome.org/glib/unstable/glib-Simple-XML-Subset-Parser.html#g-markup-escape-text"><code class="function">g_markup_escape_text()</code></a> if you are
+user's chosen font size. See <a href="../glib/glib-Simple-XML-Subset-Parser.html#g-markup-escape-text"><code class="function">g_markup_escape_text()</code></a> if you are
 constructing such strings on the fly.
 </p>
 <p>
@@ -1024,7 +1024,7 @@ buffer <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkText
 <span class="function"><a href="GtkTextBuffer.html#gtk-text-buffer-get-bounds">gtk_text_buffer_get_bounds</a></span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">, &amp;</span>start<span class="gtkdoc opt">, &amp;</span>end<span class="gtkdoc opt">);</span>
 text <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkTextIter.html#gtk-text-iter-get-text">gtk_text_iter_get_text</a></span> <span class="gtkdoc opt">(&amp;</span>start<span class="gtkdoc opt">, &amp;</span>end<span class="gtkdoc opt">);</span>
 <span class="comment">/* use text */</span>
-<span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Memory-Allocation.html#g-free">g_free</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../glib/glib-Memory-Allocation.html#g-free">g_free</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1154,7 +1154,7 @@ How do I change the way that numbers are formatted by <a class="link" href="GtkT
 <p>
 Use <a class="link" href="GtkTreeView.html#gtk-tree-view-insert-column-with-data-func" title="gtk_tree_view_insert_column_with_data_func ()"><code class="function">gtk_tree_view_insert_column_with_data_func()</code></a>
 or <a class="link" href="GtkTreeViewColumn.html#gtk-tree-view-column-set-cell-data-func" title="gtk_tree_view_column_set_cell_data_func ()"><code class="function">gtk_tree_view_column_set_cell_data_func()</code></a> and do the conversion
-from number to string yourself (with, say, <a href="https://developer.gnome.org/glib/unstable/glib-String-Utility-Functions.html#g-strdup-printf"><code class="function">g_strdup_printf()</code></a>).
+from number to string yourself (with, say, <a href="../glib/glib-String-Utility-Functions.html#g-strdup-printf"><code class="function">g_strdup_printf()</code></a>).
 </p>
 <p>
 The following example demonstrates this:
@@ -1250,9 +1250,9 @@ GtkTreeView <span class="gtkdoc opt">*</span>treeview<span class="gtkdoc opt">;<
   <span class="comment">/* Get the double value from the model. */</span>
   <span class="function"><a href="GtkTreeModel.html#gtk-tree-model-get">gtk_tree_model_get</a></span> <span class="gtkdoc opt">(</span>tree_model<span class="gtkdoc opt">,</span> iter<span class="gtkdoc opt">, (</span>gint<span class="gtkdoc opt">)</span>data<span class="gtkdoc opt">, &amp;</span>d<span class="gtkdoc opt">, -</span><span class="number">1</span><span class="gtkdoc opt">);</span>
   <span class="comment">/* Now we can format the value ourselves. */</span>
-  text <span class="gtkdoc opt">=</span> <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-String-Utility-Functions.html#g-strdup-printf">g_strdup_printf</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;%.2f&quot;</span><span class="gtkdoc opt">,</span> d<span class="gtkdoc opt">);</span>
-  <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-set">g_object_set</a></span> <span class="gtkdoc opt">(</span>cell<span class="gtkdoc opt">,</span> <span class="string">&quot;text&quot;</span><span class="gtkdoc opt">,</span> text<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
-  <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Memory-Allocation.html#g-free">g_free</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
+  text <span class="gtkdoc opt">=</span> <span class="function"><a href="../glib/glib-String-Utility-Functions.html#g-strdup-printf">g_strdup_printf</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;%.2f&quot;</span><span class="gtkdoc opt">,</span> d<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-set">g_object_set</a></span> <span class="gtkdoc opt">(</span>cell<span class="gtkdoc opt">,</span> <span class="string">&quot;text&quot;</span><span class="gtkdoc opt">,</span> text<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="../glib/glib-Memory-Allocation.html#g-free">g_free</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
 <span class="gtkdoc opt">}</span>
 
 <span class="gtkdoc kwb">void</span>
@@ -1366,7 +1366,7 @@ Render extension).
 <a name="id-1.2.5.3.3.6.4"></a><a name="id-1.2.5.3.3.6.4.1"></a><p><b>6.3.</b></p>
 </td>
 <td align="left" valign="top"><p>
-Can I use cairo to draw on a <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> ?
+Can I use cairo to draw on a <a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#GdkPixbuf-struct"><span class="type">GdkPixbuf</span></a> ?
 </p></td>
 </tr>
 <tr class="answer">
@@ -1384,7 +1384,7 @@ pixel format used by GdkPixbuf.
 <br><hr style="width:100; text-align:left;margin-left: 0">
 <div id="ftn.id-1.2.5.3.3.1.12.2.1.2" class="footnote"><p><a href="#id-1.2.5.3.3.1.12.2.1.2" class="para"><sup class="para">[1] </sup></a> If the file load fails,
 <a class="link" href="GtkImage.html#gtk-image-new-from-file" title="gtk_image_new_from_file ()"><code class="function">gtk_image_new_from_file()</code></a> will display no image graphic — to detect
-a failed load yourself, use <a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-File-Loading.html#gdk-pixbuf-new-from-file"><code class="function">gdk_pixbuf_new_from_file()</code></a> directly, then
+a failed load yourself, use <a href="../gdk-pixbuf/gdk-pixbuf-File-Loading.html#gdk-pixbuf-new-from-file"><code class="function">gdk_pixbuf_new_from_file()</code></a> directly, then
 <a class="link" href="GtkImage.html#gtk-image-new-from-pixbuf" title="gtk_image_new_from_pixbuf ()"><code class="function">gtk_image_new_from_pixbuf()</code></a>.</p></div>
 </div>
 </div>

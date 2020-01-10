@@ -10,8 +10,8 @@
 
 m4_define([gtk_major_version], [3])
 m4_define([gtk_minor_version], [22])
-m4_define([gtk_micro_version], [10])
-m4_define([gtk_interface_age], [10])
+m4_define([gtk_micro_version], [26])
+m4_define([gtk_interface_age], [26])
 m4_define([gtk_binary_age],
           [m4_eval(100 * gtk_minor_version + gtk_micro_version)])
 m4_define([gtk_version],
@@ -60,10 +60,11 @@ m4_define([cairo_required_version], [1.14.0])
 m4_define([gdk_pixbuf_required_version], [2.30.0])
 m4_define([introspection_required_version], [1.39.0])
 m4_define([wayland_required_version], [1.9.91])
-m4_define([wayland_protocols_required_version], [1.7])
+m4_define([wayland_protocols_required_version], [1.9])
 m4_define([mirclient_required_version], [0.22.0])
 m4_define([mircookie_required_version], [0.17.0])
 m4_define([epoxy_required_version], [1.0])
+m4_define([cloudproviders_required_version], [0.2.0])
 GLIB_REQUIRED_VERSION=glib_required_version
 PANGO_REQUIRED_VERSION=pango_required_version
 ATK_REQUIRED_VERSION=atk_required_version
@@ -81,7 +82,7 @@ AC_SUBST(INTROSPECTION_REQUIRED_VERSION)
 # Save this value here, since automake will set cflags later
 cflags_set=${CFLAGS+set}
 
-AM_INIT_AUTOMAKE([1.11 -Wall no-define -Wno-portability tar-ustar no-dist-gzip dist-xz])
+AM_INIT_AUTOMAKE([1.11 -Wall subdir-objects no-define -Wno-portability tar-ustar no-dist-gzip dist-xz])
 AM_MAINTAINER_MODE([enable])
 
 # Support silent build rules. Disable
@@ -346,6 +347,11 @@ AC_ARG_ENABLE(mir-backend,
                               [enable the Mir gdk backend])],
 			      [backend_set=yes])
 
+AC_ARG_ENABLE(cloudproviders,
+              [AS_HELP_STRING([--enable-cloudproviders],
+                              [enable libcloudproviders integration])],
+                              [cloudproviders_set=yes])
+
 if test -z "$backend_set"; then
   if test "$platform_win32" = yes; then
     enable_win32_backend=yes
@@ -456,7 +462,7 @@ if test "$enable_wayland_backend" = "yes"; then
   WAYLAND_PACKAGES="$WAYLAND_DEPENDENCIES"
   AC_PATH_PROG([WAYLAND_SCANNER],[wayland-scanner],[no])
   AS_IF([test "x$WAYLAND_SCANNER" = "xno"],
-    AC_MSG_ERROR([Could not find wayland-scanner in your PATH, required for parsing wayland extension protocols]))
+    [AC_MSG_ERROR([Could not find wayland-scanner in your PATH, required for parsing wayland extension protocols])])
   AC_SUBST([WAYLAND_SCANNER])
 
   AM_CONDITIONAL(USE_WAYLAND, true)
@@ -1341,11 +1347,26 @@ else
         LIBS="$gtk_save_LIBS"
 fi
 
+# Check for libcloudproviders
+
+CLOUDPROVIDER_PACKAGES=""
+if test "x$cloudproviders_set" = "xyes"; then
+  CLOUDPROVIDER_PACKAGES="cloudproviders >= cloudproviders_required_version"
+  if $PKG_CONFIG --exists $CLOUDPROVIDER_PACKAGES ; then
+    AC_DEFINE(HAVE_CLOUDPROVIDERS, [1],
+              [Define if libcloudproviders is available]
+              )
+  else
+    AC_MSG_ERROR([
+*** libcloudproviders not found.])
+  fi
+fi
+
 CFLAGS="$saved_cflags"
 LDFLAGS="$saved_ldflags"
 
 GDK_PACKAGES="$PANGO_PACKAGES gdk-pixbuf-2.0 >= gdk_pixbuf_required_version cairo >= cairo_required_version cairo-gobject >= cairo_required_version"
-GDK_PRIVATE_PACKAGES="$GDK_GIO_PACKAGE $X_PACKAGES $WAYLAND_PACKAGES $MIR_PACKAGES $cairo_backends epoxy >= epoxy_required_version"
+GDK_PRIVATE_PACKAGES="$GDK_GIO_PACKAGE $X_PACKAGES $WAYLAND_PACKAGES $MIR_PACKAGES $cairo_backends epoxy >= epoxy_required_version $CLOUDPROVIDER_PACKAGES"
 
 PKG_CHECK_MODULES(GDK_DEP, $GDK_PACKAGES $GDK_PRIVATE_PACKAGES)
 GDK_DEP_LIBS="$GDK_EXTRA_LIBS $GDK_DEP_LIBS $MATH_LIB"
@@ -1814,6 +1835,14 @@ case "$host" in
     ;;
 esac
 AC_SUBST(GDK_HIDDEN_VISIBILITY_CFLAGS)
+
+##################################################
+# Theming
+##################################################
+
+AC_PATH_PROG([SASSC], [sassc])
+AC_ARG_VAR(SASSC)
+AM_CONDITIONAL([REBUILD_SCSS], [test "x$SASSC" != x])
 
 ##################################################
 # Output commands

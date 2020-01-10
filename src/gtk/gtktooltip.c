@@ -761,6 +761,12 @@ tooltip_browse_mode_expired (gpointer data)
   tooltip->browse_mode_enabled = FALSE;
   tooltip->browse_mode_timeout_id = 0;
 
+  if (tooltip->timeout_id)
+    {
+      g_source_remove (tooltip->timeout_id);
+      tooltip->timeout_id = 0;
+    }
+
   /* destroy tooltip */
   display = gtk_widget_get_display (tooltip->window);
   g_object_set_qdata (G_OBJECT (display), quark_current_tooltip, NULL);
@@ -773,6 +779,12 @@ gtk_tooltip_display_closed (GdkDisplay *display,
 			    gboolean    was_error,
 			    GtkTooltip *tooltip)
 {
+  if (tooltip->timeout_id)
+    {
+      g_source_remove (tooltip->timeout_id);
+      tooltip->timeout_id = 0;
+    }
+
   g_object_set_qdata (G_OBJECT (display), quark_current_tooltip, NULL);
 }
 
@@ -1417,8 +1429,7 @@ static void
 gtk_tooltip_handle_event_internal (GdkEvent *event)
 {
   gint x, y;
-  gboolean return_value = FALSE;
-  GtkWidget *has_tooltip_widget = NULL;
+  GtkWidget *has_tooltip_widget;
   GdkDisplay *display;
   GtkTooltip *current_tooltip;
 
@@ -1434,6 +1445,8 @@ gtk_tooltip_handle_event_internal (GdkEvent *event)
 
   if (current_tooltip && current_tooltip->keyboard_mode_enabled)
     {
+      gboolean return_value;
+
       has_tooltip_widget = current_tooltip->keyboard_widget;
       if (!has_tooltip_widget)
 	return;
@@ -1486,12 +1499,9 @@ gtk_tooltip_handle_event_internal (GdkEvent *event)
 	    tip_area_set = current_tooltip->tip_area_set;
 	    tip_area = current_tooltip->tip_area;
 
-	    return_value = gtk_tooltip_run_requery (&has_tooltip_widget,
-						    current_tooltip,
-						    &x, &y);
-
-	    /* Requested to be hidden? */
-	    hide_tooltip = !return_value;
+	    gtk_tooltip_run_requery (&has_tooltip_widget,
+                                     current_tooltip,
+                                     &x, &y);
 
 	    /* Leave notify should override the query function */
 	    hide_tooltip = (event->type == GDK_LEAVE_NOTIFY);

@@ -46,6 +46,7 @@
 #include "tablet-unstable-v2-client-protocol.h"
 #include "xdg-shell-unstable-v6-client-protocol.h"
 #include "xdg-foreign-unstable-v1-client-protocol.h"
+#include "server-decoration-client-protocol.h"
 
 /**
  * SECTION:wayland_interaction
@@ -79,6 +80,10 @@
  *   g_error ("Unsupported GDK backend");
  * ]|
  */
+
+#define MIN_SYSTEM_BELL_DELAY_MS 20
+
+#define GTK_SHELL1_VERSION       2
 
 static void _gdk_wayland_display_load_cursor_theme (GdkWaylandDisplay *display_wayland);
 
@@ -330,6 +335,35 @@ static const struct wl_shm_listener wl_shm_listener = {
 };
 
 static void
+server_decoration_manager_default_mode (void                                          *data,
+                                        struct org_kde_kwin_server_decoration_manager *manager,
+                                        uint32_t                                       mode)
+{
+  g_assert (mode <= ORG_KDE_KWIN_SERVER_DECORATION_MANAGER_MODE_SERVER);
+  const char *modes[] = {
+    [ORG_KDE_KWIN_SERVER_DECORATION_MANAGER_MODE_NONE]   = "none",
+    [ORG_KDE_KWIN_SERVER_DECORATION_MANAGER_MODE_CLIENT] = "client",
+    [ORG_KDE_KWIN_SERVER_DECORATION_MANAGER_MODE_SERVER] = "server",
+  };
+  GdkWaylandDisplay *display_wayland = data;
+  g_debug ("Compositor prefers decoration mode '%s'", modes[mode]);
+  display_wayland->server_decoration_mode = mode;
+}
+
+static const struct org_kde_kwin_server_decoration_manager_listener server_decoration_listener = {
+  .default_mode = server_decoration_manager_default_mode
+};
+
+gboolean
+gdk_wayland_display_prefers_ssd (GdkDisplay *display)
+{
+  GdkWaylandDisplay *display_wayland = GDK_WAYLAND_DISPLAY (display);
+  if (display_wayland->server_decoration_manager)
+    return display_wayland->server_decoration_mode == ORG_KDE_KWIN_SERVER_DECORATION_MANAGER_MODE_SERVER;
+  return FALSE;
+}
+
+static void
 gdk_registry_handle_global (void               *data,
                             struct wl_registry *registry,
                             uint32_t            id,
@@ -369,7 +403,7 @@ gdk_registry_handle_global (void               *data,
       display_wayland->gtk_shell =
         wl_registry_bind(display_wayland->wl_registry, id,
                          &gtk_shell1_interface,
-                         1);
+                         MIN (version, GTK_SHELL1_VERSION));
       _gdk_wayland_screen_set_has_gtk_shell (display_wayland->screen);
       display_wayland->gtk_shell_version = version;
     }
@@ -445,6 +479,21 @@ gdk_registry_handle_global (void               *data,
       display_wayland->xdg_importer =
         wl_registry_bind (display_wayland->wl_registry, id,
                           &zxdg_importer_v1_interface, 1);
+    }
+  else if (strcmp (interface, "zwp_keyboard_shortcuts_inhibit_manager_v1") == 0)
+    {
+      display_wayland->keyboard_shortcuts_inhibit =
+        wl_registry_bind (display_wayland->wl_registry, id,
+                          &zwp_keyboard_shortcuts_inhibit_manager_v1_interface, 1);
+    }
+  else if (strcmp (interface, "org_kde_kwin_server_decoration_manager") == 0)
+    {
+      display_wayland->server_decoration_manager =
+        wl_registry_bind (display_wayland->wl_registry, id,
+                          &org_kde_kwin_server_decoration_manager_interface, 1);
+      org_kde_kwin_server_decoration_manager_add_listener (display_wayland->server_decoration_manager,
+                                                           &server_decoration_listener,
+                                                           display_wayland);
     }
   else
     handled = FALSE;
@@ -656,10 +705,13 @@ gdk_wayland_display_get_default_screen (GdkDisplay *display)
   return GDK_WAYLAND_DISPLAY (display)->screen;
 }
 
-static void
-gdk_wayland_display_beep (GdkDisplay *display)
+void
+gdk_wayland_display_system_bell (GdkDisplay *display,
+                                 GdkWindow  *window)
 {
   GdkWaylandDisplay *display_wayland;
+  struct gtk_surface1 *gtk_surface;
+  gint64 now_ms;
 
   g_return_if_fail (GDK_IS_DISPLAY (display));
 
@@ -668,7 +720,24 @@ gdk_wayland_display_beep (GdkDisplay *display)
   if (!display_wayland->gtk_shell)
     return;
 
-  gtk_shell1_system_bell (display_wayland->gtk_shell, NULL);
+  if (window)
+    gtk_surface = gdk_wayland_window_get_gtk_surface (window);
+  else
+    gtk_surface = NULL;
+
+  now_ms = g_get_monotonic_time () / 1000;
+  if (now_ms - display_wayland->last_bell_time_ms < MIN_SYSTEM_BELL_DELAY_MS)
+    return;
+
+  display_wayland->last_bell_time_ms = now_ms;
+
+  gtk_shell1_system_bell (display_wayland->gtk_shell, gtk_surface);
+}
+
+static void
+gdk_wayland_display_beep (GdkDisplay *display)
+{
+  gdk_wayland_display_system_bell (display, NULL);
 }
 
 static void

@@ -482,6 +482,7 @@
    <ClCompile Include="..\..\..\gtk\gtkdragsource.c" />
    <ClCompile Include="..\..\..\gtk\gtkdrawingarea.c" />
    <ClCompile Include="..\..\..\gtk\gtkeditable.c" />
+   <ClCompile Include="..\..\..\gtk\gtkemojichooser.c" />
    <ClCompile Include="..\..\..\gtk\gtkentry.c" />
    <ClCompile Include="..\..\..\gtk\gtkentrybuffer.c" />
    <ClCompile Include="..\..\..\gtk\gtkentrycompletion.c" />

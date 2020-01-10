@@ -181,6 +181,7 @@
     <file compressed='true'>ui/gtkcoloreditor.ui</file>
     <file compressed='true'>ui/gtkcombobox.ui</file>
     <file compressed='true'>ui/gtkdialog.ui</file>
+    <file compressed='true'>ui/gtkemojichooser.ui</file>
     <file compressed='true'>ui/gtkfilechooserbutton.ui</file>
     <file compressed='true'>ui/gtkfilechooserdialog.ui</file>
     <file compressed='true'>ui/gtkfilechooserwidget.ui</file>
@@ -265,5 +266,6 @@
     <file compressed='true'>inspector/visual.ui</file>
     <file compressed='true'>inspector/window.ui</file>
     <file>inspector/logo.png</file>
+    <file>emoji/emoji.data</file>
   </gresource>
 </gresources>

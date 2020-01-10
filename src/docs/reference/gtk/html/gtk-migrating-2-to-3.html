@@ -284,7 +284,7 @@
         henceforth respect the users preference for what application to use and
         correctly open links in sandboxed applications.</li>
 <li class="listitem">If you are launching a regular, installed application that
-        has a desktop file, it is best to use GIOs <a href="https://developer.gnome.org/gio/unstable/GAppInfo.html#GAppInfo-struct"><span class="type">GAppInfo</span></a> with a suitable
+        has a desktop file, it is best to use GIOs <a href="../gio/GAppInfo.html#GAppInfo-struct"><span class="type">GAppInfo</span></a> with a suitable
         launch context.
         <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
@@ -310,18 +310,18 @@
 GAppLaunchContext <span class="gtkdoc opt">*</span>context<span class="gtkdoc opt">;</span>
 GError <span class="gtkdoc opt">*</span>error <span class="gtkdoc opt">=</span> NULL<span class="gtkdoc opt">;</span>
 
-info <span class="gtkdoc opt">= (</span>GAppInfo<span class="gtkdoc opt">*)</span> <span class="function"><a href="https://developer.gnome.org/gio/unstable/gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new">g_desktop_app_info_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;epiphany.desktop&quot;</span><span class="gtkdoc opt">);</span>
-context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc opt">*)</span> <span class="function"><a href="http://developer.gnome.org/gdk3/GdkDisplay.html#gdk-display-get-app-launch-context">gdk_display_get_app_launch_context</a></span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/gio/unstable/GAppInfo.html#g-app-info-launch">g_app_info_launch</a></span> <span class="gtkdoc opt">(</span>info<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> context<span class="gtkdoc opt">, &amp;</span>error<span class="gtkdoc opt">);</span>
+info <span class="gtkdoc opt">= (</span>GAppInfo<span class="gtkdoc opt">*)</span> <span class="function"><a href="../gio/gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new">g_desktop_app_info_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;epiphany.desktop&quot;</span><span class="gtkdoc opt">);</span>
+context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc opt">*)</span> <span class="function"><a href="../gdk4/GdkDisplay.html#gdk-display-get-app-launch-context">gdk_display_get_app_launch_context</a></span> <span class="gtkdoc opt">(</span>display<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gio/GAppInfo.html#g-app-info-launch">g_app_info_launch</a></span> <span class="gtkdoc opt">(</span>info<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> context<span class="gtkdoc opt">, &amp;</span>error<span class="gtkdoc opt">);</span>
 
 <span class="keyword">if</span> <span class="gtkdoc opt">(</span>error<span class="gtkdoc opt">)</span>
   <span class="gtkdoc opt">{</span>
-    <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Message-Logging.html#g-warning">g_warning</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Failed to launch epiphany: %s&quot;</span><span class="gtkdoc opt">,</span> error<span class="gtkdoc opt">-&gt;</span>message<span class="gtkdoc opt">);</span>
-    <span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#g-error-free">g_error_free</a></span> <span class="gtkdoc opt">(</span>error<span class="gtkdoc opt">);</span>
+    <span class="function"><a href="../glib/glib-Message-Logging.html#g-warning">g_warning</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Failed to launch epiphany: %s&quot;</span><span class="gtkdoc opt">,</span> error<span class="gtkdoc opt">-&gt;</span>message<span class="gtkdoc opt">);</span>
+    <span class="function"><a href="../glib/glib-Error-Reporting.html#g-error-free">g_error_free</a></span> <span class="gtkdoc opt">(</span>error<span class="gtkdoc opt">);</span>
   <span class="gtkdoc opt">}</span>
 
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>info<span class="gtkdoc opt">);</span>
-<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>context<span class="gtkdoc opt">);</span></pre></td>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>info<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>context<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -330,13 +330,13 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
         Remember that you have to include
         <code class="filename">gio/gdesktopappinfo.h</code>
         and use the <code class="filename">gio-unix-2.0</code> pkg-config file
-        when using <a href="https://developer.gnome.org/gio/unstable/gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new"><code class="function">g_desktop_app_info_new()</code></a>.
+        when using <a href="../gio/gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new"><code class="function">g_desktop_app_info_new()</code></a>.
         </li>
 <li class="listitem">If you are launching a custom commandline, you can
-        still use <a href="https://developer.gnome.org/gio/unstable/GAppInfo.html#g-app-info-launch"><code class="function">g_app_info_launch()</code></a> with a GAppInfo that is constructed
-        with <a href="https://developer.gnome.org/gio/unstable/GAppInfo.html#g-app-info-create-from-commandline"><code class="function">g_app_info_create_from_commandline()</code></a>, or you can use the
+        still use <a href="../gio/GAppInfo.html#g-app-info-launch"><code class="function">g_app_info_launch()</code></a> with a GAppInfo that is constructed
+        with <a href="../gio/GAppInfo.html#g-app-info-create-from-commandline"><code class="function">g_app_info_create_from_commandline()</code></a>, or you can use the
         more lowlevel <code class="literal">g_spawn</code> family of functions
-        (e.g. <a href="https://developer.gnome.org/glib/unstable/glib-Spawning-Processes.html#g-spawn-command-line-async"><code class="function">g_spawn_command_line_async()</code></a>), and pass <code class="envar">DISPLAY</code>
+        (e.g. <a href="../glib/glib-Spawning-Processes.html#g-spawn-command-line-async"><code class="function">g_spawn_command_line_async()</code></a>), and pass <code class="envar">DISPLAY</code>
         in the environment. <code class="function">gdk_screen_make_display_name()</code> can be
         used to find the right value for the <code class="envar">DISPLAY</code>
         environment variable.
@@ -390,8 +390,8 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
                  pixbuf<span class="gtkdoc opt">,</span>
                  <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span>
                  x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">,</span>
-                 <span class="function"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#gdk-pixbuf-get-width">gdk_pixbuf_get_width</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
-                 <span class="function"><a href="http://library.gnome.org/devel/gdk-pixbuf/unstable/gdk-pixbuf-The-GdkPixbuf-Structure.html#gdk-pixbuf-get-height">gdk_pixbuf_get_height</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
+                 <span class="function"><a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#gdk-pixbuf-get-width">gdk_pixbuf_get_width</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
+                 <span class="function"><a href="../gdk-pixbuf/gdk-pixbuf-The-GdkPixbuf-Structure.html#gdk-pixbuf-get-height">gdk_pixbuf_get_height</a></span> <span class="gtkdoc opt">(</span>pixbuf<span class="gtkdoc opt">),</span>
                  GDK_RGB_DITHER_NORMAL<span class="gtkdoc opt">,</span>
                  <span class="number">0</span><span class="gtkdoc opt">,</span> <span class="number">0</span><span class="gtkdoc opt">);</span></pre></td>
       </tr>
@@ -411,7 +411,7 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
 3
 4</pre></td>
         <td class="listing_code"><pre class="programlisting">cairo_t <span class="gtkdoc opt">*</span>cr <span class="gtkdoc opt">=</span> <span class="function">gdk_cairo_create</span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">);</span>
-<span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf">gdk_cairo_set_source_pixbuf</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> pixbuf<span class="gtkdoc opt">,</span> x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf">gdk_cairo_set_source_pixbuf</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> pixbuf<span class="gtkdoc opt">,</span> x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">);</span>
 <span class="function">cairo_paint</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 <span class="function">cairo_destroy</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span></pre></td>
       </tr>
@@ -423,7 +423,7 @@ context <span class="gtkdoc opt">= (</span>GAppLaunchContext<span class="gtkdoc 
            Note that very similar code can be used when porting code
            using GdkPixmap to <span class="type">cairo_surface_t</span> by calling
            <code class="function">cairo_set_source_surface()</code> instead of
-           <a href="http://developer.gnome.org/gdk3/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a>.
+           <a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a>.
          </p>
 </div>
 </div>
@@ -508,7 +508,7 @@ cr <span class="gtkdoc opt">=</span> <span class="function">gdk_cairo_create</sp
 The surface here can be either an image surface or a X surface,
 and can either be created on the spot or kept around for caching purposes.
 Another alternative is to use pixbufs instead of surfaces with
-<a href="http://developer.gnome.org/gdk3/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
+<a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
         </p>
 </div>
 </div>
@@ -578,16 +578,16 @@ cairo_t <span class="gtkdoc opt">*</span>cr<span class="gtkdoc opt">;</span>
 
 cr <span class="gtkdoc opt">=</span> <span class="function">gdk_cairo_create</span> <span class="gtkdoc opt">(</span>drawable<span class="gtkdoc opt">);</span>
 <span class="comment">/* clip */</span>
-<span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
 <span class="function">cairo_clip</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 <span class="comment">/* set the correct source color */</span>
 context <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-get-style-context">gtk_widget_get_style_context</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">));</span>
 state <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidget.html#gtk-widget-get-state-flags">gtk_widget_get_state_flags</a></span> <span class="gtkdoc opt">(</span>widget<span class="gtkdoc opt">);</span>
 <span class="function"><a href="GtkStyleContext.html#gtk-style-context-get-color">gtk_style_context_get_color</a></span> <span class="gtkdoc opt">(</span>context<span class="gtkdoc opt">,</span> state<span class="gtkdoc opt">, &amp;</span>rgba<span class="gtkdoc opt">);</span>
-<span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-rgba">gdk_cairo_set_source_rgba</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>rgba<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-rgba">gdk_cairo_set_source_rgba</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>rgba<span class="gtkdoc opt">);</span>
 <span class="comment">/* draw the text */</span>
 <span class="function">cairo_move_to</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> x<span class="gtkdoc opt">,</span> y<span class="gtkdoc opt">);</span>
-<span class="function"><a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Cairo-Rendering.html#pango-cairo-show-layout">pango_cairo_show_layout</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> layout<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../pango/pango-Cairo-Rendering.html#pango-cairo-show-layout">pango_cairo_show_layout</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">,</span> layout<span class="gtkdoc opt">);</span>
 <span class="function">cairo_destroy</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span></pre></td>
       </tr>
     </tbody>
@@ -718,7 +718,7 @@ state <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidge
         <td class="listing_code"><pre class="programlisting">cairo_t <span class="gtkdoc opt">*</span>cr <span class="gtkdoc opt">=</span> <span class="function">cairo_create</span> <span class="gtkdoc opt">(</span>surface<span class="gtkdoc opt">);</span>
 <span class="comment">/* clipping restricts the intermediate surface&apos;s size, so it&apos;s a good idea</span>
 <span class="comment"> * to use it. */</span>
-<span class="function"><a href="http://developer.gnome.org/gdk3/gdk4-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
+<span class="function"><a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-rectangle">gdk_cairo_rectangle</a></span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">, &amp;</span>area<span class="gtkdoc opt">);</span>
 <span class="function">cairo_clip</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
 <span class="comment">/* Now push a group to change the target */</span>
 <span class="function">cairo_push_group</span> <span class="gtkdoc opt">(</span>cr<span class="gtkdoc opt">);</span>
@@ -737,7 +737,7 @@ state <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWidge
 The surface here can be either an image surface or a X surface,
 and can either be created on the spot or kept around for caching purposes.
 Another alternative is to use pixbufs instead of surfaces with
-<a href="http://developer.gnome.org/gdk3/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
+<a href="../gdk4/gdk4-Cairo-Interaction.html#gdk-cairo-set-source-pixbuf"><code class="function">gdk_cairo_set_source_pixbuf()</code></a> instead of <code class="function">cairo_set_source_surface()</code>.
         
           The cairo developers plan to add self-copies in the future to allow
           exactly this effect, so you might want to keep up on cairo
@@ -749,7 +749,7 @@ Another alternative is to use pixbufs instead of surfaces with
           function. This is often used to draw text shadows or selections.
           Pango’s cairo support does not yet provide this functionality. If
           you use Pango layouts that change colors, the easiest way to achieve
-          a similar effect is using <a href="/home/mclasen/gnome/share/gtk-doc/html/pango/pango-Cairo-Rendering.html#pango-cairo-layout-path"><code class="function">pango_cairo_layout_path()</code></a> and <code class="function">cairo_fill()</code>
+          a similar effect is using <a href="../pango/pango-Cairo-Rendering.html#pango-cairo-layout-path"><code class="function">pango_cairo_layout_path()</code></a> and <code class="function">cairo_fill()</code>
           instead of <code class="function">gdk_draw_layout_with_colors()</code>. Note that this results in
           a slightly uglier-looking text, as subpixel anti-aliasing is not
           supported.

@@ -46,7 +46,7 @@ We use <literallayout> for syntax productions, and each line is put in a <code>
 
   <para>
     We loosely follow the CSS
-    <ulink url="http://www.w3.org/TR/css-values/#value-defs">value definition</ulink>
+    <ulink url="https://www.w3.org/TR/css-values/#value-defs">value definition</ulink>
     specification in the formatting of syntax productions.
     <simplelist>
       <member>Nonterminals are enclosed in angle backets (〈〉), all other strings that are not listed here are literals</member>
@@ -123,7 +123,7 @@ scale[.fine-tune]
       <programlisting><![CDATA[
 button, entry {
   color: #ff00ea;
-  font: Comic Sans 12
+  font: 12px "Comic Sans"
 }
 ]]></programlisting>
     </example>
@@ -154,7 +154,7 @@ button, entry {
 
     <para>
       To learn more about the @import rule, you can read the
-      <ulink url="http://www.w3.org/TR/css3-cascade/#at-import">Cascading</ulink>
+      <ulink url="https://www.w3.org/TR/css3-cascade/#at-import">Cascading</ulink>
       module of the CSS specification.
     </para>
 
@@ -216,7 +216,7 @@ notebook > entry {
       <title>Theme any widget within a GtkBox</title>
       <programlisting><![CDATA[
 box * {
-  font: Sans 20
+  font: 20px Sans
 }
 ]]></programlisting>
     </example>
@@ -225,7 +225,7 @@ box * {
       <title>Theme a label named title-label</title>
       <programlisting><![CDATA[
 label#title-label {
-  font: Sans 15
+  font: 15px Sans
 }
 ]]></programlisting>
     </example>
@@ -360,85 +360,85 @@ checkbutton:indeterminate {
           <row>
             <entry>*</entry>
             <entry>any node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#universal-selector">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#universal-selector">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E</entry>
             <entry>any node with name E</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#type-selectors">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#type-selectors">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E.class</entry>
             <entry>any E node with the given style class</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#class-html">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#class-html">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E#id</entry>
             <entry>any E node with the given ID</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#id-selectors">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#id-selectors">CSS</ulink></entry>
             <entry>GTK+ uses the widget name as ID</entry>
           </row>
           <row>
             <entry>E:nth‑child(〈nth‑child〉)</entry>
             <entry>any E node which is the n-th child of its parent node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E:nth‑last‑child(〈nth‑child〉)</entry>
             <entry>any E node which is the n-th child of its parent node, counting from the end</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E:first‑child</entry>
             <entry>any E node which is the first child of its parent node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E:last‑child</entry>
             <entry>any E node which is the last child of its parent node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E:only‑child</entry>
             <entry>any E node which is the only child of its parent node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#structural-pseudos">CSS</ulink></entry>
             <entry>Equivalent to E:first-child:last-child</entry>
           </row>
           <row>
             <entry>E:link, E:visited</entry>
             <entry>any E node which represents a hyperlink, not yet visited (:link) or already visited (:visited)</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#link">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#link">CSS</ulink></entry>
             <entry>Corresponds to GTK_STATE_FLAG_LINK and GTK_STATE_FLAGS_VISITED</entry>
           </row>
           <row>
             <entry>E:active, E:hover, E:focus</entry>
             <entry>any E node which is part of a widget with the corresponding state</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#useraction-pseudos">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#useraction-pseudos">CSS</ulink></entry>
             <entry>Corresponds to GTK_STATE_FLAG_ACTIVE, GTK_STATE_FLAG_PRELIGHT and GTK_STATE_FLAGS_FOCUSED; GTK+ also allows E:prelight and E:focused</entry>
           </row>
           <row>
             <entry>E:disabled</entry>
-            <entry>any E node which is part of a widget with is disabled</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#UIstates">CSS</ulink></entry>
+            <entry>any E node which is part of a widget which is disabled</entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#UIstates">CSS</ulink></entry>
             <entry>Corresponds to GTK_STATE_FLAG_INSENSITIVE; GTK+ also allows E:insensitive</entry>
           </row>
           <row>
             <entry>E:checked</entry>
             <entry>any E node which is part of a widget (e.g. radio- or checkbuttons) which is checked</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#UIstates">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#UIstates">CSS</ulink></entry>
             <entry>Corresponds to GTK_STATE_FLAG_CHECKED</entry>
           </row>
           <row>
             <entry>E:indeterminate</entry>
             <entry>any E node which is part of a widget (e.g. radio- or checkbuttons) which is in an inconsistent state</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#indeterminate">CSS3</ulink>,
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#indeterminate">CSS3</ulink>,
                    <ulink url="https://drafts.csswg.org/selectors/#indeterminate">CSS4</ulink></entry>
             <entry>Corresponds to GTK_STATE_FLAG_INCONSISTENT; GTK+ also allows E:inconsistent</entry>
           </row>
@@ -451,7 +451,7 @@ checkbutton:indeterminate {
           <row>
             <entry>E:not(〈selector〉)</entry>
             <entry>any E node which does not match the simple selector 〈selector〉</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#negation">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#negation">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
@@ -469,25 +469,25 @@ checkbutton:indeterminate {
           <row>
             <entry>E F</entry>
             <entry>any F node which is a descendent of an E node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#descendent-combinators">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#descendent-combinators">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E > F</entry>
             <entry>any F node which is a child of an E node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#child-combinators">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#child-combinators">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E ~ F</entry>
             <entry>any F node which is preceded by an E node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#general-sibling-combinators">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#general-sibling-combinators">CSS</ulink></entry>
             <entry></entry>
           </row>
           <row>
             <entry>E + F</entry>
             <entry>any F node which is immediately preceded by an E node</entry>
-            <entry><ulink url="http://www.w3.org/TR/css3-selectors/#adjacent-sibling-combinators">CSS</ulink></entry>
+            <entry><ulink url="https://www.w3.org/TR/css3-selectors/#adjacent-sibling-combinators">CSS</ulink></entry>
             <entry></entry>
           </row>
         </tbody>
@@ -499,7 +499,7 @@ checkbutton:indeterminate {
 
     <para>
       To learn more about selectors in CSS, read the
-      <ulink url="http://www.w3.org/TR/css3-selectors/">Selectors</ulink>
+      <ulink url="https://www.w3.org/TR/css3-selectors/">Selectors</ulink>
       module of the CSS specification.
     </para>
 
@@ -532,7 +532,7 @@ checkbutton:indeterminate {
 
     <para>
       For a list of valid color names and for more background on colors in
-      CSS, see the <ulink url="http://www.w3.org/TR/css3-color/#svg-color">Color</ulink>
+      CSS, see the <ulink url="https://www.w3.org/TR/css3-color/#svg-color">Color</ulink>
       module of the CSS specification.
     </para>
 
@@ -582,12 +582,21 @@ background-color: @bg_color;
     </example>
 
     <para>
-      GTK+ also allows to form color expressions, which can be nested and
-      provide a rich language to define colors which are derived from a
-      set of base colors.
+      GTK+ also supports color expressions, which allow colors to be transformed
+      to new ones and can be nested, providing a rich language to define colors.
+      Color expressions resemble functions, taking 1 or more colors and in some
+      cases a number as arguments.
+    </para>
+    <para>
+      shade() leaves the color unchanged when the number is 1 and transforms it
+      to black or white as the number approaches 0 or 2 respectively. For mix(),
+      0 or 1 return the unaltered 1st or 2nd color respectively; numbers between
+      0 and 1 return blends of the two; and numbers below 0 or above 1 intensify
+      the RGB components of the 1st or 2nd color respectively. alpha() takes a
+      number from 0 to 1 and applies that as the opacity of the supplied color.
     </para>
 
-<literallayout><code>〈color expression〉 = lighter(〈color〉) | darker(〈color〉) | shade(〈number〉,〈color〉) | alpha(〈number〉,〈color〉) | mix(〈number〉,〈color〉,〈color〉)</code>
+<literallayout><code>〈color expression〉 = lighter(〈color〉) | darker(〈color〉) | shade(〈color〉,〈number〉) | alpha(〈color〉,〈number〉) | mix(〈color〉,〈color〉,〈number〉)</code>
 </literallayout>
 
     <para>
@@ -645,7 +654,7 @@ button {
     <para>
       A crossfade lets you specify an image as an intermediate between two
       images. Crossfades are specified in the draft of the level 4
-      <ulink url="http://www.w3.org/TR/css4-images">Image</ulink>
+      <ulink url="https://www.w3.org/TR/css4-images">Image</ulink>
       module of the CSS specification.
     </para>
 
@@ -726,7 +735,7 @@ label {
       To learn more about gradients in CSS, including details of how color stops
       are placed on the gradient line and keywords for specifying radial sizes,
       you can read the
-      <ulink url="http://www.w3.org/TR/css3-images/#gradients">Image</ulink>
+      <ulink url="https://www.w3.org/TR/css3-images/#gradients">Image</ulink>
       module of the CSS specification.
     </para>
 

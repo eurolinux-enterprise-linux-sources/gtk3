@@ -467,6 +467,7 @@ gtk_private_h_sources =		\
 	gtkcustompaperunixdialog.h \
 	gtkdialogprivate.h 	\
 	gtkdndprivate.h		\
+	gtkemojichooser.h	\
 	gtkentryprivate.h	\
 	gtkeventcontrollerprivate.h	\
 	gtkfilechooserembed.h	\
@@ -743,6 +744,7 @@ gtk_base_c_sources = 		\
 	gtkdragsource.c		\
 	gtkdrawingarea.c	\
 	gtkeditable.c		\
+	gtkemojichooser.c	\
 	gtkentry.c		\
 	gtkentrybuffer.c	\
 	gtkentrycompletion.c	\
@@ -1042,6 +1044,7 @@ gtk_use_quartz_c_sources = 	\
 	gtkmountoperation-stub.c \
 	gtkapplication-quartz.c \
 	gtkapplication-quartz-menu.c \
+	gtkfilechoosernativequartz.c \
 	gtkquartz.c
 gtk_use_stub_c_sources = 	\
 	gtkmountoperation-stub.c
@@ -1186,6 +1189,7 @@ templates =				\
 	ui/gtkcombobox.ui		\
 	ui/gtkdialog.ui		\
 	ui/gtkfilechooserbutton.ui	\
+	ui/gtkemojichooser.ui		\
 	ui/gtkfilechooserwidget.ui	\
 	ui/gtkfilechooserdialog.ui	\
 	ui/gtkfontbutton.ui		\
@@ -1227,14 +1231,20 @@ BUILT_SOURCES = \
 gtkmarshalers.h: stamp-gtkmarshalers.h
 	@true
 stamp-gtkmarshalers.h: gtkmarshalers.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=_gtk_marshal $(srcdir)/gtkmarshalers.list --header --valist-marshallers >> xgen-gmlh \
+	$(AM_V_GEN) $(GLIB_GENMARSHAL) \
+		--prefix=_gtk_marshal \
+		--header \
+		--valist-marshallers \
+		$(srcdir)/gtkmarshalers.list >> xgen-gmlh \
 	&& (cmp -s xgen-gmlh gtkmarshalers.h || cp xgen-gmlh gtkmarshalers.h) \
 	&& rm -f xgen-gmlh \
 	&& echo timestamp > $(@F)
 gtkmarshalers.c: gtkmarshalers.list
-	$(AM_V_GEN) (echo "#include \"gtkmarshalers.h\""; \
-	 echo "#undef G_ENABLE_DEBUG"; \
-	 $(GLIB_GENMARSHAL) --prefix=_gtk_marshal $(srcdir)/gtkmarshalers.list --body  --valist-marshallers) >> xgen-gmlc \
+	$(AM_V_GEN) (echo "#undef G_ENABLE_DEBUG"; \
+	 $(GLIB_GENMARSHAL) \
+	 	--prefix=_gtk_marshal \
+		--body \
+		--valist-marshallers $(srcdir)/gtkmarshalers.list) >> xgen-gmlc \
 	&& cp xgen-gmlc gtkmarshalers.c \
 	&& rm -f xgen-gmlc
 
@@ -1312,6 +1322,7 @@ gtk.gresource.xml: Makefile.am inspector/Makefile.inc
 	  echo "    <file compressed='true'>inspector/$$n</file>" >> $@; \
 	done; \
 	echo "    <file>inspector/logo.png</file>" >> $@; \
+	echo "    <file>emoji/emoji.data</file>" >> $@; \
 	echo "  </gresource>" >> $@; \
 	echo "</gresources>" >> $@;
 
@@ -1323,36 +1334,63 @@ gesture_sources = 				\
 	gesture/gesture-two-finger-swipe-left-symbolic.svg	\
 	gesture/gesture-two-finger-swipe-right-symbolic.svg
 
-theme_sources = 				\
-	theme/win32/gtk.css	 		\
-	theme/win32/gtk-win32-base.css 		\
-	theme/Adwaita/assets.txt 		\
-	theme/Adwaita/assets.svg 		\
+adwaita_theme_scss = \
 	theme/Adwaita/_colors-public.scss 	\
 	theme/Adwaita/_colors.scss 		\
 	theme/Adwaita/_common.scss 		\
 	theme/Adwaita/_drawing.scss 		\
 	theme/Adwaita/gtk-contained-dark.scss 	\
 	theme/Adwaita/gtk-contained.scss 	\
-	theme/Adwaita/parse-sass.sh 		\
-	theme/Adwaita/render-assets.sh 		\
-	theme/Adwaita/Gemfile 			\
-	theme/Adwaita/README 			\
-	theme/Adwaita/gtk-contained.css 	\
-	theme/Adwaita/gtk-contained-dark.css 	\
-	theme/Adwaita/gtk.css 			\
-	theme/Adwaita/gtk-dark.css 		\
+	$()
+
+highcontrast_theme_scss = \
 	theme/HighContrast/_colors.scss 	\
 	theme/HighContrast/_common.scss 	\
 	theme/HighContrast/_drawing.scss 	\
 	theme/HighContrast/gtk-contained-inverse.scss \
 	theme/HighContrast/gtk-contained.scss 	\
-	theme/HighContrast/Gemfile 		\
+	$()
+
+if REBUILD_SCSS
+# If we have sassc then we can rebuild the theme CSS as soon as the SCSS
+# files have been changed
+
+scss_verbose = $(scss_verbose_@AM_V@)
+scss_verbose_ = $(scss_verbose_@AM_DEFAULT_V@)
+scss_verbose_0 = @echo "  SCSS     $@";
+
+SASSC_OPTS = -a -M -t compact
+
+theme/Adwaita/gtk-contained.css: $(top_srcdir)/gtk/theme/Adwaita/gtk-contained.scss $(adwaita_theme_scss)
+	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
+
+theme/Adwaita/gtk-contained-dark.css: $(top_srcdir)/gtk/theme/Adwaita/gtk-contained-dark.scss $(adwaita_theme_scss)
+	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
+
+theme/HighContrast/gtk-contained.css: $(top_srcdir)/gtk/theme/HighContrast/gtk-contained.scss $(highcontrast_theme_scss)
+	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
+
+theme/HighContrast/gtk-contained-inverse.css: $(top_srcdir)/gtk/theme/HighContrast/gtk-contained-inverse.scss $(highcontrast_theme_scss)
+	$(scss_verbose) $(MKDIR_P) $(dir $@) && $(SASSC) $(SASSC_OPTS) $< $@ || rm -f $@
+
+endif # REBUILD_SCSS
+
+theme_sources = 				\
+	theme/win32/gtk.css	 		\
+	theme/win32/gtk-win32-base.css 		\
+	$(adwaita_theme_scss)			\
+	theme/Adwaita/assets.txt 		\
+	theme/Adwaita/assets.svg 		\
+	theme/Adwaita/README 			\
+	theme/Adwaita/gtk-contained.css 	\
+	theme/Adwaita/gtk-contained-dark.css 	\
+	theme/Adwaita/gtk.css 			\
+	theme/Adwaita/gtk-dark.css 		\
+	$(highcontrast_theme_scss)		\
 	theme/HighContrast/gtk-contained.css 	\
 	theme/HighContrast/gtk-contained-inverse.css \
 	theme/HighContrast/gtk.css 		\
 	theme/HighContrast/gtk-inverse.css 	\
-	theme/HighContrast/parse-sass.sh 	\
 	theme/Raleigh/gtk-default.css
 
 resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir) --generate-dependencies $(builddir)/gtk.gresource.xml)
@@ -1671,6 +1709,7 @@ files:
 gsettings_SCHEMAS = \
 	org.gtk.Settings.FileChooser.gschema.xml \
 	org.gtk.Settings.ColorChooser.gschema.xml \
+	org.gtk.Settings.EmojiChooser.gschema.xml \
 	org.gtk.Settings.Debug.gschema.xml
 
 @GSETTINGS_RULES@
@@ -1680,6 +1719,8 @@ EXTRA_DIST +=                   \
 	$(gesture_sources)	\
 	$(theme_sources)	\
 	$(gsettings_SCHEMAS)	\
+	emoji/convert-emoji.c	\
+	emoji/emoji.json	\
 	a11y/Makefile.inc	\
 	deprecated/Makefile.inc	\
 	inspector/Makefile.inc	\

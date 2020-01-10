@@ -13,28 +13,6 @@
 
 G_BEGIN_DECLS
 
-/* enumerations from "deprecated/gtkrc.h" */
-GDK_AVAILABLE_IN_ALL GType gtk_rc_flags_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RC_FLAGS (gtk_rc_flags_get_type ())
-GDK_AVAILABLE_IN_ALL GType gtk_rc_token_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_RC_TOKEN_TYPE (gtk_rc_token_type_get_type ())
-GDK_AVAILABLE_IN_ALL GType gtk_path_priority_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PATH_PRIORITY_TYPE (gtk_path_priority_type_get_type ())
-GDK_AVAILABLE_IN_ALL GType gtk_path_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_PATH_TYPE (gtk_path_type_get_type ())
-
-/* enumerations from "deprecated/gtkstyle.h" */
-GDK_AVAILABLE_IN_ALL GType gtk_expander_style_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_EXPANDER_STYLE (gtk_expander_style_get_type ())
-
-/* enumerations from "deprecated/gtktable.h" */
-GDK_AVAILABLE_IN_ALL GType gtk_attach_options_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_ATTACH_OPTIONS (gtk_attach_options_get_type ())
-
-/* enumerations from "deprecated/gtkuimanager.h" */
-GDK_AVAILABLE_IN_ALL GType gtk_ui_manager_item_type_get_type (void) G_GNUC_CONST;
-#define GTK_TYPE_UI_MANAGER_ITEM_TYPE (gtk_ui_manager_item_type_get_type ())
-
 /* enumerations from "gtkaboutdialog.h" */
 GDK_AVAILABLE_IN_ALL GType gtk_license_get_type (void) G_GNUC_CONST;
 #define GTK_TYPE_LICENSE (gtk_license_get_type ())
@@ -356,6 +334,28 @@ GDK_AVAILABLE_IN_ALL GType gtk_window_type_get_type (void) G_GNUC_CONST;
 #define GTK_TYPE_WINDOW_TYPE (gtk_window_type_get_type ())
 GDK_AVAILABLE_IN_ALL GType gtk_window_position_get_type (void) G_GNUC_CONST;
 #define GTK_TYPE_WINDOW_POSITION (gtk_window_position_get_type ())
+
+/* enumerations from "deprecated/gtkrc.h" */
+GDK_AVAILABLE_IN_ALL GType gtk_rc_flags_get_type (void) G_GNUC_CONST;
+#define GTK_TYPE_RC_FLAGS (gtk_rc_flags_get_type ())
+GDK_AVAILABLE_IN_ALL GType gtk_rc_token_type_get_type (void) G_GNUC_CONST;
+#define GTK_TYPE_RC_TOKEN_TYPE (gtk_rc_token_type_get_type ())
+GDK_AVAILABLE_IN_ALL GType gtk_path_priority_type_get_type (void) G_GNUC_CONST;
+#define GTK_TYPE_PATH_PRIORITY_TYPE (gtk_path_priority_type_get_type ())
+GDK_AVAILABLE_IN_ALL GType gtk_path_type_get_type (void) G_GNUC_CONST;
+#define GTK_TYPE_PATH_TYPE (gtk_path_type_get_type ())
+
+/* enumerations from "deprecated/gtkstyle.h" */
+GDK_AVAILABLE_IN_ALL GType gtk_expander_style_get_type (void) G_GNUC_CONST;
+#define GTK_TYPE_EXPANDER_STYLE (gtk_expander_style_get_type ())
+
+/* enumerations from "deprecated/gtktable.h" */
+GDK_AVAILABLE_IN_ALL GType gtk_attach_options_get_type (void) G_GNUC_CONST;
+#define GTK_TYPE_ATTACH_OPTIONS (gtk_attach_options_get_type ())
+
+/* enumerations from "deprecated/gtkuimanager.h" */
+GDK_AVAILABLE_IN_ALL GType gtk_ui_manager_item_type_get_type (void) G_GNUC_CONST;
+#define GTK_TYPE_UI_MANAGER_ITEM_TYPE (gtk_ui_manager_item_type_get_type ())
 G_END_DECLS
 
 #endif /* __GTK_TYPE_BUILTINS_H__ */

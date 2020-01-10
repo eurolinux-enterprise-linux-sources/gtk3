@@ -5,7 +5,6 @@
 #include "gtk.h"
 #include "gtkprivate.h"
 #include "gtkprivatetypebuiltins.h"
-
 /* enumerations from "gtkcsstypesprivate.h" */
 GType
 _gtk_css_affects_get_type (void)
@@ -30,7 +29,6 @@ _gtk_css_affects_get_type (void)
     }
     return etype;
 }
-
 /* enumerations from "gtktexthandleprivate.h" */
 GType
 _gtk_text_handle_position_get_type (void)
@@ -47,7 +45,6 @@ _gtk_text_handle_position_get_type (void)
     }
     return etype;
 }
-
 GType
 _gtk_text_handle_mode_get_type (void)
 {
@@ -63,7 +60,6 @@ _gtk_text_handle_mode_get_type (void)
     }
     return etype;
 }
-
 
 
 /* Generated data ends here */

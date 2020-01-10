@@ -176,6 +176,10 @@ noinst_PROGRAMS =  $(TEST_PROGS)	\
 	testpopupat			\
 	$(NULL)
 
+if USE_WAYLAND
+noinst_PROGRAMS += testforeign
+endif
+
 if USE_X11
 noinst_PROGRAMS += testerrors
 endif
@@ -301,7 +305,6 @@ testrevealer2_DEPENDENCIES = $(TEST_DEPS)
 testtitlebar_DEPENDENCIES = $(TEST_DEPS)
 testwindowsize_DEPENDENCIES = $(TEST_DEPS)
 listmodel_DEPENDENCIES = $(TEST_DEPS)
-foreigndrawing_DEPENDENCIES = $(TEST_DEPS)
 
 animated_resizing_SOURCES = 	\
 	animated-resizing.c	\
@@ -365,6 +368,9 @@ testfontchooserdialog_SOURCES = \
 
 testfontoptions_SOURCES = \
 	testfontoptions.c
+
+testforeign_SOURCES = \
+	testforeign.c
 
 testgrid_SOURCES =	\
 	testgrid.c
@@ -539,8 +545,6 @@ testglblending_SOURCES =	\
 	gtkgears.h
 
 listmodel_SOURCES = listmodel.c
-
-foreigndrawing_SOURCES = foreigndrawing.c
 
 EXTRA_DIST += 			\
 	gradient1.png		\

@@ -280,7 +280,7 @@ entry {
     }
 
     &.flat {
-      &:focus, & {
+      &:focus, &:backdrop, &:disabled, &:backdrop:disabled, & {
         min-height: 0;
         padding: 2px;
         background-color: transparent;
@@ -427,6 +427,58 @@ treeview entry {
   }
 }
 
+.entry-tag {
+  // sizing
+  padding: 5px;
+
+  margin-top: 2px;
+  margin-bottom: 2px;
+
+  // side margins: compensate the entry padding with a negative margin
+  // then the negative margin itself
+  :dir(ltr) & {
+    margin-left: 8px;
+    margin-right: -5px;
+  }
+  :dir(rtl) & {
+    margin-left: -5px;
+    margin-right: 8px;
+  }
+
+  border-style: none;
+
+  $_entry_tag_color: if($variant=='light', $selected_fg_color, $base_color);
+  color: $_entry_tag_color;
+
+  $_entry_tag_bg: if($variant=='light', $selected_bg_color, mix($fg_color, $base_color, 50%));
+  background-color: $_entry_tag_bg;
+
+  &:hover {
+    background-color: lighten($_entry_tag_bg, 10%);
+  }
+
+  :backdrop & {
+    color: $backdrop_base_color;
+    background-color: if($variant=='light', $selected_bg_color,
+                                            mix($backdrop_fg_color, $backdrop_base_color, 50%));
+  }
+
+  &.button {
+    background-color: transparent;
+    color: transparentize($_entry_tag_color, 0.3);
+  }
+
+  :not(:backdrop) &.button {
+    &:hover {
+      border: 1px solid $_entry_tag_bg;
+      color: $_entry_tag_color;
+    }
+    &:active {
+      background-color: $_entry_tag_bg;
+      color: transparentize($_entry_tag_color, 0.3);
+    }
+  }
+}
 
 /***********
  * Buttons *
@@ -1524,7 +1576,7 @@ headerbar {
         padding-left: 10px;
         padding-right: 10px;
 
-        GtkArrow { -GtkArrow-arrow-scaling: 1; }
+        arrow { -GtkArrow-arrow-scaling: 1; }
 
         .arrow {
           -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
@@ -1535,8 +1587,18 @@ headerbar {
     }
   }
 
+  // squared corners when the window is maximized, tiled, or fullscreen
   .tiled &,
-  .maximized & { &:backdrop, & { border-radius: 0; }} // squared corners when the window is maximized or tiled
+  .tiled-top &,
+  .tiled-right &,
+  .tiled-bottom &,
+  .tiled-left &,
+  .maximized &,
+  .fullscreen & {
+    &:backdrop, & {
+      border-radius: 0;
+    }
+  }
 
   &.default-decoration {
     min-height: 28px;
@@ -1578,22 +1640,56 @@ headerbar {
   }
 }
 
-.background:not(.tiled):not(.maximized):not(.solid-csd) .titlebar {
+.background .titlebar {
   &:backdrop, & {
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
   }
 }
 
+.background.tiled .titlebar,
+.background.tiled-top .titlebar,
+.background.tiled-right .titlebar,
+.background.tiled-bottom .titlebar,
+.background.tiled-left .titlebar,
+.background.maximized .titlebar,
+.background.solid-csd .titlebar {
+  &:backdrop, & {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
 headerbar { // headerbar border rounding
-  window:not(.tiled):not(.maximized):not(.solid-csd) separator:first-child + &, // tackles the paned container case
-  window:not(.tiled):not(.maximized):not(.solid-csd) &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
-  window:not(.tiled):not(.maximized):not(.solid-csd) &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
-  window:not(.tiled):not(.maximized):not(.solid-csd) stack & { // tackles the stacked headerbars case
+
+  window separator:first-child + &,
+  window &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
+  window &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
+
+  window stack & { // tackles the stacked headerbars case
     &:first-child, &:last-child {
       &:backdrop, & {
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
+      }
+    }
+  }
+
+  window.tiled &,
+  window.tiled-top &,
+  window.tiled-right &,
+  window.tiled-bottom &,
+  window.tiled-left &,
+  window.maximized &,
+  window.fullscreen &,
+  window.solid-csd & {
+    &, &:backdrop {
+      &,
+      &:first-child,
+      &:last-child,
+      &:only-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
       }
     }
   }
@@ -1826,8 +1922,6 @@ treeview.view {
         transition: none; //I shouldn't need this
       }
     }
-
-    button:last-child { &:backdrop, & { border-right-style: none; }}
   }
 
   button.dnd,
@@ -1873,6 +1967,8 @@ treeview.view {
       background-image: none;
     }
   }
+
+  &:last-child { &:backdrop, & { border-right-style: none; }}
 }
 
 
@@ -1906,7 +2002,7 @@ menubar,
 menu,
 .menu,
 .context-menu {
-  margin: 4px;
+  margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 2px 0px;
   background-color: $menu_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
@@ -2584,10 +2680,10 @@ switch {
 
       &:backdrop { border-color: $selected_borders_color; }
 
-      &.slider:dir(rtl) { border-left-color: $borders_color; }
-      &.slider:dir(ltr) { border-right-color: $borders_color; }
+      slider:dir(rtl) { border-left-color: $borders_color; }
+      slider:dir(ltr) { border-right-color: $borders_color; }
 
-      &.slider { &:checked, & { border-color: $selected_borders_color; } }
+      slider { &:checked, & { border-color: $selected_borders_color; } }
     }
   }
 }
@@ -2639,6 +2735,19 @@ radio {
   margin: 0 4px;
 
   &:only-child { margin: 0; }
+
+  popover & { // when in a popover add more space between the label and the check, reset the other side margin.
+              // See https://bugzilla.gnome.org/show_bug.cgi?id=779570 for details.
+    &.left:dir(rtl) {
+      margin-left: 0;
+      margin-right: 12px;
+    }
+
+    &.right:dir(ltr) {
+      margin-left: 12px;
+      margin-right: 0;
+    }
+  }
 
   min-height: 14px;
   min-width: 14px;
@@ -3297,14 +3406,26 @@ progressbar {
  * Level Bar *
  *************/
 levelbar {
-  block {
-    min-width: 32px;
-    min-height: 1px;
+  &.horizontal {
+    block {
+      min-height: 1px;
+    }
+
+    &.discrete block {
+      margin: 0 1px;
+      min-width: 32px;
+    }
   }
 
-  &.vertical block {
-    min-width: 1px;
-    min-height: 32px;
+  &.vertical {
+    block {
+      min-width: 1px;
+    }
+
+    &.discrete block {
+      margin: 1px 0;
+      min-height: 32px;
+    }
   }
 
   &:backdrop { transition: $backdrop_transition; }
@@ -3317,10 +3438,6 @@ levelbar {
 
     &:backdrop { @include entry(backdrop); }
   }
-
-  &.horizontal.discrete block { margin: 0 1px; }
-
-  &.vertical.discrete block { margin: 1px 0; }
 
   block {
     border: 1px solid;
@@ -3726,6 +3843,10 @@ stacksidebar {
  ****************/
 $_placesidebar_icons_opacity: 0.7;
 
+row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sidebar icons
+                                                                  // see bug #786613 for details 
+                                                                  // on this oddity
+
 placessidebar {
   > viewport.frame { border-style: none; }
 
@@ -3751,8 +3872,6 @@ placessidebar {
     }
 
     image.sidebar-icon {
-      opacity: $_placesidebar_icons_opacity; // dim the device icons
-
       &:dir(ltr) { padding-right: 8px; }
       &:dir(rtl) { padding-left: 8px; }
     }
@@ -4035,20 +4154,28 @@ colorswatch {
     }
   }
 
-  &.dark overlay {
-    color: $selected_fg_color;
+  &.dark {
+    outline-color: transparentize(white, 0.4);
 
-    &:hover { border-color: if($variant == 'light', transparentize(black, 0.2), $borders_color); }
+    overlay {
+      color: white;
 
-    &:backdrop { color: $backdrop_selected_fg_color; }
+      &:hover { border-color: if($variant == 'light', transparentize(black, 0.2), $borders_color); }
+
+      &:backdrop { color: transparentize(white, 0.5); }
+    }
   }
 
-  &.light overlay {
-    color: $text_color;
+  &.light {
+    outline-color: transparentize(black, 0.4);
 
-    &:hover { border-color: if($variant == 'light', transparentize(black, 0.5), $borders_color); }
+    overlay {
+      color: black;
 
-    &:backdrop { color: $backdrop_text_color; }
+      &:hover { border-color: if($variant == 'light', transparentize(black, 0.5), $borders_color); }
+
+      &:backdrop { color: transparentize(black, 0.5); }
+    }
   }
 
   &:drop(active) {
@@ -4184,7 +4311,11 @@ decoration {
 
   .maximized &,
   .fullscreen &,
-  .tiled & { border-radius: 0; }
+  .tiled &,
+  .tiled-top &,
+  .tiled-right &,
+  .tiled-bottom &,
+  .tiled-left & { border-radius: 0; }
 
   .popup & { box-shadow: none; }
 
@@ -4341,4 +4472,53 @@ stackswitcher button.text-button.circular { // FIXME aggregate with buttons
   min-width: 32px;
   min-height: 32px;
   padding: 0;
+}
+
+
+/*********
+ * Emoji *
+ ********/
+
+popover.emoji-picker { padding-left: 0; padding-right: 0; }
+
+button.emoji-section {
+  border-color: transparent;
+  border-width: 3px;
+  border-style: none none solid;
+  border-radius: 0;
+
+  margin: 2px 4px 2px 4px;
+  padding: 3px 0 0;
+  min-width: 32px;
+  min-height: 28px;
+
+  /* reset props inherited from the button style */
+  background: none;
+  box-shadow: none;
+  text-shadow: none;
+
+  outline-offset: -5px;
+
+  &:backdrop:not(:checked) { border-color: transparent; }
+  &:hover { border-color: $borders_color; }
+  &:checked { border-color: $selected_bg_color; }
+
+  label {
+    padding: 0;
+
+    opacity: 0.55;
+  }
+
+  &:hover label { opacity: 0.775; }
+  &:checked label { opacity: 1; }
+}
+
+.emoji {
+  font-size: x-large;
+  padding: 6px;
+  border-radius: 6px;
+
+  :hover {
+    background: $selected_bg_color;
+  }
 }

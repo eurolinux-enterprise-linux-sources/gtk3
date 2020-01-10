@@ -77,7 +77,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 </td>
 <td class="function_name">
 <a class="link" href="GtkToggleButton.html#gtk-toggle-button-get-mode" title="gtk_toggle_button_get_mode ()">gtk_toggle_button_get_mode</a> <span class="c_punctuation">()</span>
@@ -93,7 +93,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 </td>
 <td class="function_name">
 <a class="link" href="GtkToggleButton.html#gtk-toggle-button-get-active" title="gtk_toggle_button_get_active ()">gtk_toggle_button_get_active</a> <span class="c_punctuation">()</span>
@@ -109,7 +109,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 </td>
 <td class="function_name">
 <a class="link" href="GtkToggleButton.html#gtk-toggle-button-get-inconsistent" title="gtk_toggle_button_get_inconsistent ()">gtk_toggle_button_get_inconsistent</a> <span class="c_punctuation">()</span>
@@ -136,17 +136,17 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="property_type"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
+<td class="property_type"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
 <td class="property_name"><a class="link" href="GtkToggleButton.html#GtkToggleButton--active" title="The “active” property">active</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
 <tr>
-<td class="property_type"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
+<td class="property_type"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
 <td class="property_name"><a class="link" href="GtkToggleButton.html#GtkToggleButton--draw-indicator" title="The “draw-indicator” property">draw-indicator</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
 <tr>
-<td class="property_type"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
+<td class="property_type"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
 <td class="property_name"><a class="link" href="GtkToggleButton.html#GtkToggleButton--inconsistent" title="The “inconsistent” property">inconsistent</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
@@ -164,7 +164,7 @@
 <tbody><tr>
 <td class="signal_type"><span class="returnvalue">void</span></td>
 <td class="signal_name"><a class="link" href="GtkToggleButton.html#GtkToggleButton-toggled" title="The “toggled” signal">toggled</a></td>
-<td class="signal_flags"><a href="https://developer.gnome.org/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></td>
+<td class="signal_flags"><a href="../gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></td>
 </tr></tbody>
 </table></div>
 </div>
@@ -183,8 +183,8 @@
 </div>
 <div class="refsect1">
 <a name="GtkToggleButton.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
-    <span class="lineart">╰──</span> <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GInitiallyUnowned">GInitiallyUnowned</a>
+<pre class="screen">    <a href="../gobject/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
+    <span class="lineart">╰──</span> <a href="../gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned">GInitiallyUnowned</a>
         <span class="lineart">╰──</span> <a class="link" href="GtkWidget.html" title="GtkWidget">GtkWidget</a>
             <span class="lineart">╰──</span> <a class="link" href="GtkContainer.html" title="GtkContainer">GtkContainer</a>
                 <span class="lineart">╰──</span> <a class="link" href="GtkBin.html" title="GtkBin">GtkBin</a>
@@ -260,39 +260,45 @@ it from a plain <a class="link" href="GtkButton.html" title="GtkButton"><span cl
 30
 31
 32
-33</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">void</span> <span class="function">make_toggles</span> <span class="gtkdoc opt">(</span><span class="gtkdoc kwb">void</span><span class="gtkdoc opt">) {</span>
-   GtkWidget <span class="gtkdoc opt">*</span>dialog<span class="gtkdoc opt">, *</span>toggle1<span class="gtkdoc opt">, *</span>toggle2<span class="gtkdoc opt">;</span>
-   GtkWidget <span class="gtkdoc opt">*</span>content_area<span class="gtkdoc opt">;</span>
-   <span class="gtkdoc kwb">const char</span> <span class="gtkdoc opt">*</span>text<span class="gtkdoc opt">;</span>
+33
+34
+35
+36</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">static void</span> <span class="function">output_state</span> <span class="gtkdoc opt">(</span>GtkToggleButton <span class="gtkdoc opt">*</span>source<span class="gtkdoc opt">,</span> gpointer user_data<span class="gtkdoc opt">) {</span>
+  <span class="function">printf</span> <span class="gtkdoc opt">(</span><span class="string">&quot;Active: %d</span><span class="gtkdoc esc">\n</span><span class="string">&quot;</span><span class="gtkdoc opt">,</span> <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-get-active">gtk_toggle_button_get_active</a></span> <span class="gtkdoc opt">(</span>source<span class="gtkdoc opt">));</span>
+<span class="gtkdoc opt">}</span>
 
-   dialog <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkDialog.html#gtk-dialog-new">gtk_dialog_new</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
-   content_area <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkDialog.html#gtk-dialog-get-content-area">gtk_dialog_get_content_area</a></span> <span class="gtkdoc opt">();</span>
+<span class="gtkdoc kwb">void</span> <span class="function">make_toggles</span> <span class="gtkdoc opt">(</span><span class="gtkdoc kwb">void</span><span class="gtkdoc opt">) {</span>
+  GtkWidget <span class="gtkdoc opt">*</span>window<span class="gtkdoc opt">, *</span>toggle1<span class="gtkdoc opt">, *</span>toggle2<span class="gtkdoc opt">;</span>
+  GtkWidget <span class="gtkdoc opt">*</span>box<span class="gtkdoc opt">;</span>
+  <span class="gtkdoc kwb">const char</span> <span class="gtkdoc opt">*</span>text<span class="gtkdoc opt">;</span>
 
-   text <span class="gtkdoc opt">=</span> <span class="string">&quot;Hi, i’m a toggle button.&quot;</span><span class="gtkdoc opt">;</span>
-   toggle1 <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-new-with-label">gtk_toggle_button_new_with_label</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
+  window <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkWindow.html#gtk-window-new">gtk_window_new</a></span> <span class="gtkdoc opt">(</span>GTK_WINDOW_TOPLEVEL<span class="gtkdoc opt">);</span>
+  box <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkBox.html#gtk-box-new">gtk_box_new</a></span> <span class="gtkdoc opt">(</span>GTK_ORIENTATION_VERTICAL<span class="gtkdoc opt">,</span> <span class="number">12</span><span class="gtkdoc opt">);</span>
 
-   <span class="gtkdoc slc">// Makes this toggle button invisible</span>
-   <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-set-mode">gtk_toggle_button_set_mode</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_TOGGLE_BUTTON</span> <span class="gtkdoc opt">(</span>toggle1<span class="gtkdoc opt">),</span>
-                               TRUE<span class="gtkdoc opt">);</span>
+  text <span class="gtkdoc opt">=</span> <span class="string">&quot;Hi, I’m a toggle button.&quot;</span><span class="gtkdoc opt">;</span>
+  toggle1 <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-new-with-label">gtk_toggle_button_new_with_label</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
 
-   <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span> <span class="gtkdoc opt">(</span>toggle1<span class="gtkdoc opt">,</span> <span class="string">&quot;toggled&quot;</span><span class="gtkdoc opt">,</span>
-                     <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span> <span class="gtkdoc opt">(</span>output_state<span class="gtkdoc opt">),</span>
-                     NULL<span class="gtkdoc opt">);</span>
-   <span class="function"><a href="GtkBox.html#gtk-box-pack-start">gtk_box_pack_start</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_BOX</span> <span class="gtkdoc opt">(</span>content_area<span class="gtkdoc opt">),</span>
-                       toggle1<span class="gtkdoc opt">,</span> FALSE<span class="gtkdoc opt">,</span> FALSE<span class="gtkdoc opt">,</span> <span class="number">2</span><span class="gtkdoc opt">);</span>
+  <span class="gtkdoc slc">// Makes this toggle button invisible</span>
+  <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-set-mode">gtk_toggle_button_set_mode</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_TOGGLE_BUTTON</span> <span class="gtkdoc opt">(</span>toggle1<span class="gtkdoc opt">),</span>
+                              TRUE<span class="gtkdoc opt">);</span>
 
-   text <span class="gtkdoc opt">=</span> <span class="string">&quot;Hi, i’m a toggle button.&quot;</span><span class="gtkdoc opt">;</span>
-   toggle2 <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-new-with-label">gtk_toggle_button_new_with_label</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
-   <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-set-mode">gtk_toggle_button_set_mode</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_TOGGLE_BUTTON</span> <span class="gtkdoc opt">(</span>toggle2<span class="gtkdoc opt">),</span>
-                               FALSE<span class="gtkdoc opt">);</span>
-   <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span> <span class="gtkdoc opt">(</span>toggle2<span class="gtkdoc opt">,</span> <span class="string">&quot;toggled&quot;</span><span class="gtkdoc opt">,</span>
-                     <span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span> <span class="gtkdoc opt">(</span>output_state<span class="gtkdoc opt">),</span>
-                     NULL<span class="gtkdoc opt">);</span>
-   <span class="function"><a href="GtkBox.html#gtk-box-pack-start">gtk_box_pack_start</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_BOX</span> <span class="gtkdoc opt">(</span>content_area<span class="gtkdoc opt">),</span>
-                       toggle2<span class="gtkdoc opt">,</span> FALSE<span class="gtkdoc opt">,</span> FALSE<span class="gtkdoc opt">,</span> <span class="number">2</span><span class="gtkdoc opt">);</span>
+  <span class="function"><a href="../gobject/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span> <span class="gtkdoc opt">(</span>toggle1<span class="gtkdoc opt">,</span> <span class="string">&quot;toggled&quot;</span><span class="gtkdoc opt">,</span>
+                    <span class="function"><a href="../gobject/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span> <span class="gtkdoc opt">(</span>output_state<span class="gtkdoc opt">),</span>
+                    NULL<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="GtkContainer.html#gtk-container-add">gtk_container_add</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_CONTAINER</span> <span class="gtkdoc opt">(</span>box<span class="gtkdoc opt">),</span> toggle1<span class="gtkdoc opt">);</span>
 
-   <span class="function"><a href="GtkWidget.html#gtk-widget-show-all">gtk_widget_show_all</a></span> <span class="gtkdoc opt">(</span>dialog<span class="gtkdoc opt">);</span>
+  text <span class="gtkdoc opt">=</span> <span class="string">&quot;Hi, I’m a toggle button.&quot;</span><span class="gtkdoc opt">;</span>
+  toggle2 <span class="gtkdoc opt">=</span> <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-new-with-label">gtk_toggle_button_new_with_label</a></span> <span class="gtkdoc opt">(</span>text<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="GtkToggleButton.html#gtk-toggle-button-set-mode">gtk_toggle_button_set_mode</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_TOGGLE_BUTTON</span> <span class="gtkdoc opt">(</span>toggle2<span class="gtkdoc opt">),</span>
+                              FALSE<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="../gobject/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span> <span class="gtkdoc opt">(</span>toggle2<span class="gtkdoc opt">,</span> <span class="string">&quot;toggled&quot;</span><span class="gtkdoc opt">,</span>
+                    <span class="function"><a href="../gobject/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span> <span class="gtkdoc opt">(</span>output_state<span class="gtkdoc opt">),</span>
+                    NULL<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="GtkContainer.html#gtk-container-add">gtk_container_add</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_CONTAINER</span> <span class="gtkdoc opt">(</span>box<span class="gtkdoc opt">),</span> toggle2<span class="gtkdoc opt">);</span>
+
+  <span class="function"><a href="GtkContainer.html#gtk-container-add">gtk_container_add</a></span> <span class="gtkdoc opt">(</span><span class="function">GTK_CONTAINER</span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">),</span> box<span class="gtkdoc opt">);</span>
+  <span class="function"><a href="GtkWidget.html#gtk-widget-show-all">gtk_widget_show_all</a></span> <span class="gtkdoc opt">(</span>window<span class="gtkdoc opt">);</span>
 <span class="gtkdoc opt">}</span></pre></td>
       </tr>
     </tbody>
@@ -319,7 +325,7 @@ gtk_toggle_button_new (<em class="parameter"><code><span class="type">void</span
 <div class="refsect2">
 <a name="gtk-toggle-button-new-with-label"></a><h3>gtk_toggle_button_new_with_label ()</h3>
 <pre class="programlisting"><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="returnvalue">GtkWidget</span></a> *
-gtk_toggle_button_new_with_label (<em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *label</code></em>);</pre>
+gtk_toggle_button_new_with_label (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *label</code></em>);</pre>
 <p>Creates a new toggle button with a text label.</p>
 <div class="refsect3">
 <a name="gtk-toggle-button-new-with-label.parameters"></a><h4>Parameters</h4>
@@ -345,7 +351,7 @@ gtk_toggle_button_new_with_label (<em class="parameter"><code>const <a href="htt
 <div class="refsect2">
 <a name="gtk-toggle-button-new-with-mnemonic"></a><h3>gtk_toggle_button_new_with_mnemonic ()</h3>
 <pre class="programlisting"><a class="link" href="GtkWidget.html" title="GtkWidget"><span class="returnvalue">GtkWidget</span></a> *
-gtk_toggle_button_new_with_mnemonic (<em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *label</code></em>);</pre>
+gtk_toggle_button_new_with_mnemonic (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *label</code></em>);</pre>
 <p>Creates a new <a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> containing a label. The label
 will be created using <a class="link" href="GtkLabel.html#gtk-label-new-with-mnemonic" title="gtk_label_new_with_mnemonic ()"><code class="function">gtk_label_new_with_mnemonic()</code></a>, so underscores
 in <em class="parameter"><code>label</code></em>
@@ -376,11 +382,11 @@ mnemonic character</p></td>
 <a name="gtk-toggle-button-set-mode"></a><h3>gtk_toggle_button_set_mode ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_toggle_button_set_mode (<em class="parameter"><code><a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> *toggle_button</code></em>,
-                            <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> draw_indicator</code></em>);</pre>
+                            <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> draw_indicator</code></em>);</pre>
 <p>Sets whether the button is displayed as a separate indicator and label.
 You can call this function on a checkbutton or a radiobutton with
 <em class="parameter"><code>draw_indicator</code></em>
- = <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> to make the button look like a normal button.</p>
+ = <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> to make the button look like a normal button.</p>
 <p>This can be used to create linked strip of buttons that work like
 a <a class="link" href="GtkStackSwitcher.html" title="GtkStackSwitcher"><span class="type">GtkStackSwitcher</span></a>.</p>
 <p>This function only affects instances of classes like <a class="link" href="GtkCheckButton.html" title="GtkCheckButton"><span class="type">GtkCheckButton</span></a>
@@ -402,8 +408,8 @@ not instances of <a class="link" href="GtkToggleButton.html" title="GtkToggleBut
 </tr>
 <tr>
 <td class="parameter_name"><p>draw_indicator</p></td>
-<td class="parameter_description"><p>if <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, draw the button as a separate indicator
-and label; if <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, draw the button like a normal button</p></td>
+<td class="parameter_description"><p>if <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, draw the button as a separate indicator
+and label; if <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, draw the button like a normal button</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -413,7 +419,7 @@ and label; if <a href="https://developer.gnome.org/glib/unstable/glib-Standard-M
 <hr>
 <div class="refsect2">
 <a name="gtk-toggle-button-get-mode"></a><h3>gtk_toggle_button_get_mode ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 gtk_toggle_button_get_mode (<em class="parameter"><code><a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> *toggle_button</code></em>);</pre>
 <p>Retrieves whether the button is displayed as a separate indicator
 and label. See <a class="link" href="GtkToggleButton.html#gtk-toggle-button-set-mode" title="gtk_toggle_button_set_mode ()"><code class="function">gtk_toggle_button_set_mode()</code></a>.</p>
@@ -434,7 +440,7 @@ and label. See <a class="link" href="GtkToggleButton.html#gtk-toggle-button-set-
 </div>
 <div class="refsect3">
 <a name="gtk-toggle-button-get-mode.returns"></a><h4>Returns</h4>
-<p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the togglebutton is drawn as a separate indicator
+<p> <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the togglebutton is drawn as a separate indicator
 and label.</p>
 </div>
 </div>
@@ -465,10 +471,10 @@ application ever to call this function.</p>
 <hr>
 <div class="refsect2">
 <a name="gtk-toggle-button-get-active"></a><h3>gtk_toggle_button_get_active ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 gtk_toggle_button_get_active (<em class="parameter"><code><a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> *toggle_button</code></em>);</pre>
-<p>Queries a <a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> and returns its current state. Returns <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if
-the toggle button is pressed in and <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if it is raised.</p>
+<p>Queries a <a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> and returns its current state. Returns <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if
+the toggle button is pressed in and <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if it is raised.</p>
 <div class="refsect3">
 <a name="gtk-toggle-button-get-active.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -486,7 +492,7 @@ the toggle button is pressed in and <a href="https://developer.gnome.org/glib/un
 </div>
 <div class="refsect3">
 <a name="gtk-toggle-button-get-active.returns"></a><h4>Returns</h4>
-<p> a <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> value.</p>
+<p> a <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> value.</p>
 </div>
 </div>
 <hr>
@@ -494,9 +500,9 @@ the toggle button is pressed in and <a href="https://developer.gnome.org/glib/un
 <a name="gtk-toggle-button-set-active"></a><h3>gtk_toggle_button_set_active ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_toggle_button_set_active (<em class="parameter"><code><a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> *toggle_button</code></em>,
-                              <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> is_active</code></em>);</pre>
-<p>Sets the status of the toggle button. Set to <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if you want the
-GtkToggleButton to be “pressed in”, and <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> to raise it.
+                              <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> is_active</code></em>);</pre>
+<p>Sets the status of the toggle button. Set to <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if you want the
+GtkToggleButton to be “pressed in”, and <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> to raise it.
 This action causes the <a class="link" href="GtkToggleButton.html#GtkToggleButton-toggled" title="The “toggled” signal"><span class="type">“toggled”</span></a> signal and the
 <a class="link" href="GtkButton.html#GtkButton-clicked" title="The “clicked” signal"><span class="type">“clicked”</span></a> signal to be emitted.</p>
 <div class="refsect3">
@@ -515,7 +521,7 @@ This action causes the <a class="link" href="GtkToggleButton.html#GtkToggleButto
 </tr>
 <tr>
 <td class="parameter_name"><p>is_active</p></td>
-<td class="parameter_description"><p><a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.</p></td>
+<td class="parameter_description"><p><a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> or <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -525,7 +531,7 @@ This action causes the <a class="link" href="GtkToggleButton.html#GtkToggleButto
 <hr>
 <div class="refsect2">
 <a name="gtk-toggle-button-get-inconsistent"></a><h3>gtk_toggle_button_get_inconsistent ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 gtk_toggle_button_get_inconsistent (<em class="parameter"><code><a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> *toggle_button</code></em>);</pre>
 <p>Gets the value set by <a class="link" href="GtkToggleButton.html#gtk-toggle-button-set-inconsistent" title="gtk_toggle_button_set_inconsistent ()"><code class="function">gtk_toggle_button_set_inconsistent()</code></a>.</p>
 <div class="refsect3">
@@ -545,7 +551,7 @@ gtk_toggle_button_get_inconsistent (<em class="parameter"><code><a class="link" 
 </div>
 <div class="refsect3">
 <a name="gtk-toggle-button-get-inconsistent.returns"></a><h4>Returns</h4>
-<p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the button is displayed as inconsistent, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
+<p> <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the button is displayed as inconsistent, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
 </div>
 </div>
 <hr>
@@ -553,7 +559,7 @@ gtk_toggle_button_get_inconsistent (<em class="parameter"><code><a class="link" 
 <a name="gtk-toggle-button-set-inconsistent"></a><h3>gtk_toggle_button_set_inconsistent ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 gtk_toggle_button_set_inconsistent (<em class="parameter"><code><a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> *toggle_button</code></em>,
-                                    <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> setting</code></em>);</pre>
+                                    <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> setting</code></em>);</pre>
 <p>If the user has selected a range of elements (such as some text or
 spreadsheet cells) that are affected by a toggle button, and the
 current values in that range are inconsistent, you may want to
@@ -578,7 +584,7 @@ visual appearance, it doesn’t affect the semantics of the button.</p>
 </tr>
 <tr>
 <td class="parameter_name"><p>setting</p></td>
-<td class="parameter_description"><p><a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if state is inconsistent</p></td>
+<td class="parameter_description"><p><a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if state is inconsistent</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -597,7 +603,7 @@ visual appearance, it doesn’t affect the semantics of the button.</p>
 <a name="GtkToggleButton.property-details"></a><h2>Property Details</h2>
 <div class="refsect2">
 <a name="GtkToggleButton--active"></a><h3>The <code class="literal">“active”</code> property</h3>
-<pre class="programlisting">  “active”                   <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
+<pre class="programlisting">  “active”                   <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
 <p>If the toggle button should be pressed in.</p>
 <p>Flags: Read / Write</p>
 <p>Default value: FALSE</p>
@@ -605,7 +611,7 @@ visual appearance, it doesn’t affect the semantics of the button.</p>
 <hr>
 <div class="refsect2">
 <a name="GtkToggleButton--draw-indicator"></a><h3>The <code class="literal">“draw-indicator”</code> property</h3>
-<pre class="programlisting">  “draw-indicator”           <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
+<pre class="programlisting">  “draw-indicator”           <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
 <p>If the toggle part of the button is displayed.</p>
 <p>Flags: Read / Write</p>
 <p>Default value: FALSE</p>
@@ -613,7 +619,7 @@ visual appearance, it doesn’t affect the semantics of the button.</p>
 <hr>
 <div class="refsect2">
 <a name="GtkToggleButton--inconsistent"></a><h3>The <code class="literal">“inconsistent”</code> property</h3>
-<pre class="programlisting">  “inconsistent”             <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
+<pre class="programlisting">  “inconsistent”             <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
 <p>If the toggle button is in an "in between" state.</p>
 <p>Flags: Read / Write</p>
 <p>Default value: FALSE</p>
@@ -625,7 +631,7 @@ visual appearance, it doesn’t affect the semantics of the button.</p>
 <a name="GtkToggleButton-toggled"></a><h3>The <code class="literal">“toggled”</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 user_function (<a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a> *togglebutton,
-               <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>         user_data)</pre>
+               <a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>         user_data)</pre>
 <p>Should be connected if you wish to perform an action whenever the
 <a class="link" href="GtkToggleButton.html" title="GtkToggleButton"><span class="type">GtkToggleButton</span></a>'s state is changed.</p>
 <div class="refsect3">
@@ -650,7 +656,7 @@ user_function (<a class="link" href="GtkToggleButton.html" title="GtkToggleButto
 </tbody>
 </table></div>
 </div>
-<p>Flags: <a href="https://developer.gnome.org/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></p>
+<p>Flags: <a href="../gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">Run First</a></p>
 </div>
 </div>
 <div class="refsect1">

@@ -295,6 +295,7 @@
    <ClCompile Include="..\..\..\gtk\gtkdragsource.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\gtk\gtkdrawingarea.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\gtk\gtkeditable.c"><Filter>Source Files</Filter></ClCompile>
+   <ClCompile Include="..\..\..\gtk\gtkemojichooser.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\gtk\gtkentry.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\gtk\gtkentrybuffer.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\..\gtk\gtkentrycompletion.c"><Filter>Source Files</Filter></ClCompile>

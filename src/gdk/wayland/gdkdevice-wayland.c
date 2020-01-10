@@ -227,7 +227,6 @@ struct _GdkWaylandSeat
   guint32 repeat_key;
   guint32 repeat_count;
   gint64 repeat_deadline;
-  gint32 nkeys;
   GSettings *keyboard_settings;
   uint32_t keyboard_time;
   uint32_t keyboard_key_serial;
@@ -757,6 +756,8 @@ gdk_wayland_device_grab (GdkDevice    *device,
   if (gdk_device_get_source (device) == GDK_SOURCE_KEYBOARD)
     {
       /* Device is a keyboard */
+      gdk_wayland_window_inhibit_shortcuts (window,
+                                            gdk_device_get_seat (device));
       return GDK_GRAB_SUCCESS;
     }
   else
@@ -813,6 +814,9 @@ gdk_wayland_device_ungrab (GdkDevice *device,
   if (gdk_device_get_source (device) == GDK_SOURCE_KEYBOARD)
     {
       /* Device is a keyboard */
+      if (prev_focus)
+        gdk_wayland_window_restore_shortcuts (prev_focus,
+                                              gdk_device_get_seat (device));
     }
   else
     {
@@ -1300,23 +1304,26 @@ static GdkDevice * get_scroll_device (GdkWaylandSeat              *seat,
                                       enum wl_pointer_axis_source  source);
 
 static GdkEvent *
-create_scroll_event (GdkWaylandSeat *seat,
-                     gboolean        emulated)
+create_scroll_event (GdkWaylandSeat        *seat,
+                     GdkWaylandPointerData *pointer_info,
+                     GdkDevice             *device,
+                     GdkDevice             *source_device,
+                     gboolean               emulated)
 {
   GdkWaylandDisplay *display = GDK_WAYLAND_DISPLAY (seat->display);
   GdkEvent *event;
 
   event = gdk_event_new (GDK_SCROLL);
-  event->scroll.window = g_object_ref (seat->pointer_info.focus);
-  gdk_event_set_device (event, seat->master_pointer);
-  gdk_event_set_source_device (event, get_scroll_device (seat, seat->pointer_info.frame.source));
-  event->scroll.time = seat->pointer_info.time;
-  event->scroll.state = device_get_modifiers (seat->master_pointer);
+  event->scroll.window = g_object_ref (pointer_info->focus);
+  gdk_event_set_device (event, device);
+  gdk_event_set_source_device (event, source_device);
+  event->scroll.time = pointer_info->time;
+  event->scroll.state = device_get_modifiers (device);
   gdk_event_set_screen (event, display->screen);
 
   gdk_event_set_pointer_emulated (event, emulated);
 
-  get_coordinates (seat->master_pointer,
+  get_coordinates (device,
                    &event->scroll.x,
                    &event->scroll.y,
                    &event->scroll.x_root,
@@ -1330,8 +1337,11 @@ flush_discrete_scroll_event (GdkWaylandSeat     *seat,
                              GdkScrollDirection  direction)
 {
   GdkEvent *event;
+  GdkDevice *source;
 
-  event = create_scroll_event (seat, TRUE);
+  source = get_scroll_device (seat, seat->pointer_info.frame.source);
+  event = create_scroll_event (seat, &seat->pointer_info,
+                               seat->master_pointer, source, TRUE);
   event->scroll.direction = direction;
 
   _gdk_wayland_display_deliver_event (seat->display, event);
@@ -1344,8 +1354,11 @@ flush_smooth_scroll_event (GdkWaylandSeat *seat,
                            gboolean        is_stop)
 {
   GdkEvent *event;
+  GdkDevice *source;
 
-  event = create_scroll_event (seat, FALSE);
+  source = get_scroll_device (seat, seat->pointer_info.frame.source);
+  event = create_scroll_event (seat, &seat->pointer_info,
+                               seat->master_pointer, source, FALSE);
   event->scroll.direction = GDK_SCROLL_SMOOTH;
   event->scroll.delta_x = delta_x;
   event->scroll.delta_y = delta_y;
@@ -1869,7 +1882,7 @@ keyboard_handle_enter (void               *data,
 
   seat->keyboard_focus = wl_surface_get_user_data (surface);
   g_object_ref (seat->keyboard_focus);
-  seat->nkeys = 0;
+  seat->repeat_key = 0;
 
   event = gdk_event_new (GDK_FOCUS_CHANGE);
   event->focus_change.window = g_object_ref (seat->keyboard_focus);
@@ -1926,7 +1939,7 @@ keyboard_handle_leave (void               *data,
 
   g_object_unref (seat->keyboard_focus);
   seat->keyboard_focus = NULL;
-  seat->nkeys = 0;
+  seat->repeat_key = 0;
 
   GDK_NOTE (EVENTS,
             g_message ("focus out, seat %p surface %p",
@@ -2125,8 +2138,10 @@ deliver_key_event (GdkWaylandSeat *seat,
   _gdk_wayland_display_deliver_event (seat->display, event);
 
   GDK_NOTE (EVENTS,
-            g_message ("keyboard event, code %d, sym %d, "
+            g_message ("keyboard %s event%s, code %d, sym %d, "
                        "string %s, mods 0x%x",
+                       (state ? "press" : "release"),
+                       (from_key_repeat ? " (repeat)" : ""),
                        event->key.hardware_keycode, event->key.keyval,
                        event->key.string, event->key.state));
 
@@ -2141,16 +2156,14 @@ deliver_key_event (GdkWaylandSeat *seat,
       if (state) /* Another key is pressed */
         {
           seat->repeat_key = key;
-          seat->nkeys++;
         }
-      else /* a key is released */
+      else if (seat->repeat_key == key) /* Repeated key is released */
         {
-          /* The compositor may send us more key releases than key presses */
-          seat->nkeys = MAX (0, seat->nkeys - 1);
+          seat->repeat_key = 0;
         }
     }
 
-  if (seat->nkeys == 0)
+  if (!seat->repeat_key)
     return;
 
   seat->repeat_count++;
@@ -2867,6 +2880,10 @@ tablet_handle_done (void                 *data,
     GDK_WAYLAND_DEVICE_MANAGER (seat->device_manager);
   GdkDevice *master, *stylus_device, *eraser_device;
   gchar *master_name, *eraser_name;
+  gchar *vid, *pid;
+
+  vid = g_strdup_printf ("%.4x", tablet->vid);
+  pid = g_strdup_printf ("%.4x", tablet->pid);
 
   master_name = g_strdup_printf ("Master pointer for %s", tablet->name);
   master = g_object_new (GDK_TYPE_WAYLAND_DEVICE,
@@ -2892,6 +2909,8 @@ tablet_handle_done (void                 *data,
                                 "display", display,
                                 "device-manager", device_manager,
                                 "seat", seat,
+                                "vendor-id", vid,
+                                "product-id", pid,
                                 NULL);
 
   eraser_device = g_object_new (GDK_TYPE_WAYLAND_DEVICE,
@@ -2903,6 +2922,8 @@ tablet_handle_done (void                 *data,
                                 "display", display,
                                 "device-manager", device_manager,
                                 "seat", seat,
+                                "vendor-id", vid,
+                                "product-id", pid,
                                 NULL);
 
   tablet->master = master;
@@ -2926,6 +2947,8 @@ tablet_handle_done (void                 *data,
 
   g_free (eraser_name);
   g_free (master_name);
+  g_free (vid);
+  g_free (pid);
 }
 
 static void
@@ -3422,6 +3445,9 @@ gdk_wayland_tablet_flush_frame_event (GdkWaylandTabletData *tablet,
                   sizeof (gdouble) *
                   gdk_device_get_n_axes (tablet->current_device));
       break;
+    case GDK_SCROLL:
+      event->scroll.time = time;
+      break;
     case GDK_PROXIMITY_IN:
     case GDK_PROXIMITY_OUT:
       event->proximity.time = time;
@@ -3610,6 +3636,7 @@ tablet_tool_handle_proximity_out (void                      *data,
   tablet->pointer_info.focus = NULL;
 
   gdk_device_update_tool (tablet->current_device, NULL);
+  g_clear_object (&tablet->pointer_info.cursor);
 }
 
 static void
@@ -3843,7 +3870,32 @@ tablet_tool_handle_wheel (void                      *data,
                           int32_t                    degrees,
                           int32_t                    clicks)
 {
-  /* FIXME: Handle wheel */
+  GdkWaylandTabletToolData *tool = data;
+  GdkWaylandTabletData *tablet = tool->current_tablet;
+  GdkWaylandSeat *seat = GDK_WAYLAND_SEAT (tablet->seat);
+  GdkEvent *event;
+
+  GDK_NOTE (EVENTS,
+            g_message ("tablet tool %d wheel %d/%d",
+                       gdk_device_tool_get_tool_type (tool->tool), degrees, clicks));
+
+  if (clicks == 0)
+    return;
+
+  /* Send smooth event */
+  event = create_scroll_event (seat, &tablet->pointer_info,
+                               tablet->master, tablet->current_device, FALSE);
+  gdk_event_set_device_tool (event, tablet->current_tool->tool);
+  event->scroll.direction = GDK_SCROLL_SMOOTH;
+  event->scroll.delta_y = clicks;
+  _gdk_wayland_display_deliver_event (seat->display, event);
+
+  /* Send discrete event */
+  event = create_scroll_event (seat, &tablet->pointer_info,
+                               tablet->master, tablet->current_device, TRUE);
+  gdk_event_set_device_tool (event, tablet->current_tool->tool);
+  event->scroll.direction = (clicks > 0) ? GDK_SCROLL_DOWN : GDK_SCROLL_UP;
+  _gdk_wayland_display_deliver_event (seat->display, event);
 }
 
 static void
@@ -4734,6 +4786,10 @@ gdk_wayland_seat_grab (GdkSeat                *seat,
                                     _gdk_display_get_next_serial (display),
                                     evtime,
                                     FALSE);
+
+      /* Inhibit shortcuts if the seat grab is for the keyboard only */
+      if (capabilities == GDK_SEAT_CAPABILITY_KEYBOARD)
+        gdk_wayland_window_inhibit_shortcuts (window, seat);
     }
 
   if (wayland_seat->tablets &&
@@ -4805,7 +4861,11 @@ gdk_wayland_seat_ungrab (GdkSeat *seat)
       grab = _gdk_display_get_last_device_grab (display, wayland_seat->master_keyboard);
 
       if (grab)
-        grab->serial_end = grab->serial_start;
+        {
+          grab->serial_end = grab->serial_start;
+          if (grab->window)
+            gdk_wayland_window_restore_shortcuts (grab->window, seat);
+        }
     }
 
   if (wayland_seat->touch_master)
@@ -4862,6 +4922,19 @@ gdk_wayland_seat_get_slaves (GdkSeat             *seat,
     slaves = g_list_prepend (slaves, wayland_seat->keyboard);
   if (wayland_seat->touch && (capabilities & GDK_SEAT_CAPABILITY_TOUCH))
     slaves = g_list_prepend (slaves, wayland_seat->touch);
+
+  if (wayland_seat->tablets && (capabilities & GDK_SEAT_CAPABILITY_TABLET_STYLUS))
+    {
+      GList *l;
+
+      for (l = wayland_seat->tablets; l; l = l->next)
+        {
+          GdkWaylandTabletData *tablet = l->data;
+
+          slaves = g_list_prepend (slaves, tablet->stylus_device);
+          slaves = g_list_prepend (slaves, tablet->eraser_device);
+        }
+    }
 
   return slaves;
 }
@@ -5066,9 +5139,25 @@ _gdk_wayland_device_get_implicit_grab_serial (GdkWaylandDevice *device,
   if (sequence)
     touch = gdk_wayland_seat_get_touch (GDK_WAYLAND_SEAT (seat),
                                         GDK_EVENT_SEQUENCE_TO_SLOT (sequence));
+
   if (touch)
     return touch->touch_down_serial;
-  else
+
+  if (event)
+    {
+      GdkDevice *source = gdk_event_get_source_device (event);
+      GdkWaylandSeat *wayland_seat = GDK_WAYLAND_SEAT (seat);
+      GList *l;
+
+      for (l = wayland_seat->tablets; l; l = l->next)
+        {
+          GdkWaylandTabletData *tablet = l->data;
+
+          if (tablet->current_device == source)
+            return tablet->pointer_info.press_serial;
+        }
+    }
+
     return GDK_WAYLAND_SEAT (seat)->pointer_info.press_serial;
 }
 
@@ -5079,6 +5168,7 @@ _gdk_wayland_seat_get_last_implicit_grab_serial (GdkSeat           *seat,
   GdkWaylandSeat *wayland_seat;
   GdkWaylandTouchData *touch;
   GHashTableIter iter;
+  GList *l;
   uint32_t serial;
 
   wayland_seat = GDK_WAYLAND_SEAT (seat);
@@ -5091,6 +5181,14 @@ _gdk_wayland_seat_get_last_implicit_grab_serial (GdkSeat           *seat,
 
   if (wayland_seat->pointer_info.press_serial > serial)
     serial = wayland_seat->pointer_info.press_serial;
+
+  for (l = wayland_seat->tablets; l; l = l->next)
+    {
+      GdkWaylandTabletData *tablet = l->data;
+
+      if (tablet->pointer_info.press_serial > serial)
+        serial = tablet->pointer_info.press_serial;
+    }
 
   while (g_hash_table_iter_next (&iter, NULL, (gpointer *) &touch))
     {

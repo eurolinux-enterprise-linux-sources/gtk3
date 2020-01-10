@@ -267,7 +267,7 @@ gdk_monitor_get_display (GdkMonitor *monitor)
 /**
  * gdk_monitor_get_geometry:
  * @monitor: a #GdkMonitor
- * @geometry: (out): a #GdkRectangle to be filled wiht the monitor geometry
+ * @geometry: (out): a #GdkRectangle to be filled with the monitor geometry
  *
  * Retrieves the size and position of an individual monitor within the
  * display coordinate space. The returned geometry is in  ”application pixels”,
@@ -404,7 +404,7 @@ gdk_monitor_get_model (GdkMonitor *monitor)
 int
 gdk_monitor_get_scale_factor (GdkMonitor *monitor)
 {
-  g_return_val_if_fail (GDK_IS_MONITOR (monitor), 0);
+  g_return_val_if_fail (GDK_IS_MONITOR (monitor), 1);
 
   return monitor->scale_factor;
 }
